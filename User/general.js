@@ -1,0 +1,218 @@
+// menentukan elemen navbar
+var navbar = document.querySelector("#navbar-example2");
+// menentukan posisi awal elemen
+var posisiAwal = navbar.offsetTop;
+// menambahkan event listener untuk mengubah posisi elemen saat scrolling
+window.addEventListener("scroll", function () {
+    if (window.pageYOffset >= posisiAwal) {
+        navbar.classList.add("fixed-top");
+    } else {
+        navbar.classList.remove("fixed-top");
+    }
+});
+
+//active
+var navLinks = document.querySelectorAll('.nav-link');
+var currentUrl = window.location.href;
+navLinks.forEach(function (link) {
+    if (link.href === currentUrl) {
+        link.classList.add('active');
+    }
+});
+
+//animasi navbar-pertama
+var prevScrollpos = window.pageYOffset;
+    window.onscroll = function () {
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+            document.getElementById("navbar-atas").style.top = "0";
+        } else {
+            document.getElementById("navbar-atas").style.top = "-80px";
+        }
+        prevScrollpos = currentScrollPos;
+    };
+
+//menutup navbar-pertama saat offcanvas dibuka
+$('#offcanvasNavbar').on('shown.bs.offcanvas', function () {
+    $('#navbar-atas').css('transform', 'translateY(-80px)');
+});
+
+$('#offcanvasNavbar').on('hidden.bs.offcanvas', function () {
+    $('#navbar-atas').css('transform', 'translateY(0)');
+});
+
+
+//lightbox review magnific
+$(document).ready(function () {
+    $('.btn-view').on('click', function (e) {
+        e.preventDefault();
+        var file = $(this).closest('.row').find('input[type=file]').prop('files')[0];
+        if (!file) {
+            alert('Mohon pilih file terlebih dahulu');
+            return;
+        }
+        var fileURL = URL.createObjectURL(file);
+        var fileType = file.type.split('/')[0];
+        if (fileType == 'application' || fileType == 'text') {
+            $.magnificPopup.open({
+                items: {
+                    src: fileURL,
+                    type: 'iframe'
+                },
+                iframe: {
+                    markup: '<div class="mfp-iframe-scaler">' +
+                        '<div class="mfp-close"></div>' +
+                        '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>' +
+                        '</div>',
+                    patterns: {
+                        pdf: {
+                            index: '.pdf',
+                            src: '%id'
+                        },
+                        doc: {
+                            index: '.doc, .docx',
+                            src: '%id',
+                            type: 'application/msword'
+                        },
+                        xls: {
+                            index: '.xls, .xlsx',
+                            src: '%id',
+                            type: 'application/vnd.ms-excel'
+                        },
+                        ppt: {
+                            index: '.ppt, .pptx',
+                            src: '%id',
+                            type: 'application/vnd.ms-powerpoint'
+                        }
+                    }
+                },
+                callbacks: {
+                    elementParse: function (item) {
+                        if (item.src.indexOf('.pdf') !== -1) {
+                            item.type = 'iframe';
+                        }
+                        if (item.src.indexOf('.doc') !== -1 || item.src.indexOf('.docx') !== -1) {
+                            item.type = 'iframe';
+                            item.iframe.type = 'application/msword';
+                        }
+                        if (item.src.indexOf('.xls') !== -1 || item.src.indexOf('.xlsx') !== -1) {
+                            item.type = 'iframe';
+                            item.iframe.type = 'application/vnd.ms-excel';
+                        }
+                        if (item.src.indexOf('.ppt') !== -1 || item.src.indexOf('.pptx') !== -1) {
+                            item.type = 'iframe';
+                            item.iframe.type = 'application/vnd.ms-powerpoint';
+                        }
+                    }
+                }
+            });
+        } else {
+            window.open(fileURL, '_blank');
+        }
+    });
+});
+
+//hide button input file
+function showButton(input) {
+    const btnWrapper = input.parentElement.nextElementSibling;
+    const btn = btnWrapper.querySelector('.btn-view');
+    if (input.files.length > 0) {
+        btn.classList.remove('d-none');
+    } else {
+        btn.classList.add('d-none');
+    }
+}
+
+
+//pagination dan show data tabel
+const table = document.querySelector('.table');
+const tableRows = table.querySelectorAll('tbody tr');
+const select = document.querySelector('.form-select');
+const prevButton = document.getElementById('previous');
+const nextButton = document.getElementById('next');
+
+let currentPage = 1;
+let rowsPerPage = parseInt(select.value);
+
+select.addEventListener('change', () => {
+    rowsPerPage = parseInt(select.value);
+    currentPage = 1;
+    showRows(currentPage);
+    updateButtons();
+});
+
+function showRows(page) {
+    let start = 0;
+    let end = tableRows.length;
+
+    if (rowsPerPage !== -1) {
+        start = (page - 1) * rowsPerPage;
+        end = start + rowsPerPage;
+    }
+
+    tableRows.forEach((row, index) => {
+        if (index >= start && index < end) {
+            row.style.display = 'table-row';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+
+function updateButtons() {
+    if (currentPage === 1) {
+        prevButton.classList.add('disabled');
+    } else {
+        prevButton.classList.remove('disabled');
+    }
+
+    if (rowsPerPage === -1 || currentPage === Math.ceil(tableRows.length / rowsPerPage)) {
+        nextButton.classList.add('disabled');
+    } else {
+        nextButton.classList.remove('disabled');
+    }
+    
+}
+
+function showPrevPage() {
+    currentPage--;
+    showRows(currentPage);
+    updateButtons();
+}
+
+function showNextPage() {
+    currentPage++;
+    showRows(currentPage);
+    updateButtons();
+}
+
+updateButtons();
+showRows(currentPage);
+
+prevButton.addEventListener('click', () => {
+    if (!prevButton.classList.contains('disabled')) {
+        showPrevPage();
+    }
+});
+
+nextButton.addEventListener('click', () => {
+    if (!nextButton.classList.contains('disabled')) {
+        showNextPage();
+    }
+});
+
+
+//search
+const input = document.querySelector('input[name="text"]');
+input.addEventListener('input', function () {
+    const searchText = this.value.trim().toLowerCase();
+    const rows = document.querySelectorAll('tbody tr');
+    for (const row of rows) {
+        const title = row.querySelector('td:nth-child(3)').textContent.trim().toLowerCase();
+        if (title.includes(searchText)) {
+            row.classList.remove('d-none');
+        } else {
+            row.classList.add('d-none');
+        }
+    }
+});
