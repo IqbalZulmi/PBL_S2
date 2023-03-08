@@ -216,3 +216,29 @@ input.addEventListener('input', function () {
         }
     }
 });
+
+//profile
+function enableinput() {
+    var inputFields = document.getElementsByClassName("buka");
+    var editButton = document.getElementById("editButton");
+
+    if (inputFields[0].disabled) {
+        // jika input field dalam keadaan non-aktif
+        for (var i = 0; i < inputFields.length; i++) {
+            inputFields[i].disabled = false;
+            inputFields[i].readOnly = false;
+        }
+        editButton.innerHTML = '<i class="fa-solid fa-times"></i> Cancel Edit';
+        editButton.classList.remove("btn-warning");
+        editButton.classList.add("btn-danger");
+    } else {
+        // jika input field dalam keadaan aktif
+        for (var i = 0; i < inputFields.length; i++) {
+            inputFields[i].disabled = true;
+            inputFields[i].readOnly = true;
+        }
+        editButton.innerHTML = '<i class="fa-solid fa-gear"></i> Edit';
+        editButton.classList.remove("btn-danger");
+        editButton.classList.add("btn-warning");
+    }
+}
