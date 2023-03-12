@@ -203,19 +203,21 @@ nextButton.addEventListener('click', () => {
 
 
 //search
-const input = document.querySelector('input[name="text"]');
-input.addEventListener('input', function () {
-    const searchText = this.value.trim().toLowerCase();
-    const rows = document.querySelectorAll('tbody tr');
-    for (const row of rows) {
-        const title = row.querySelector('td:nth-child(3)').textContent.trim().toLowerCase();
-        if (title.includes(searchText)) {
-            row.classList.remove('d-none');
-        } else {
-            row.classList.add('d-none');
+function cari(columnNumber) {
+    const input = document.querySelector('input[name="text"]');
+    input.addEventListener('input', function() {
+        const searchText = this.value.trim().toLowerCase();
+        const rows = table.querySelectorAll('tbody tr');
+        for (const row of rows) {
+            const text = row.querySelector('td:nth-child(' + columnNumber + ')').textContent.trim().toLowerCase();
+            if (text.includes(searchText)) {
+                row.classList.remove('d-none');
+            } else {
+                row.classList.add('d-none');
+            }
         }
-    }
-});
+    });
+}
 
 //profile
 function enableinput() {
