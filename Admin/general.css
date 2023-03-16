@@ -111,6 +111,7 @@ body{
 /*riwayat-judul*/
 .container-input {
     position: relative;
+    min-height: 50px;
 }
 
 .input {
@@ -166,3 +167,5 @@ body{
 /*Dashboard Admin*/
 /*Profile*/
 /*Change-Password*/
+/*verif-cipta*/
+

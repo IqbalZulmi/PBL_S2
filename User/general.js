@@ -44,6 +44,15 @@ $('#offcanvasNavbar').on('hidden.bs.offcanvas', function () {
 
 //lightbox review and home magnific
 $(document).ready(function () {
+    $('.review').click(function () {
+        var pdfUrl = $(this).closest('td').find('iframe').attr('src');
+        $.magnificPopup.open({
+            items: {
+                src: pdfUrl
+            },
+            type: 'iframe'
+        });
+    });
     $('.image-link').magnificPopup({
 		type: 'image',
 		closeOnContentClick: false,
@@ -65,7 +74,6 @@ $(document).ready(function () {
 				return element.find('img');
 			}
 		}
-		
 	});
     $('.btn-view').on('click', function (e) {
         e.preventDefault();
@@ -194,7 +202,7 @@ function updateButtons() {
     } else {
         nextButton.classList.remove('disabled');
     }
-    
+
 }
 
 function showPrevPage() {
