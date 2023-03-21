@@ -8,7 +8,7 @@
                 <hr class="border-dark">
             </div>
             <div class="col-md-8">
-                <p class="fs-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam cum, praesentium illo est temporibus ea reiciendis, aliquid officia labore adipisci esse expedita beatae, quas vero animi sapiente inventore rerum quam.</p>
+                <p class="fs-6">Sentra HKI merupakan unit kerja yang bertujuan untuk mengelola dan mendaya gunakan kekayaan intelektual, sekaligus sebagai pusat informasi dan pelayanan HKI yang dimana merujuk kepada hak - hak hukum, seperti hak cipta, hak paten, merek dagang, rahasia dagang, dan sebagainya.</p>
             </div>
             <div class="col-md-4 d-flex flex-column align-items-start align-items-md-center">
                 <p class="fs-4">Contact</p>

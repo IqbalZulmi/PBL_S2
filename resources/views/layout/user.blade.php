@@ -5,8 +5,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Sentra HKI</title>
-        <link rel="stylesheet" href="general.css">
-        <link rel="icon shortcut" href="logo.jpeg">
+        <link rel="stylesheet" href="{{ asset('web/general.css') }}">
+        <link rel="icon shortcut" href="{{ asset('web/logo.jpeg') }} ">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
@@ -21,18 +21,42 @@
             <nav class="navbar navbar-dark gradient fixed-top" id="navbar-atas">
                 <div class="container-fluid">
                     <span class="navbar-brand">
-                        <img src="logo.jpeg" class="rounded-5" alt="" width="auto" height="38">
+                        <img src="{{ asset('web/logo.jpeg') }}" class="rounded-5" alt="" width="auto" height="38">
                     </span>
-                    <button class="btn btn-outline-info">
-                        Login
-                    </button>
+                    @auth
+                    <div class="dropdown">
+                        <img src="https://learning-if.polibatam.ac.id/theme/image.php/moove/core/1675225508/u/f2" alt=""
+                            class="rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->name }}</span>
+                        <ul class="dropdown-menu dropdown-menu-end animate slideIn">
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="/user/profile">
+                                    <i class="fa-regular fa-address-card"></i> Profile
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="/user/change-password">
+                                    <i class="fa-solid fa-key"></i> Change Password
+                                </a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    @else
+                    <a href="/login" class="btn btn-outline-info">Login</a>
+                    @endauth
                 </div>
             </nav>
             <div class="img-fluid container-fluid text-white">
                 <div class="row">
-                    <div class="col-md-4 col-lg-3 text-center text-md-start">
+                    <div class="col-md-5 col-lg-4 text-center text-md-start">
                         <a href="/" class="h1 text-decoration-none text-white">Sentra HKI</a>
-                        <p class="fs-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod odio aliquid qui voluptatum, dolor rerum impedit magni assumenda explicabo inventore, labore fugit ullam nulla praesentium nihil omnis quo commodi animi!</p>
+                        <p class="fs-6">merupakan unit kerja yang bertujuan untuk mengelola dan mendaya gunakan kekayaan intelektual, sekaligus sebagai pusat informasi dan pelayanan HKI yang dimana merujuk kepada hak - hak hukum, seperti hak cipta, hak paten, merek dagang, rahasia dagang, dan sebagainya</p>
                     </div>
                 </div>
             </div>
@@ -104,7 +128,7 @@
         <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-        <script src="general.js"></script>
+        <script src="{{ asset('web/general.js') }}"></script>
 
     </body>
 
