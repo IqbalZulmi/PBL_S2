@@ -51,6 +51,7 @@
                 <div class="col-12 col-md-6 d-flex justify-content-center align-items-center order-1 order-md-2">
                     <div class="image-fluid text-center pt-2" data-aos="fade-down" data-aos-duration="1000">
                         <i class="fa-sharp fa-regular fa-copyright"></i>
+                        <h1 class="pt-1">COPYRIGHT</h1>
                     </div>
                 </div>
             </div>
