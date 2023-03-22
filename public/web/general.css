@@ -162,6 +162,94 @@ body{
     color: white;
 }
 
+/*landing-page*/
+.roboto{
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+.wave-color{
+    background-color: #0a2735;
+}
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-30px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.image-fluid.text-center.pt-2 {
+    animation: float 2s ease-in-out infinite;
+}
+
+.fa-sharp.fa-regular.fa-copyright{
+    font-size: 12rem;
+}
+
+.container.test{
+    min-height: 70vh;
+    margin-bottom: 60px;
+}
+
+.sizing{
+    font-size: 26pt;
+}
+
+.sizing1{
+    font-size: 12pt;
+}
+
+.btn.land{
+    border-color: #c6ecff;
+    color: #c6ecff;
+    font-size: 12pt;
+}
+.btn.land:hover{
+    background-color: #c6ecff;
+    border-color: #c6ecff;
+    color: black;
+}
+
+@media (min-width: 768px) {
+    .fa-sharp.fa-regular.fa-copyright {
+        font-size: 23rem;
+    }
+
+    .sizing{
+        font-size: 40pt;
+    }
+}
+
+@media (min-width: 992px) {
+    .fa-sharp.fa-regular.fa-copyright {
+        font-size: 26rem;
+    }
+
+    .sizing{
+        font-size: 42pt;
+    }
+
+    .sizing1{
+        font-size: 14pt;
+    }
+
+    .btn.land{
+        font-size: 14pt;
+    }
+}
+
+@media (min-width: 1440px) {
+    .fa-sharp.fa-regular.fa-copyright {
+        font-size: 32rem;
+    }
+}
 /*unduhan*/
 /*status*/
 /*Dashboard Admin*/

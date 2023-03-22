@@ -18,35 +18,35 @@ Pengajuan Hak Cipta
             </button>
         </div>
         <form action="">
-            <div class="mb-3">
+            <div class="mb-3" data-aos="fade-up" data-aos-duration="500">
                 <label for="exampleFormControlInput1" class="form-label">USERNAME</label>
                 <input type="text" name="username" class="form-control unedit" id="exampleFormControlInput" disabled readonly required>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" data-aos="fade-up" data-aos-duration="500">
                 <label for="exampleFormControlInput1" class="form-label">NIK/NIP</label>
                 <input type="text" name="nik" class="form-control buka" id="exampleFormControlInput" disabled readonly required>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" data-aos="fade-up" data-aos-duration="500">
                 <label for="exampleFormControlInput1" class="form-label">NAMA</label>
                 <input type="text" name="name" class="form-control buka" id="exampleFormControlInput" disabled readonly required>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" data-aos="fade-up" data-aos-duration="500">
                 <label for="exampleFormControlInput1" class="form-label">EMAIL</label>
                 <input type="email" name="email" class="form-control buka" id="exampleFormControlInput" disabled readonly required>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" data-aos="fade-up" data-aos-duration="500">
                 <label for="exampleFormControlInput1" class="form-label">Jurusan</label>
                 <input type="text" name="jurusan" class="form-control buka" id="exampleFormControlInput" disabled readonly required>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" data-aos="fade-up" data-aos-duration="500">
                 <label for="exampleFormControlInput1" class="form-label">Prodi</label>
                 <input type="text" name="prodi" class="form-control buka" id="exampleFormControlInput" disabled readonly required>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" data-aos="fade-up" data-aos-duration="500">
                 <label for="exampleFormControlInput1" class="form-label">No Whatsapp</label>
                 <input type="text" name="nowa" class="form-control buka" id="exampleFormControlInput" disabled readonly required>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" data-aos="fade-up" data-aos-duration="500">
                 <input type="submit" class="btn btn-outline-primary w-100 submit">
             </div>
         </form>

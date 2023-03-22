@@ -55,7 +55,7 @@
             <div class="img-fluid container-fluid text-white">
                 <div class="row">
                     <div class="col-md-5 col-lg-4 text-center text-md-start">
-                        <a href="/" class="h1 text-decoration-none text-white">Sentra HKI</a>
+                        <a href="/home" class="h1 text-decoration-none text-white">Sentra HKI</a>
                         <p class="fs-6">merupakan unit kerja yang bertujuan untuk mengelola dan mendaya gunakan kekayaan intelektual, sekaligus sebagai pusat informasi dan pelayanan HKI yang dimana merujuk kepada hak - hak hukum, seperti hak cipta, hak paten, merek dagang, rahasia dagang, dan sebagainya</p>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                         <div class="offcanvas-body gradient">
                             <ul class="nav-pills navbar-nav">
                                 <li class="nav-item me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link" href="/"><i class="fa-solid fa-house"></i> Home</a>
+                                    <a class="nav-link" href="/home"><i class="fa-solid fa-house"></i> Home</a>
                                 </li>
                                 <li class="nav-item dropdown me-lg-3 mb-2 mb-sm-0">
                                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
