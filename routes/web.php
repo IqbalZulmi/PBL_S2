@@ -77,6 +77,14 @@ Route::get('/admin/profile', function () {
     return view('admin.profile');
 });
 
+Route::get('/tambah-akun', function () {
+    return view('superadmin.tambah');
+});
+
+Route::get('/kelola-akun', function () {
+    return view('superadmin.kelola');
+});
+
 Route::get('/login', function () {
     return view('login');
 });

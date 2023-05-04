@@ -1,7 +1,7 @@
 @extends('layout.user')
 
 @section('title')
-Home
+Beranda
 @endsection
 
 @section('content')

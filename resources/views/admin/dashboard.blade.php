@@ -1,7 +1,7 @@
 @extends('layout.admin')
 
 @section('title')
-Dashboard
+Dasbor
 @endsection
 
 @section('content')

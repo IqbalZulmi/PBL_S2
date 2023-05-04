@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Sentra HKI</title>
         <link rel="stylesheet" href="{{ asset('web/general.css') }}">
-        <link rel="icon shortcut" href="{{ asset('web/logo.jpeg') }} ">
+        <link rel="icon shortcut" href="{{ asset('web/logo.jpeg') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
@@ -23,20 +23,13 @@
                     <span class="navbar-brand">
                         <img src="{{ asset('web/logo.jpeg') }}" class="rounded-5" alt="" width="auto" height="38">
                     </span>
-                    @auth
                     <div class="dropdown">
-                        <img src="https://learning-if.polibatam.ac.id/theme/image.php/moove/core/1675225508/u/f2" alt=""
-                            class="rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->name }}</span>
+                        <img src="https://learning-if.polibatam.ac.id/theme/image.php/moove/core/1675225508/u/f2" alt="" class="rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false"></span>
                         <ul class="dropdown-menu dropdown-menu-end animate slideIn">
                             <li class="nav-item">
-                                <a class="dropdown-item" href="/user/profile">
-                                    <i class="fa-regular fa-address-card"></i> Profil
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="/user/change-password">
-                                    <i class="fa-solid fa-key"></i> ubah kata sandi
+                                <a class="dropdown-item">
+                                    <i class="fa-regular fa-user"></i> SuperAdmin
                                 </a>
                             </li>
                             <hr>
@@ -47,15 +40,12 @@
                             </li>
                         </ul>
                     </div>
-                    @else
-                    <a href="/login" class="btn btn-outline-info">Masuk</a>
-                    @endauth
                 </div>
             </nav>
             <div class="img-fluid container-fluid text-white">
                 <div class="row">
                     <div class="col-md-5 col-lg-4 text-center text-md-start">
-                        <a href="/home" class="h1 text-decoration-none text-white">Sentra HKI</a>
+                        <a href="/dashboard" class="h1 text-decoration-none text-white">Sentra HKI</a>
                         <p class="fs-6">merupakan unit kerja yang bertujuan untuk mengelola dan mendaya gunakan kekayaan intelektual, sekaligus sebagai pusat informasi dan pelayanan HKI yang dimana merujuk kepada hak - hak hukum, seperti hak cipta, hak paten, merek dagang, rahasia dagang, dan sebagainya</p>
                     </div>
                 </div>
@@ -73,34 +63,10 @@
                         <div class="offcanvas-body gradient">
                             <ul class="nav-pills navbar-nav">
                                 <li class="nav-item me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link" href="/home"><i class="fa-solid fa-house"></i> Beranda</a>
-                                </li>
-                                <li class="nav-item dropdown me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-user"></i> Profil
-                                    </a>
-                                    <ul class="dropdown-menu animate slideIn">
-                                        <li><a class="dropdown-item" href="/sejarah">Sejarah Singkat</a></li>
-                                        <li><a class="dropdown-item" href="/visi">Visi dan Misi</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-file-pen"></i> Pendaftaran
-                                    </a>
-                                    <ul class="dropdown-menu animate slideIn">
-                                        <li><a class="dropdown-item" href="/hak-cipta">Hak Cipta</a></li>
-                                        <li><a class="dropdown-item" href="/hak-paten">Hak Paten</a></li>
-                                    </ul>
+                                    <a class="nav-link" href="/tambah-akun"><i class="fa-solid fa-user-plus"></i> Tambah Akun</a>
                                 </li>
                                 <li class="nav-item me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link" href="/status"><i class="fa-solid fa-bell"></i> Status Pengajuan</a>
-                                </li>
-                                <li class="nav-item me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link" href="/riwayat-judul"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Judul</a>
-                                </li>
-                                <li class="nav-item me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link" href="/unduhan"><i class="fa-solid fa-file-arrow-down"></i> Unduhan</a>
+                                    <a class="nav-link" href="/kelola-akun"><i class="fa-solid fa-user-pen"></i> Kelola Akun</a>
                                 </li>
                             </ul>
                         </div>

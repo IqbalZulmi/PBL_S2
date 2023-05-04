@@ -35,18 +35,18 @@
                             <hr>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="/admin/profile">
-                                    <i class="fa-regular fa-address-card"></i> Profiles
+                                    <i class="fa-regular fa-address-card"></i> Profil
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="/admin/change-password">
-                                    <i class="fa-solid fa-key"></i> Change Password
+                                    <i class="fa-solid fa-key"></i> Ubah Kata Sandi
                                 </a>
                             </li>
                             <hr>
                             <li class="nav-item">
                                 <a class="dropdown-item" href="#">
-                                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar
                                 </a>
                             </li>
                         </ul>
@@ -74,7 +74,7 @@
                         <div class="offcanvas-body gradient">
                             <ul class="nav-pills navbar-nav">
                                 <li class="nav-item me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link" href="/dashboard"><i class="fa-solid fa-house"></i> Dashboard</a>
+                                    <a class="nav-link" href="/dashboard"><i class="fa-solid fa-house"></i> Dasbor</a>
                                 </li>
                                 <li class="nav-item dropdown me-lg-3 mb-2 mb-sm-0">
                                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">

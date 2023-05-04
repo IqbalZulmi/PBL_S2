@@ -19,7 +19,7 @@ Unduhan
                             <i class="fa-solid fa-eye"></i> Lihat file
                         </a>
                         <a href="T12.pdf" class="btn btn-outline-success" download>
-                            <i class="fa-solid fa-download"></i> Download file
+                            <i class="fa-solid fa-download"></i> Unduh file
                         </a>
                     </div>
                 </div>
@@ -35,7 +35,7 @@ Unduhan
                             <i class="fa-solid fa-eye"></i> Lihat file
                         </a>
                         <a href="T12.pdf" class="btn btn-outline-success" download>
-                            <i class="fa-solid fa-download"></i> Download file
+                            <i class="fa-solid fa-download"></i> Unduh file
                         </a>
                     </div>
                 </div>
@@ -51,7 +51,7 @@ Unduhan
                             <i class="fa-solid fa-eye"></i> Lihat file
                         </a>
                         <a href="T12.pdf" class="btn btn-outline-success" download>
-                            <i class="fa-solid fa-download"></i> Download file
+                            <i class="fa-solid fa-download"></i> Unduh file
                         </a>
                     </div>
                 </div>
@@ -67,7 +67,7 @@ Unduhan
                             <i class="fa-solid fa-eye"></i> Lihat file
                         </a>
                         <a href="T12.pdf" class="btn btn-outline-success" download>
-                            <i class="fa-solid fa-download"></i> Download file
+                            <i class="fa-solid fa-download"></i> Unduh file
                         </a>
                     </div>
                 </div>
@@ -83,7 +83,7 @@ Unduhan
                             <i class="fa-solid fa-eye"></i> Lihat file
                         </a>
                         <a href="T12.pdf" class="btn btn-outline-success" download>
-                            <i class="fa-solid fa-download"></i> Download file
+                            <i class="fa-solid fa-download"></i> Unduh file
                         </a>
                     </div>
                 </div>
@@ -99,7 +99,7 @@ Unduhan
                             <i class="fa-solid fa-eye"></i> Lihat file
                         </a>
                         <a href="T12.pdf" class="btn btn-outline-success" download>
-                            <i class="fa-solid fa-download"></i> Download file
+                            <i class="fa-solid fa-download"></i> Unduh file
                         </a>
                     </div>
                 </div>
@@ -115,7 +115,7 @@ Unduhan
                             <i class="fa-solid fa-eye"></i> Lihat file
                         </a>
                         <a href="T12.pdf" class="btn btn-outline-success" download>
-                            <i class="fa-solid fa-download"></i> Download file
+                            <i class="fa-solid fa-download"></i> Unduh file
                         </a>
                     </div>
                 </div>

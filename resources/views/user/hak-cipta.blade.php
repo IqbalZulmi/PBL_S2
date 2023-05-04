@@ -108,7 +108,7 @@ Pengajuan Hak Cipta
             <div class="mb-2 row" data-aos="fade-up" data-aos-duration="500">
                 <label for="pilih" class="col-lg-4 col-form-label">Apakah usulan merupakan hasil kerjasama/berhubungan dengan mitra eksternal?</label>
                 <div class="col-9 col-sm-10 col-lg-6">
-                    <select type="file" class="form-select" id="pilih">
+                    <select class="form-select" id="pilih">
                         <option value="Ya">Ya</option>
                         <option value="Tidak">Tidak</option>
                     </select>
