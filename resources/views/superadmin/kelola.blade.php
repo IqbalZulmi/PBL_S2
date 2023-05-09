@@ -8,7 +8,7 @@ Kelola Akun
 <div class="row wht">
     <div class="col-12">
         <div class="container-input mt-2">
-            <input type="text" placeholder="Cari Judul" name="text" class="input" oninput="cari(2)">
+            <input type="text" placeholder="Cari Username" name="text" class="input" oninput="cari(2)">
             <select name="limit" class="form-select form-select-md">
                 <option value="-1">ALL</option>
                 <option value="5">5</option>
@@ -26,8 +26,13 @@ Kelola Akun
                 <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">username</th>
-                        <th scope="col">password</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">NIK</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">No_wa</th>
+                        <th scope="col">Jurusan</th>
                         <th scope="col">Roles</th>
                         <th scope="col">Aksi</th>
                     </tr>
@@ -37,6 +42,11 @@ Kelola Akun
                         <th scope="row">1</th>
                         <td>Iqbal1</td>
                         <td>13 Maret 2023</td>
+                        <td>a</td>
+                        <td>1111</td>
+                        <td>c@gmail.com</td>
+                        <td>088876145613</td>
+                        <td>Teknik Informatika</td>
                         <td>admin</td>
                         <td>
                             <a class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editModal">
@@ -49,8 +59,13 @@ Kelola Akun
                     </tr>
                     <tr>
                         <th scope="row">2</th>
-                        <td>adel</td>
-                        <td>13 Maret 2023</td>
+                        <td>bela</td>
+                        <td>132023</td>
+                        <td>a</td>
+                        <td>1111</td>
+                        <td>c@gmail.com</td>
+                        <td>088876145613</td>
+                        <td>Teknik Informatika</td>
                         <td>admin</td>
                         <td>
                             <a class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editModal">
@@ -89,11 +104,36 @@ Kelola Akun
                         </div>
                         <div class="mt-2">
                             <label for="">Password</label>
-                            <input type="text" name="username" class="form-control" placeholder="username" value="iqbal123" required>
+                            <input type="text" name="password" class="form-control" placeholder="password" value="iqbal123" required>
+                        </div>
+                        <div class="mt-2">
+                            <label for="">Nama</label>
+                            <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" value="a" required>
+                        </div>
+                        <div class="mt-2">
+                            <label for="">NIK</label>
+                            <input type="text" name="nik" class="form-control" placeholder="Nomor Identitas Kepegawaian" value="1111" required>
+                        </div>
+                        <div class="mt-2">
+                            <label for="">Email</label>
+                            <input type="email" name="email" class="form-control" placeholder="Email Aktif" value="c@gmail.com" required>
+                        </div>
+                        <div class="mt-2">
+                            <label for="">No WhatsApp</label>
+                            <input type="text" name="No_Wa" class="form-control" placeholder="Nomor WhatsApp Aktif" value="088876145613" required>
+                        </div>
+                        <div class="mt-2">
+                            <label for="">Jurusan</label>
+                            <select class="form-select" name="jurusan" required>
+                                <option value="Teknik Informatika">Teknik Informatika</option>
+                                <option value="Teknik Elektro">Teknik Elektro</option>
+                                <option value="Teknik Informatika">Teknik Mesin</option>
+                                <option value="Manajemen Bisnis">Manajemen Bisnis</option>
+                            </select>
                         </div>
                         <div class="my-2">
                             <label for="">Roles</label>
-                            <select class="form-select">
+                            <select class="form-select" name="roles">
                                 <option value="admin">admin</option>
                                 <option value="superadmin">superadmin</option>
                             </select>

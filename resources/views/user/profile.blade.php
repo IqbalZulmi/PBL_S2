@@ -7,7 +7,7 @@ Pengajuan Hak Cipta
 @section('content')
 <div class="row wht">
     <div class="col-sm-5 d-grid" style="place-items:center;">
-        <div class="w-100">
+        <div class="w-75">
             <img src="https://learning-if.polibatam.ac.id/theme/image.php/moove/core/1675225508/u/f2" class="rounded-circle w-100 h-100">
         </div>
     </div>
@@ -36,11 +36,12 @@ Pengajuan Hak Cipta
             </div>
             <div class="mb-3" data-aos="fade-up" data-aos-duration="500">
                 <label for="exampleFormControlInput1" class="form-label">Jurusan</label>
-                <input type="text" name="jurusan" class="form-control buka" id="exampleFormControlInput" disabled readonly required>
-            </div>
-            <div class="mb-3" data-aos="fade-up" data-aos-duration="500">
-                <label for="exampleFormControlInput1" class="form-label">Prodi</label>
-                <input type="text" name="prodi" class="form-control buka" id="exampleFormControlInput" disabled readonly required>
+                <select class="form-select buka" name="jurusan" required disabled>
+                    <option value="Teknik Informatika">Teknik Informatika</option>
+                    <option value="Teknik Elektro">Teknik Elektro</option>
+                    <option value="Teknik Informatika">Teknik Mesin</option>
+                    <option value="Manajemen Bisnis">Manajemen Bisnis</option>
+                </select>
             </div>
             <div class="mb-3" data-aos="fade-up" data-aos-duration="500">
                 <label for="exampleFormControlInput1" class="form-label">No Whatsapp</label>

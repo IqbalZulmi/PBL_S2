@@ -33,7 +33,7 @@
 			<div class="wrap-login100">
 				<form action="" method="post" class="login100-form validate-form">
 					<span class="login100-form-title p-b-0">
-						WELCOME
+						SELAMAT DATANG
 					</span>
 					<span class="login100-form-title p-b-20">
 						SENTRA HKI
@@ -46,35 +46,53 @@
                 }
                 ?>
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" name="username" required>
+						<input required class="input100" type="text" name="Username">
 						<span class="focus-input100" data-placeholder="Username"></span>
 					</div>
-
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
 						<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
 						</span>
-						<input class="input100" type="password" name="password" required>
+						<input required class="input100" type="password" name="password">
 						<span class="focus-input100" data-placeholder="Password"></span>
 					</div>
+					<div class="wrap-input100 validate-input">
+						<input required class="input100" type="text" name="Nama">
+						<span class="focus-input100" data-placeholder="Nama"></span>
+					</div>
+					<div class="wrap-input100 validate-input">
+						<input required class="input100" type="text" name="NIK">
+						<span class="focus-input100" data-placeholder="NIK"></span>
+					</div>
+					<div class="wrap-input100 validate-input">
+						<input required class="input100" type="text" name="Email">
+						<span class="focus-input100" data-placeholder="Email"></span>
+					</div>
+					<div class="wrap-input100 validate-input">
+						<input required class="input100" type="text" name="No_WhatsApp">
+						<span class="focus-input100" data-placeholder="NO Whatsapp"></span>
+					</div>
+
+						<div class="wrap-input100 validate-input">
+							<select class="input100" name="Jurusan" required>
+								<option value="">Pilih Jurusan</option>
+								<option value="Teknik Informatika">Teknik Informatika</option>
+								<option value="Sistem Informasi">Teknik Mesin</option>
+								<option value="Teknik Elektro">Teknik Elektro</option>
+								<option value="Manajemen Bisnis">Manajemen Bisnis</option>
+							</select>
+
+						</div>
 
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button name="submit" class="login100-form-btn">
-								Login
+								Daftar
 							</button>
 						</div>
 					</div>
 
-					<div class="text-center p-t-115">
-						<a href="/register" class="txt2">
-                            Register |
-                        </a>
-                        <a class="txt2" href="#">
-							 Forgot Password
-						</a>
-					</div>
 				</form>
 			</div>
 		</div>

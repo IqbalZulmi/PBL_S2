@@ -31,6 +31,15 @@ Pengajuan Hak Cipta
                 <input type="email" name="email" class="form-control buka" id="exampleFormControlInput" disabled readonly required>
             </div>
             <div class="mb-3" data-aos="fade-up" data-aos-duration="500">
+                <label for="exampleFormControlInput1" class="form-label">Jurusan</label>
+                <select class="form-select buka" name="jurusan" required disabled>
+                    <option value="Teknik Informatika">Teknik Informatika</option>
+                    <option value="Teknik Elektro">Teknik Elektro</option>
+                    <option value="Teknik Informatika">Teknik Mesin</option>
+                    <option value="Manajemen Bisnis">Manajemen Bisnis</option>
+                </select>
+            </div>
+            <div class="mb-3" data-aos="fade-up" data-aos-duration="500">
                 <label for="exampleFormControlInput1" class="form-label">No Whatsapp</label>
                 <input type="text" name="email" class="form-control buka" id="exampleFormControlInput" disabled readonly required>
             </div>
