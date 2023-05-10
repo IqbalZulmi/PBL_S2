@@ -31,20 +31,14 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form action="" method="post" class="login100-form validate-form">
+				<form action="{{ route('register.action') }}" method="post" class="login100-form validate-form">
+                @csrf
 					<span class="login100-form-title p-b-0">
 						SELAMAT DATANG
 					</span>
 					<span class="login100-form-title p-b-20">
 						SENTRA HKI
 					</span>
-					<?php
-                if (isset($_GET['pesan'])) {
-                    if ($_GET['pesan'] == "gagal") {
-                        echo "<div class='alert text-center'>Username dan Password tidak sesuai !</div>";
-                    }
-                }
-                ?>
 					<div class="wrap-input100 validate-input">
 						<input required class="input100" type="text" name="Username">
 						<span class="focus-input100" data-placeholder="Username"></span>
