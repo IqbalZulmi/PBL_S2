@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Superadmincontroller;
+use App\Http\Controllers\Registercontroller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,17 +80,28 @@ Route::get('/admin/profile', function () {
     return view('admin.profile');
 });
 
-Route::get('/tambah-akun', function () {
-    return view('superadmin.tambah');
-});
+Route::get('/tambah-akun', [Superadmincontroller::class, 'create'])
+->name('superadmin.tambah');
 
-Route::get('/kelola-akun', function () {
-    return view('superadmin.kelola');
-});
+Route::POST('/tambah-akun', [Superadmincontroller::class, 'store'])
+->name('superadmin.store');
+
+Route::DELETE('/kelola-akun/delete/{id}', [Superadmincontroller::class, 'destroy'])
+->name('superadmin.destroy');
+
+Route::get('/kelola-akun', [Superadmincontroller::class, 'index'])
+->name('superadmin.kelola');
+
+Route::PUT('/kelola-akun/update/{id}', [Superadmincontroller::class, 'update'])
+->name('superadmin.update');
+
 
 Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('register', [UserController::class, 'register'])->name('register');
-Route::post('register/action', [UserController::class, 'register_action'])->name('register.action');
+Route::get('/register', [Registercontroller::class, 'create'])
+->name('register.create');
+
+Route::POST('/register', [Registercontroller::class, 'store'])
+->name('register.store');

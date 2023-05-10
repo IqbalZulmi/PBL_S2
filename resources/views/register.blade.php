@@ -31,8 +31,15 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form action="{{ route('register.action') }}" method="post" class="login100-form validate-form">
-                @csrf
+				<form action="{{ route('register.store')}}" method="post" class="login100-form validate-form">
+                @csrf @method('POST')
+                @if(session('notifikasi'))
+                <div class="form-group">
+                    <div class="alert alert-{{ session('type') }}">
+                        {{ session('notifikasi') }}
+                    </div>
+                </div>
+                @endif
 					<span class="login100-form-title p-b-0">
 						SELAMAT DATANG
 					</span>
@@ -40,53 +47,70 @@
 						SENTRA HKI
 					</span>
 					<div class="wrap-input100 validate-input">
-						<input required class="input100" type="text" name="Username">
+						<input required class="input100 @error('username') is-invalid @enderror" value="{{ old('username') }}" type="text" name="username">
+                        @error('username')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
 						<span class="focus-input100" data-placeholder="Username"></span>
 					</div>
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
 						<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
 						</span>
-						<input required class="input100" type="password" name="password">
+						<input required class="input100 @error('password') is-invalid @enderror" value="{{ old('password') }}" type="password" name="password">
+                        @error('password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
 						<span class="focus-input100" data-placeholder="Password"></span>
 					</div>
 					<div class="wrap-input100 validate-input">
-						<input required class="input100" type="text" name="Nama">
-						<span class="focus-input100" data-placeholder="Nama"></span>
+						<input required class="input100 @error('nama') is-invalid @enderror" value="{{ old('nama') }}" type="text" name="nama">
+                        @error('nama')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                        <span class="focus-input100" data-placeholder="Nama"></span>
 					</div>
 					<div class="wrap-input100 validate-input">
-						<input required class="input100" type="text" name="NIK">
-						<span class="focus-input100" data-placeholder="NIK"></span>
+						<input required class="input100 @error('nik') is-invalid @enderror" value="{{ old('nik') }}" type="text" name="nik">
+                        @error('nik')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                        <span class="focus-input100" data-placeholder="NIK"></span>
 					</div>
 					<div class="wrap-input100 validate-input">
-						<input required class="input100" type="text" name="Email">
-						<span class="focus-input100" data-placeholder="Email"></span>
+						<input required class="input100 @error('email') is-invalid @enderror" value="{{ old('email') }}" type="text" name="email">
+						@error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                        <span class="focus-input100" data-placeholder="Email"></span>
 					</div>
 					<div class="wrap-input100 validate-input">
-						<input required class="input100" type="text" name="No_WhatsApp">
-						<span class="focus-input100" data-placeholder="NO Whatsapp"></span>
+						<input required class="input100 @error('no_wa') is-invalid @enderror" value="{{ old('no_wa') }}" type="text" name="no_wa">
+						@error('no_wa')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                        <span class="focus-input100" data-placeholder="NO Whatsapp"></span>
 					</div>
 
-						<div class="wrap-input100 validate-input">
-							<select class="input100" name="Jurusan" required>
-								<option value="">Pilih Jurusan</option>
-								<option value="Teknik Informatika">Teknik Informatika</option>
-								<option value="Sistem Informasi">Teknik Mesin</option>
-								<option value="Teknik Elektro">Teknik Elektro</option>
-								<option value="Manajemen Bisnis">Manajemen Bisnis</option>
-							</select>
-
-						</div>
-
+                    <div class="wrap-input100 validate-input">
+                        <select class="input100  @error('jurusan') is-invalid @enderror" name="jurusan" required>
+                            <option value="Teknik Informatika">Teknik Informatika</option>
+                            <option value="Sistem Informasi">Teknik Mesin</option>
+                            <option value="Teknik Elektro">Teknik Elektro</option>
+                            <option value="Manajemen Bisnis">Manajemen Bisnis</option>
+                        </select>
+                        @error('jurusan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button name="submit" class="login100-form-btn">
+							<button type="submit" name="submit" class="login100-form-btn">
 								Daftar
 							</button>
 						</div>
 					</div>
-
 				</form>
 			</div>
 		</div>

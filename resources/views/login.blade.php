@@ -38,13 +38,13 @@
 					<span class="login100-form-title p-b-20">
 						SENTRA HKI
 					</span>
-					<?php
-                if (isset($_GET['pesan'])) {
-                    if ($_GET['pesan'] == "gagal") {
-                        echo "<div class='alert text-center'>Username dan Password tidak sesuai !</div>";
-                    }
-                }
-                ?>
+					@if(session('notifikasi'))
+                    <div class="form-group">
+                        <div class="alert alert-{{ session('type') }}">
+                            {{ session('notifikasi') }}
+                        </div>
+                    </div>
+                    @endif
 					<div class="wrap-input100 validate-input">
 						<input class="input100" type="text" name="username" required>
 						<span class="focus-input100" data-placeholder="Username"></span>

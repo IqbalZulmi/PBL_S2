@@ -7,46 +7,92 @@ Tambah Akun
 @section('content')
 <div class="row wht">
     <div class="col-12 px-4 pt-2">
-        <form action="">
+        <form action="/tambah-akun" method="post">
+            @csrf
+            @if(session('notifikasi'))
+            <div class="form-group">
+                <div class="alert alert-{{ session('type') }}">
+                    {{ session('notifikasi') }}
+                </div>
+            </div>
+            @endif
             <div class="row gy-2" data-aos="zoom-in" data-aos-duration="400">
                 <label for="inputPassword" class="col-sm-2 col-form-label mt-3">username</label>
                 <div class="col-sm-10">
-                    <input type="text" name="username" class="form-control mt-sm-2" placeholder="username" required>
+                    <input type="text" name="username" class="form-control mt-sm-2" placeholder="username" class="form-control @error('username') is-invalid
+                    @enderror" value="{{ old('username') }}" required>
+                    @error('username')
+                    <div class="invalid-feedback">{{ $message
+                    }}</div>
+                    @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
-                    <input type="password" name="password" class="form-control" placeholder="password" required>
+                    <input type="password" name="password" class="form-control" placeholder="password" class="form-control @error('password') is-invalid
+                    @enderror" value="{{ old('password') }}" required>
+                    @error('password')
+                    <div class="invalid-feedback">{{ $message
+                    }}</div>
+                    @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-10">
-                    <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" required>
+                    <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" class="form-control @error('nama') is-invalid
+                    @enderror" value="{{ old('nama') }}" required>
+                    @error('nama')
+                    <div class="invalid-feedback">{{ $message
+                    }}</div>
+                    @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">NIK</label>
                 <div class="col-sm-10">
-                    <input type="text" name="nik" class="form-control" placeholder="Nomor Identitas Kepegawaian" required>
+                    <input type="text" name="nik" class="form-control" placeholder="Nomor Identitas Kepegawaian" class="form-control @error('nik') is-invalid
+                    @enderror" value="{{ old('nik') }}" required>
+                    @error('nik')
+                    <div class="invalid-feedback">{{ $message
+                    }}</div>
+                    @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="email" name="email" class="form-control" placeholder="Email Aktif" required>
+                    <input type="email" name="email" class="form-control" placeholder="Email Aktif" class="form-control @error('email') is-invalid
+                    @enderror" value="{{ old('email') }}" required>
+                    @error('email')
+                    <div class="invalid-feedback">{{ $message
+                    }}</div>
+                    @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">No WhatsApp</label>
                 <div class="col-sm-10">
-                    <input type="text" name="No_WhatsApp" class="form-control" placeholder="Nomor WhatsApp Aktif" required>
+                    <input type="text" name="no_wa" class="form-control" placeholder="Nomor WhatsApp Aktif" class="form-control @error('no_wa') is-invalid
+                    @enderror" value="{{ old('no_wa') }}" required>
+                    @error('no_wa')
+                    <div class="invalid-feedback">{{ $message
+                    }}</div>
+                    @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">Jurusan</label>
                 <div class="col-sm-10">
-                    <select class="form-select" name="jurusan" required>
+                    <select class="form-select" name="jurusan" class="form-control @error('jurusan') is-invalid
+                    @enderror" required>
                         <option value="Teknik Informatika">Teknik Informatika</option>
                         <option value="Teknik Elektro">Teknik Elektro</option>
                         <option value="Teknik Informatika">Teknik Mesin</option>
                         <option value="Manajemen Bisnis">Manajemen Bisnis</option>
                     </select>
+                    @error('jurusan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">Roles</label>
                 <div class="col-sm-10">
-                    <select class="form-select" name="roles">
+                    <select class="form-select" name="role" class="form-control @error('role') is-invalid
+                    @enderror" required>
                         <option value="admin">admin</option>
                         <option value="superadmin">superadmin</option>
+                        @error('role')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </select>
                 </div>
                 <div class="col-sm-12 my-3 text-center">
