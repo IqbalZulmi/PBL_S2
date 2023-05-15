@@ -13,21 +13,21 @@ return new class extends Migration
     {
         Schema::create('pengajuan_patens', function (Blueprint $table) {
             $table->id();
-            $table->String('id_user');
+            $table->integer('nik');
             $table->String('kkt');
             $table->String('judul_usulan');
-            $table->String('borang');
-            $table->String('abstrak_paten');
-            $table->String('daftar_isian_pendaftaran');
-            $table->String('gambar');
-            $table->String('surat_pengalihan');
-            $table->String('scan_surat');
-            $table->String('dokumen');
-            $table->String('klaim_paten');
+            $table->String('file_borang_tindak_lanjut_penelitian');
+            $table->String('file_abstrak_paten');
+            $table->String('file_daftar_isian_pendaftaran');
+            $table->String('file_gambar');
+            $table->String('file_surat_pengalihan_hak_atas_invensi');
+            $table->String('file_scan_surat_kepemilikan');
+            $table->String('file_dokumen_spesifikasi_paten');
+            $table->String('file_klaim_paten');
             $table->String('usulan');
-            $table->String('salinan_pks');
-            $table->enum('status', ['menunggu', 'diterima', 'ditolak']);
-            $table->timestamps();
+            $table->String('file_salinan_pks');
+            $table->enum('status', ['sedang diproses', 'diterima', 'perlu direvisi'])->default('sedang diproses');
+            $table->timestamp('tanggal_pengajuan');
         });
     }
 

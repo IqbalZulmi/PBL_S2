@@ -13,19 +13,19 @@ return new class extends Migration
     {
         Schema::create('pengajuan_hak_ciptas', function (Blueprint $table) {
             $table->id();
-            $table->String('id_user');
+            $table->integer('nik');
             $table->String('kkt');
             $table->String('judul_usulan');
-            $table->String('formulir');
-            $table->String('scan_ktp');
-            $table->String('scan_npwp');
-            $table->String('contoh_ciptaan');
-            $table->String('surat_pernyataan');
-            $table->String('surat_pengalihan');
+            $table->String('file_formulir_permohonan');
+            $table->String('file_scan_ktp');
+            $table->String('file_scan_npwp');
+            $table->String('file_contoh_ciptaan');
+            $table->String('file_surat_pernyataan_hak_cipta');
+            $table->String('file_surat_pengalihan_hak_cipta');
             $table->String('usulan');
-            $table->String('salinan_pks');
-            $table->enum('status', ['menunggu', 'diterima', 'ditolak']);
-            $table->timestamps();
+            $table->String('file_salinan_pks');
+            $table->enum('status', ['sedang diproses', 'diterima', 'perlu direvisi'])->default('sedang diproses');
+            $table->timestamp('tanggal_pengajuan');
         });
     }
 
