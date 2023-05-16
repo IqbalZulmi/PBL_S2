@@ -12,6 +12,6 @@ class pengajuan_hakCipta extends Model
     protected $table = 'pengajuan_hakCiptas';
 
     protected $fillable = array (
-        'id_user', 'kkt', 'judul_usulan', 'formulir', 'scan_ktp', 'scan_npwp', 'contoh_ciptaan', 'surat_pernyataan', 'surat_pengalihan', 'usulan', 'salinan_pks', 'status', 'tanggal_pengajuan'
+        'nik', 'kkt', 'judul_usulan', 'file_formulir_permohonan', 'file_scan_ktp', 'file_scan_npwp', 'file_contoh_ciptaan', 'file_surat_pernyataan_hak_cipta', 'file_surat_pengalihan_hak_cipta', 'usulan', 'file_salinan_pks', 'status', 'tanggal_pengajuan'
     );
 }

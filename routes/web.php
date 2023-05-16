@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Superadmincontroller;
 use App\Http\Controllers\Registercontroller;
 use Illuminate\Support\Facades\Route;
@@ -80,6 +80,13 @@ Route::get('/admin/profile', function () {
     return view('admin.profile');
 });
 
+Route::get('/login', [LoginController::class, 'index'])
+->name('login');
+
+Route::post('/login', [LoginController::class, 'login']);
+
+Route::post('/logout', [LoginController::class, 'logout']);
+
 Route::get('/tambah-akun', [Superadmincontroller::class, 'create'])
 ->name('superadmin.tambah');
 
@@ -94,11 +101,6 @@ Route::get('/kelola-akun', [Superadmincontroller::class, 'index'])
 
 Route::PUT('/kelola-akun/update/{id}', [Superadmincontroller::class, 'update'])
 ->name('superadmin.update');
-
-
-Route::get('/login', function () {
-    return view('login');
-});
 
 Route::get('/register', [Registercontroller::class, 'create'])
 ->name('register.create');

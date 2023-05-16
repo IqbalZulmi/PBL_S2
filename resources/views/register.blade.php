@@ -6,24 +6,26 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets_login/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets_login/vendor/bootstrap/css/bootstrap.min.css') }}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets_login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets_login/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets_login/fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="{{  asset('assets_login/fonts/iconic/css/material-design-iconic-font.min.css') }}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets_login/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="{{  asset('assets_login/vendor/animate/animate.css') }}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets_login/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="{{  asset('assets_login/vendor/css-hamburgers/hamburgers.min.css') }}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets_login/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="{{  asset('assets_login/vendor/animsition/css/animsition.min.css') }}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets_login/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="{{  asset('assets_login/vendor/select2/select2.min.css') }}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets_login/vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="{{  asset('assets_login/vendor/daterangepicker/daterangepicker.css') }}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets_login/css/util.css">
-	<link rel="stylesheet" type="text/css" href="assets_login/css/main.css">
+	<link rel="stylesheet" type="text/css" href="{{  asset('assets_login/css/util.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{  asset('assets_login/css/main.css') }}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <!--===============================================================================================-->
 </head>
 <body>
@@ -47,7 +49,7 @@
 						SENTRA HKI
 					</span>
 					<div class="wrap-input100 validate-input">
-						<input required class="input100 @error('username') is-invalid @enderror" value="{{ old('username') }}" type="text" name="username">
+						<input required class="input100 @error('username') is-invalid @enderror" autofocus value="{{ old('username') }}" type="text" name="username">
                         @error('username')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -71,13 +73,6 @@
                         <span class="focus-input100" data-placeholder="Nama"></span>
 					</div>
 					<div class="wrap-input100 validate-input">
-						<input required class="input100 @error('nik') is-invalid @enderror" value="{{ old('nik') }}" type="text" name="nik">
-                        @error('nik')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                        <span class="focus-input100" data-placeholder="NIK"></span>
-					</div>
-					<div class="wrap-input100 validate-input">
 						<input required class="input100 @error('email') is-invalid @enderror" value="{{ old('email') }}" type="text" name="email">
 						@error('email')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -89,7 +84,7 @@
 						@error('no_wa')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                        <span class="focus-input100" data-placeholder="NO Whatsapp"></span>
+                        <span class="focus-input100" data-placeholder="No Whatsapp"></span>
 					</div>
 
                     <div class="wrap-input100 validate-input">
@@ -120,21 +115,24 @@
 	<div id="dropDownSelect1"></div>
 
 <!--===============================================================================================-->
-	<script src="assets_login/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="{{  asset('assets_login/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
 <!--===============================================================================================-->
-	<script src="assets_login/vendor/animsition/js/animsition.min.js"></script>
+	<script src="{{  asset('assets_login/vendor/animsition/js/animsition.min.js') }}"></script>
 <!--===============================================================================================-->
-	<script src="assets_login/vendor/bootstrap/js/popper.js"></script>
-	<script src="assets_login/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="{{  asset('assets_login/vendor/bootstrap/js/popper.js') }}"></script>
+	<script src="{{  asset('assets_login/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <!--===============================================================================================-->
-	<script src="assets_login/vendor/select2/select2.min.js"></script>
+	<script src="{{  asset('assets_login/vendor/select2/select2.min.js') }}"></script>
 <!--===============================================================================================-->
-	<script src="assets_login/vendor/daterangepicker/moment.min.js"></script>
-	<script src="assets_login/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="{{  asset('assets_login/vendor/daterangepicker/moment.min.js') }}"></script>
+	<script src="{{  asset('assets_login/vendor/daterangepicker/daterangepicker.js') }}"></script>
 <!--===============================================================================================-->
-	<script src="assets_login/vendor/countdowntime/countdowntime.js"></script>
+	<script src="{{ asset('assets_login/vendor/countdowntime/countdowntime.js') }}"></script>
 <!--===============================================================================================-->
-	<script src="assets_login/js/main.js"></script>
+	<script src="{{  asset('assets_login/js/main.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

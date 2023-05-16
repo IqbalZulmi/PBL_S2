@@ -22,9 +22,12 @@ Kelola Akun
         </div>
         <div class="card-body">
         @if(session('notifikasi'))
-            <div class="alert alert-{{ session('type') }}">
-            {{ session('notifikasi') }}
+        <div class="form-group">
+            <div class="alert alert-{{ session('type') }} alert-dismissible fade show" role="alert">
+                {{ session('notifikasi') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
             </div>
+        </div>
         @endif
         <div class="table-responsive">
             <table class="table border table-striped table-hover align-middle text-center caption-top">
@@ -33,7 +36,6 @@ Kelola Akun
                     <tr>
                         <th scope="col">No</th>
                         <th scope="col">Username</th>
-                        <th scope="col">Password</th>
                         <th scope="col">Nama</th>
                         <th scope="col">NIK</th>
                         <th scope="col">Email</th>
@@ -48,7 +50,6 @@ Kelola Akun
                     <tr>
                         <td>{{ $index+1 }}</td>
                         <td>{{ $data->username }}</td>
-                        <td>{{ $data->password }}</td>
                         <td>{{ $data->nama }}</td>
                         <td>{{ $data->nik }}</td>
                         <td>{{ $data->email }}</td>
@@ -56,10 +57,10 @@ Kelola Akun
                         <td>{{ $data->jurusan }}</td>
                         <td>{{ $data->role }}</td>
                         <td>
-                            <a class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $data->id }}">
+                            <a class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $data->nik }}">
                                 <i class="fa-solid fa-gear"></i> Edit
                             </a>
-                            <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#hapusModal{{ $data->id }}">
+                            <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#hapusModal{{ $data->nik }}">
                                 <i class="fa-solid fa-trash"></i> Hapus
                             </a>
                         </td>
@@ -84,57 +85,75 @@ Kelola Akun
             </ul>
         </nav>
         @foreach ( $accounts as $index => $data )
-        <div class="modal fade" id="editModal{{ $data->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editModal{{ $data->nik }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Akun</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('superadmin.update', $data->id)}}" method="POST">
+                    <form action="{{ route('superadmin.update', $data->username)}}" method="POST">
                         <div class="modal-body">
-                            @csrf @method('PUT')
+                            @csrf
+                            @method('PUT')
+                            <input name="old_username" hidden value="{{ $data->username }}">
                             <div>
                                 <label for="">Username</label>
-                                <input type="text" name="username" class="form-control" placeholder="username" value="{{$data->username}}" required>
-                            </div>
-                            <div class="mt-2">
-                                <label for="">Password</label>
-                                <input type="text" name="password" class="form-control" placeholder="password" value="{{ $data->password }}" required>
+                                <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" placeholder="username" value="{{old('username', $data->username)}}" required>
+                                @error('username')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mt-2">
                                 <label for="">Nama</label>
-                                <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" value="{{ $data->nama }}" required>
+                                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" placeholder="Nama Lengkap" value="{{old('nama', $data->nama)}}" required>
+                                @error('nama')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mt-2">
                                 <label for="">NIK</label>
-                                <input type="text" name="nik" class="form-control" placeholder="Nomor Identitas Kepegawaian" value="{{ $data->nik }}" required>
+                                <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" placeholder="Nomor Identitas Kepegawaian" value="{{old('nik', $data->nik)}}" required>
+                                @error('nik')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mt-2">
                                 <label for="">Email</label>
-                                <input type="email" name="email" class="form-control" placeholder="Email Aktif" value="{{ $data->email }}" required>
+                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email Aktif" value="{{old('email', $data->email)}}" required>
+                                @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mt-2">
                                 <label for="">No WhatsApp</label>
-                                <input type="text" name="no_wa" class="form-control" placeholder="Nomor WhatsApp Aktif" value="{{ $data->no_wa }}" required>
+                                <input type="text" name="no_wa" class="form-control @error('no_wa') is-invalid @enderror" placeholder="Nomor WhatsApp Aktif" value="{{old('no_wa', $data->no_wa)}}" required>
+                                @error('no_wa')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mt-2">
                                 <label for="">Jurusan</label>
-                                <select class="form-select" name="jurusan" required>
+                                <select class="form-select @error('jurusan') is-invalid @enderror" name="jurusan" required>
                                     <option value="Teknik Informatika">Teknik Informatika</option>
                                     <option value="Teknik Elektro">Teknik Elektro</option>
                                     <option value="Teknik Informatika">Teknik Mesin</option>
                                     <option value="Manajemen Bisnis">Manajemen Bisnis</option>
                                 </select>
+                                @error('jurusan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="my-2">
                                 <label for="">Roles</label>
-                                <select class="form-select" name="role">
-                                    <option value="admin">admin</option>
+                                <select class="form-select @error('role') is-invalid @enderror" name="role">
+                                    <option value="administrator">administrator</option>
                                     <option value="superadmin">superadmin</option>
                                 </select>
+                                @error('role')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -144,7 +163,7 @@ Kelola Akun
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="hapusModal{{ $data->id }}" tabindex="-1" aria-labelledby="hapusModalLabel" aria-hidden="true">
+        <div class="modal fade" id="hapusModal{{ $data->nik }}" tabindex="-1" aria-labelledby="hapusModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -156,8 +175,7 @@ Kelola Akun
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-
-                        <form action="{{ route('superadmin.destroy', $data->id) }}" method="post">
+                        <form action="{{ route('superadmin.destroy', $data->nik) }}" method="post">
                             @csrf @method('DELETE')
                             <button type="submit" class="btn btn-danger">hapus</button>
                         </form>

@@ -11,70 +11,51 @@ Tambah Akun
             @csrf
             @if(session('notifikasi'))
             <div class="form-group">
-                <div class="alert alert-{{ session('type') }}">
+                <div class="alert alert-{{ session('type') }} alert-dismissible fade show" role="alert">
                     {{ session('notifikasi') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
                 </div>
             </div>
             @endif
             <div class="row gy-2" data-aos="zoom-in" data-aos-duration="400">
                 <label for="inputPassword" class="col-sm-2 col-form-label mt-3">username</label>
                 <div class="col-sm-10">
-                    <input type="text" name="username" class="form-control mt-sm-2" placeholder="username" class="form-control @error('username') is-invalid
-                    @enderror" value="{{ old('username') }}" required>
+                    <input type="text" name="username" class="form-control mt-sm-2" placeholder="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required autofocus>
                     @error('username')
-                    <div class="invalid-feedback">{{ $message
-                    }}</div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
-                    <input type="password" name="password" class="form-control" placeholder="password" class="form-control @error('password') is-invalid
-                    @enderror" value="{{ old('password') }}" required>
+                    <input type="password" name="password" class="form-control" placeholder="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" required>
                     @error('password')
-                    <div class="invalid-feedback">{{ $message
-                    }}</div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-10">
-                    <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" class="form-control @error('nama') is-invalid
-                    @enderror" value="{{ old('nama') }}" required>
+                    <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}" required>
                     @error('nama')
-                    <div class="invalid-feedback">{{ $message
-                    }}</div>
-                    @enderror
-                </div>
-                <label for="inputPassword" class="col-sm-2 col-form-label">NIK</label>
-                <div class="col-sm-10">
-                    <input type="text" name="nik" class="form-control" placeholder="Nomor Identitas Kepegawaian" class="form-control @error('nik') is-invalid
-                    @enderror" value="{{ old('nik') }}" required>
-                    @error('nik')
-                    <div class="invalid-feedback">{{ $message
-                    }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="email" name="email" class="form-control" placeholder="Email Aktif" class="form-control @error('email') is-invalid
-                    @enderror" value="{{ old('email') }}" required>
+                    <input type="email" name="email" class="form-control" placeholder="Email Aktif" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
                     @error('email')
-                    <div class="invalid-feedback">{{ $message
-                    }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">No WhatsApp</label>
                 <div class="col-sm-10">
-                    <input type="text" name="no_wa" class="form-control" placeholder="Nomor WhatsApp Aktif" class="form-control @error('no_wa') is-invalid
-                    @enderror" value="{{ old('no_wa') }}" required>
+                    <input type="text" name="no_wa" class="form-control" placeholder="Nomor WhatsApp Aktif" class="form-control @error('no_wa') is-invalid @enderror" value="{{ old('no_wa') }}" required>
                     @error('no_wa')
-                    <div class="invalid-feedback">{{ $message
-                    }}</div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">Jurusan</label>
                 <div class="col-sm-10">
-                    <select class="form-select" name="jurusan" class="form-control @error('jurusan') is-invalid
-                    @enderror" required>
+                    <select class="form-select" name="jurusan" class="form-control @error('jurusan') is-invalid @enderror" required>
                         <option value="Teknik Informatika">Teknik Informatika</option>
                         <option value="Teknik Elektro">Teknik Elektro</option>
                         <option value="Teknik Informatika">Teknik Mesin</option>
@@ -86,9 +67,8 @@ Tambah Akun
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">Roles</label>
                 <div class="col-sm-10">
-                    <select class="form-select" name="role" class="form-control @error('role') is-invalid
-                    @enderror" required>
-                        <option value="admin">admin</option>
+                    <select class="form-select" name="role" class="form-control @error('role') is-invalid @enderror" required>
+                        <option value="administrator">administrator</option>
                         <option value="superadmin">superadmin</option>
                         @error('role')
                         <div class="invalid-feedback">{{ $message }}</div>
