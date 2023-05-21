@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Stmt\ElseIf_;
 
 class LoginController extends Controller
 {
     public function index(){
+        if (auth::check()){
+            return redirect()->back();
+        }
         return view('login');
     }
-   public function login(Request $request)
+   public function login(Request $request): RedirectResponse
     {
         $request->validate([
             'username' => 'required',
@@ -20,18 +24,18 @@ class LoginController extends Controller
 
         $credentials = [
             'username' => $request->username,
-            'password' => $request->password
+            'password' => $request->password,
         ];
 
        if (Auth::attempt($credentials)){
         $user = Auth::user();
-
+        $request->session()->regenerate();
         if ($user->role === 'pemohon'){
-            return redirect()->route('/home');
+            return redirect()->route('home');
         }elseif($user->role === 'administrator'){
-            return redirect()->route('/dashboard');
+            return redirect()->route('dashboard');
         }elseif($user->role === 'superadmin'){
-            return redirect()->route('/kelola-akun');
+            return redirect()->route('superadmin.kelola');
         }
        }
        return redirect()->back()->withInput()->with([
@@ -40,9 +44,11 @@ class LoginController extends Controller
        ]);
     }
 
-    public function logout()
+    public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect()->route('login');
     }
 }

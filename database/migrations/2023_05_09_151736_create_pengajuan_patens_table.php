@@ -25,7 +25,7 @@ return new class extends Migration
             $table->String('file_dokumen_spesifikasi_paten');
             $table->String('file_klaim_paten');
             $table->String('usulan');
-            $table->String('file_salinan_pks');
+            $table->String('file_salinan_pks')->nullable();
             $table->enum('status', ['sedang diproses', 'diterima', 'perlu direvisi'])->default('sedang diproses');
             $table->timestamp('tanggal_pengajuan');
         });

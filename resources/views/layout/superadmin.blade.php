@@ -34,7 +34,7 @@
                             </li>
                             <hr>
                             <li class="nav-item">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/logout">
                                     <i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar
                                 </a>
                             </li>

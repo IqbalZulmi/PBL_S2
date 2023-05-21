@@ -25,38 +25,25 @@ Status Pengajuan
                 <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Judul</th>
-                        <th scope="col">Tanggal Pengajuan</th>
+                        <th scope="col">Nik</th>
+                        <th scope="col">Judul Usulan</th>
                         <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @forelse ( $pengajuan_hakciptas as $index => $data)
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>mark@gmail</td>
-                        <td>Otto si pelari</td>
-                        <td>13/05/2044</td>
-                        <td>diterima</td>
+                        <td>{{ $index+1 }}</td>
+                        <td>{{ $data->nik }}</td>
+                        <td>{{ $data->judul_usulan }}</td>
+                        <td>{{ $data->status }}</td>
                     </tr>
+                    @empty
                     <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>mark@gmail</td>
-                        <td>Thornton si penari</td>
-                        <td>13/02/2004</td>
-                        <td>diterima</td>
+                        <td colspan="100%">Tidak ada data untuk ditampilkan !</td>
                     </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Jacob</td>
-                        <td>mark@gmail</td>
-                        <td>jhon si penari</td>
-                        <td>13/02/2004</td>
-                        <td>diterima</td>
-                    </tr>
+
+                    @endforelse
                 </tbody>
             </table>
         </div>

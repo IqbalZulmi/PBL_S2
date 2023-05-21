@@ -41,7 +41,7 @@
                             </li>
                             <hr>
                             <li class="nav-item">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/logout">
                                     <i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar
                                 </a>
                             </li>
@@ -108,6 +108,14 @@
                 </div>
             </nav>
         </header>
+        @if(session('notifikasi'))
+        <div class="form-group">
+            <div class="alert alert-{{ session('type') }} alert-dismissible fade show" role="alert">
+                {{ session('notifikasi') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+            </div>
+        </div>
+        @endif
         <div class="container-fluid wht">
             <div class="row px-2 py-2">
                 <div class="col-12">

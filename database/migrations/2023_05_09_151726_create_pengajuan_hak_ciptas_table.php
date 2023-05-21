@@ -23,7 +23,7 @@ return new class extends Migration
             $table->String('file_surat_pernyataan_hak_cipta');
             $table->String('file_surat_pengalihan_hak_cipta');
             $table->String('usulan');
-            $table->String('file_salinan_pks');
+            $table->String('file_salinan_pks')->nullable();
             $table->enum('status', ['sedang diproses', 'diterima', 'perlu direvisi'])->default('sedang diproses');
             $table->timestamp('tanggal_pengajuan');
         });

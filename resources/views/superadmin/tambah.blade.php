@@ -20,35 +20,35 @@ Tambah Akun
             <div class="row gy-2" data-aos="zoom-in" data-aos-duration="400">
                 <label for="inputPassword" class="col-sm-2 col-form-label mt-3">username</label>
                 <div class="col-sm-10">
-                    <input type="text" name="username" class="form-control mt-sm-2" placeholder="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required autofocus>
+                    <input type="text" name="username" placeholder="username" class="form-control mt-sm-2 @error('username') is-invalid @enderror" value="{{ old('username') }}" required autofocus>
                     @error('username')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
-                    <input type="password" name="password" class="form-control" placeholder="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" required>
+                    <input type="password" name="password" placeholder="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" required>
                     @error('password')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-10">
-                    <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}" required>
+                    <input type="text" name="nama" placeholder="Nama Lengkap" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}" required>
                     @error('nama')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="email" name="email" class="form-control" placeholder="Email Aktif" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
+                    <input type="email" name="email" placeholder="Email Aktif" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
                     @error('email')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <label for="inputPassword" class="col-sm-2 col-form-label">No WhatsApp</label>
                 <div class="col-sm-10">
-                    <input type="text" name="no_wa" class="form-control" placeholder="Nomor WhatsApp Aktif" class="form-control @error('no_wa') is-invalid @enderror" value="{{ old('no_wa') }}" required>
+                    <input type="text" name="no_wa" placeholder="Nomor WhatsApp Aktif" class="form-control @error('no_wa') is-invalid @enderror" value="{{ old('no_wa') }}" required>
                     @error('no_wa')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
