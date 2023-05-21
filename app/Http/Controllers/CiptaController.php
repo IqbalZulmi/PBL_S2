@@ -13,8 +13,8 @@ class CiptaController extends Controller
      */
     public function index()
     {
-        $cipta = pengajuan_hakCipta::all();
-
+        $user = Auth::user()->nik;
+        $cipta = pengajuan_hakCipta::where('nik',$user)->get();
         return view('user.status', ['pengajuan_hakciptas' => $cipta]);
     }
 
@@ -78,8 +78,12 @@ class CiptaController extends Controller
         $fileSuratPernyataan = basename($fileSuratPernyataan);
         $fileSuratPengalihan = $request->file('file_surat_pengalihan_hak_cipta')->store('public/file');
         $fileSuratPengalihan = basename($fileSuratPengalihan);
-        
-        $fileSalinanPKS = $request->file('file_salinan_pks')->store('public/file');
+        if($request->hasFile('file_salinan_pks')){
+            $fileSalinanPKS = $request->file('file_salinan_pks')->store('public/file');
+            $fileSalinanPKS = basename($fileSalinanPKS);
+        }else{
+            $fileSalinanPKS = null;
+        }
 
         // Move uploaded files to a storage location
 
@@ -90,6 +94,13 @@ class CiptaController extends Controller
         $cipta->judul_usulan = $request->judul_usulan;
         $cipta->usulan = $request->usulan;
 
+        $cipta->file_formulir_permohonan = $fileFormulir ? 'file/' . $fileFormulir : null;
+        $cipta->file_scan_ktp = $fileScanKTP ? 'file/' . $fileScanKTP : null;
+        $cipta->file_scan_npwp = $fileScanNPWP ? 'file/' . $fileScanNPWP : null;
+        $cipta->file_contoh_ciptaan = $fileContohCiptaan ? 'file/' . $fileContohCiptaan : null;
+        $cipta->file_surat_pernyataan_hak_cipta = $fileSuratPernyataan ? 'file/' . $fileSuratPernyataan : null;
+        $cipta->file_surat_pengalihan_hak_cipta = $fileSuratPengalihan ? 'file/' . $fileSuratPengalihan : null;
+        $cipta->file_salinan_pks = $fileSalinanPKS ? 'file/' . $fileSalinanPKS : null;
 
 
         if($cipta->save()){
@@ -100,7 +111,7 @@ class CiptaController extends Controller
         } else {
             return redirect()->back()->with([
                 'notifikasi' => 'Gagal mengirim pengajuan',
-                'type' => 'error'
+                'type' => 'danger'
             ]);
         }
     }

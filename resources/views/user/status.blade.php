@@ -8,7 +8,7 @@ Status Pengajuan
 <div class="row wht">
     <div class="col-12">
         <div class="container-input mt-2">
-            <input type="text" placeholder="Cari Judul" name="text" class="input" oninput="cari(4)">
+            <input type="text" placeholder="Cari Judul" name="text" class="input" oninput="cari(3)">
             <select name="limit" class="form-select form-select-md">
                 <option value="-1">ALL</option>
                 <option value="5">5</option>
@@ -27,6 +27,7 @@ Status Pengajuan
                         <th scope="col">No</th>
                         <th scope="col">Nik</th>
                         <th scope="col">Judul Usulan</th>
+                        <th scope="col">Tanggal Pengajuan</th>
                         <th scope="col">Status</th>
                     </tr>
                 </thead>
@@ -36,7 +37,12 @@ Status Pengajuan
                         <td>{{ $index+1 }}</td>
                         <td>{{ $data->nik }}</td>
                         <td>{{ $data->judul_usulan }}</td>
-                        <td>{{ $data->status }}</td>
+                        <td>{{ $data->tanggal_pengajuan }}</td>
+                        <td>
+                            <div class="badge fs-6 fw-normal @if ($data->status == 'sedang diproses') text-bg-warning @elseif ($data->status == 'diterima') text-bg-success @else text-bg-danger @endif">
+                                {{ $data->status }}
+                            </div>
+                        </td>
                     </tr>
                     @empty
                     <tr>

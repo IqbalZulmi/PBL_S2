@@ -30,6 +30,12 @@
                         <span class="dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->name }}</span>
                         <ul class="dropdown-menu dropdown-menu-end animate slideIn">
                             <li class="nav-item">
+                                <a class="dropdown-item">
+                                    <i class="fa-regular fa-user"></i> {{ auth()->user()->nama }}
+                                </a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
                                 <a class="dropdown-item" href="/user/profile">
                                     <i class="fa-regular fa-address-card"></i> Profil
                                 </a>
@@ -108,6 +114,13 @@
                 </div>
             </nav>
         </header>
+        <div class="container-fluid wht">
+            <div class="row px-2 py-2">
+                <div class="col-12">
+                    <h1 class="h1">@yield('title')</h1>
+                </div>
+            </div>
+        </div>
         @if(session('notifikasi'))
         <div class="form-group">
             <div class="alert alert-{{ session('type') }} alert-dismissible fade show" role="alert">
@@ -116,13 +129,6 @@
             </div>
         </div>
         @endif
-        <div class="container-fluid wht">
-            <div class="row px-2 py-2">
-                <div class="col-12">
-                    <h1 class="h1">@yield('title')</h1>
-                </div>
-            </div>
-        </div>
         <main class="content py-5 px-lg-4">
             <div class="container-fluid">
                 @yield('content')

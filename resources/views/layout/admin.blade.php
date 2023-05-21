@@ -29,7 +29,7 @@
                         <ul class="dropdown-menu dropdown-menu-end animate slideIn">
                             <li class="nav-item">
                                 <a class="dropdown-item">
-                                    <i class="fa-regular fa-user"></i> Rayyan Kheisar
+                                    <i class="fa-regular fa-user"></i> {{ auth()->user()->nama }}
                                 </a>
                             </li>
                             <hr>
@@ -101,6 +101,14 @@
                 </div>
             </div>
         </div>
+        @if(session('notifikasi'))
+        <div class="form-group">
+            <div class="alert alert-{{ session('type') }} alert-dismissible fade show" role="alert">
+                {{ session('notifikasi') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+            </div>
+        </div>
+        @endif
         <main class="content py-5 px-lg-4">
             <div class="container-fluid">
                 @yield('content')

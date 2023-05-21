@@ -281,3 +281,11 @@ function enableinput() {
         editButton.classList.add("btn-warning");
     }
 }
+
+//select-filter-usulan
+function toggleUploadField(selectElement) {
+    var selectFilterElements = document.getElementsByClassName("select-filter");
+    for (var i = 0; i < selectFilterElements.length; i++) {
+        selectFilterElements[i].style.display = (selectElement.value === "Tidak") ? "none" : "";
+    }
+}
