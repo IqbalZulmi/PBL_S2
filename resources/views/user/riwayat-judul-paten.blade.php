@@ -1,14 +1,14 @@
 @extends('layout.user')
 
 @section('title')
-Status Pengajuan
+Riwayat Judul Paten
 @endsection
 
 @section('content')
 <div class="row wht">
     <div class="col-12">
         <div class="container-input mt-2">
-            <input type="text" placeholder="Cari Judul" name="text" class="input" oninput="cari(3)">
+            <input type="text" placeholder="Cari Judul" name="text" class="input" oninput="cari(2)">
             <select name="limit" class="form-select form-select-md">
                 <option value="-1">ALL</option>
                 <option value="5">5</option>
@@ -20,38 +20,27 @@ Status Pengajuan
                 <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
             </svg>
         </div>
-        <div class="table-responsive my-2">
-            <table class="table border table-striped table-hover align-middle text-center">
+        <div class="table-responsive">
+            <table class="table border table-striped table-hover align-middle text-center caption-top">
+                <caption>Judul yang telah diterima:</caption>
                 <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">Nik</th>
-                        <th scope="col">Judul Usulan</th>
-                        <th scope="col">Tanggal Pengajuan</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Alasan</th>
+                        <th scope="col">Judul</th>
+                        <th scope="col">Tanggal diterima</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ( $pengajuan_hakciptas as $index => $data)
                     <tr>
-                        <td>{{ $index+1 }}</td>
-                        <td>{{ $data->nik }}</td>
-                        <td>{{ $data->judul_usulan }}</td>
-                        <td>{{ $data->tanggal_pengajuan }}</td>
-                        <td>
-                            <div class="badge fs-6 fw-normal @if ($data->status == 'sedang diproses') text-bg-warning @elseif ($data->status == 'diterima') text-bg-success @else text-bg-danger @endif">
-                                {{ $data->status }}
-                            </div>
-                        </td>
-                        <td>{{ $data->alasan }}</td>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
                     </tr>
-                    @empty
                     <tr>
-                        <td colspan="100%">Tidak ada data untuk ditampilkan !</td>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
                     </tr>
-
-                    @endforelse
                 </tbody>
             </table>
         </div>

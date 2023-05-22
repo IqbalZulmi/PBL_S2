@@ -25,7 +25,8 @@ return new class extends Migration
             $table->String('usulan');
             $table->String('file_salinan_pks')->nullable();
             $table->enum('status', ['sedang diproses', 'diterima', 'perlu direvisi'])->default('sedang diproses');
-            $table->timestamp('tanggal_pengajuan');
+            $table->text('alasan')->nullable();
+            $table->timestamp('tanggal_pengajuan')->default(now());
         });
     }
 

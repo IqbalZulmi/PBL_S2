@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\adminController;
 use App\Http\Controllers\CiptaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Superadmincontroller;
@@ -26,8 +27,11 @@ Route::get('/home', function () {
     return view('user.home');
 })->name('home');
 
-Route::get('/riwayat-judul', function () {
-    return view('user.riwayat-judul');
+Route::get('/riwayat/hak-cipta', [CiptaController::class, 'riwayat'])
+->name('riwayat.tampil');
+
+Route::get('/riwayat/hak-paten', function () {
+    return view('user.riwayat-judul-paten');
 });
 
 Route::get('/sejarah', function () {
@@ -72,9 +76,8 @@ Route::middleware('auth')->group(function(){
     });
 
     Route::middleware(CekRole::class . ':administrator')->group(function(){
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        })->name('dashboard');
+        Route::get('/dashboard', [adminController::class, 'index'])
+        ->name('dashboard.tampil');
 
         Route::get('/verif-cipta', function () {
             return view('admin.verif-cipta');
@@ -84,8 +87,12 @@ Route::middleware('auth')->group(function(){
             return view('admin.verif-paten');
         });
 
-        Route::get('/riwayat-pengajuan', function () {
-            return view('admin.riwayat-pengajuan');
+        Route::get('/riwayat-pengajuan/hak-cipta', function () {
+            return view('admin.riwayat-pengajuan-cipta');
+        });
+
+        Route::get('/riwayat-pengajuan/paten', function () {
+            return view('admin.riwayat-pengajuan-paten');
         });
 
         Route::get('/admin/change-password', function () {
@@ -98,6 +105,16 @@ Route::middleware('auth')->group(function(){
     });
 
     Route::middleware(CekRole::class . ':superadmin')->group(function () {
+        Route::get('/tambah-akun', [Superadmincontroller::class, 'create'])
+        ->name('superadmin.tambah');
+
+        Route::POST('/tambah-akun', [Superadmincontroller::class, 'store'])
+        ->name('superadmin.store');
+
+        Route::get('/superadmin/change-password', function () {
+            return view('superadmin.change-password');
+        });
+
         Route::get('/kelola-akun', [Superadmincontroller::class, 'index'])
         ->name('superadmin.kelola');
 
@@ -108,16 +125,6 @@ Route::middleware('auth')->group(function(){
         ->name('superadmin.destroy');
     });
 });
-
-Route::get('/tambah-akun', [Superadmincontroller::class, 'create'])
-->name('superadmin.tambah');
-
-Route::POST('/tambah-akun', [Superadmincontroller::class, 'store'])
-->name('superadmin.store');
-
-
-
-
 
 Route::get('/register', [Registercontroller::class, 'create'])
 ->name('register.create');

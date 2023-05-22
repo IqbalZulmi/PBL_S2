@@ -27,7 +27,7 @@
                     <div class="dropdown">
                         <img src="https://learning-if.polibatam.ac.id/theme/image.php/moove/core/1675225508/u/f2" alt=""
                             class="rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->name }}</span>
+                        <span class="dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->nama }}</span>
                         <ul class="dropdown-menu dropdown-menu-end animate slideIn">
                             <li class="nav-item">
                                 <a class="dropdown-item">
@@ -35,13 +35,15 @@
                                 </a>
                             </li>
                             <hr>
+                            @if (auth()->user()->role == 'pemohon' || auth()->user()->role == 'administrator')
                             <li class="nav-item">
-                                <a class="dropdown-item" href="/user/profile">
+                                <a class="dropdown-item" href="@if (auth()->user()->role == 'administrator') /admin/profile @elseif (auth()->user()->role == 'superadmin') /superadmin/profile @else /user/profile @endif">
                                     <i class="fa-regular fa-address-card"></i> Profil
                                 </a>
                             </li>
+                            @endif
                             <li class="nav-item">
-                                <a class="dropdown-item" href="/user/change-password">
+                                <a class="dropdown-item" href="@if (auth()->user()->role == 'administrator') /admin/change-password @elseif (auth()->user()->role == 'superadmin') /superadmin/change-password @else /user/change-password @endif">
                                     <i class="fa-solid fa-key"></i> ubah kata sandi
                                 </a>
                             </li>
@@ -96,14 +98,20 @@
                                     </a>
                                     <ul class="dropdown-menu animate slideIn">
                                         <li><a class="dropdown-item" href="/hak-cipta">Hak Cipta</a></li>
-                                        <li><a class="dropdown-item" href="/hak-paten">Hak Paten</a></li>
+                                        <li><a class="dropdown-item" href="/hak-paten">Paten</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item me-lg-3 mb-2 mb-sm-0">
                                     <a class="nav-link" href="/status"><i class="fa-solid fa-bell"></i> Status Pengajuan</a>
                                 </li>
-                                <li class="nav-item me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link" href="/riwayat-judul"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Judul</a>
+                                <li class="nav-item dropdown me-lg-3 mb-2 mb-sm-0">
+                                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-clock-rotate-left"></i> Riwayat Judul
+                                    </a>
+                                    <ul class="dropdown-menu animate slideIn">
+                                        <li><a class="dropdown-item" href="/riwayat/hak-cipta">Hak Cipta</a></li>
+                                        <li><a class="dropdown-item" href="/riwayat/hak-paten">Paten</a></li>
+                                    </ul>
                                 </li>
                                 <li class="nav-item me-lg-3 mb-2 mb-sm-0">
                                     <a class="nav-link" href="/unduhan"><i class="fa-solid fa-file-arrow-down"></i> Unduhan</a>

@@ -33,7 +33,7 @@ class LoginController extends Controller
         if ($user->role === 'pemohon'){
             return redirect()->route('home');
         }elseif($user->role === 'administrator'){
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard.tampil');
         }elseif($user->role === 'superadmin'){
             return redirect()->route('superadmin.kelola');
         }

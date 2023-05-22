@@ -25,11 +25,17 @@
                     </span>
                     <div class="dropdown">
                         <img src="https://learning-if.polibatam.ac.id/theme/image.php/moove/core/1675225508/u/f2" alt="" class="rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false"></span>
+                        <span class="dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->nama }}</span>
                         <ul class="dropdown-menu dropdown-menu-end animate slideIn">
                             <li class="nav-item">
                                 <a class="dropdown-item">
                                     <i class="fa-regular fa-user"></i> {{ auth()->user()->nama }}
+                                </a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="/superadmin/change-password">
+                                    <i class="fa-solid fa-key"></i> ubah kata sandi
                                 </a>
                             </li>
                             <hr>

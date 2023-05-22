@@ -289,3 +289,19 @@ function toggleUploadField(selectElement) {
         selectFilterElements[i].style.display = (selectElement.value === "Tidak") ? "none" : "";
     }
 }
+
+//validasi input pdf
+function validasi(input){
+    var filename = input.value.trim();
+
+    var extIndex = filename.lastIndexOf('.');
+    var fileExntension = filename.slice(extIndex).toLowerCase();
+
+    if (fileExntension !== ".pdf"){
+        alert("Tipe File harus PDF!");
+        input.value = "";
+        return false;
+    }
+
+    return true;
+}

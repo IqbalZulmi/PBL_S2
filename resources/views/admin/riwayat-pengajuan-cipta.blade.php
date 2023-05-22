@@ -1,7 +1,7 @@
 @extends('layout.admin')
 
 @section('title')
-Riwayat pengajuan
+Riwayat pengajuan hak cipta
 @endsection
 
 @section('content')

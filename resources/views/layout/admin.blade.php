@@ -25,7 +25,7 @@
                     </span>
                     <div class="dropdown">
                         <img src="https://learning-if.polibatam.ac.id/theme/image.php/moove/core/1675225508/u/f2" alt="" class="rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false"></span>
+                        <span class="dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->nama }}</span>
                         <ul class="dropdown-menu dropdown-menu-end animate slideIn">
                             <li class="nav-item">
                                 <a class="dropdown-item">
@@ -82,11 +82,17 @@
                                     </a>
                                     <ul class="dropdown-menu animate slideIn">
                                         <li><a class="dropdown-item" href="/verif-cipta">Hak Cipta</a></li>
-                                        <li><a class="dropdown-item" href="/verif-paten">Hak Paten</a></li>
+                                        <li><a class="dropdown-item" href="/verif-paten">Paten</a></li>
                                     </ul>
                                 </li>
-                                <li class="nav-item me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link" href="/riwayat-pengajuan"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Pengajuan</a>
+                                <li class="nav-item dropdown me-lg-3 mb-2 mb-sm-0">
+                                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-clock-rotate-left"></i> Riwayat Pengajuan
+                                    </a>
+                                    <ul class="dropdown-menu animate slideIn">
+                                        <li><a class="dropdown-item" href="/riwayat-pengajuan/hak-cipta">Hak Cipta</a></li>
+                                        <li><a class="dropdown-item" href="/riwayat-pengajuan/paten">Paten</a></li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>

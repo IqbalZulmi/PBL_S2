@@ -11,6 +11,12 @@ class CiptaController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function riwayat()
+    {
+        $cipta = pengajuan_hakCipta::where('status','diterima')->get();
+        return view('user.riwayat-judul-cipta',['cipta' => $cipta]);
+    }
+
     public function index()
     {
         $user = Auth::user()->nik;
@@ -33,7 +39,7 @@ class CiptaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nik' => 'required|unique:pengajuan_hak_ciptas,nik',
+            'nik' => 'required',
             'kkt' => 'required',
             'judul_usulan' => 'required',
             'file_formulir_permohonan' => 'required|file|mimes:pdf',
@@ -43,10 +49,9 @@ class CiptaController extends Controller
             'file_surat_pernyataan_hak_cipta' => 'required|file|mimes:pdf',
             'file_surat_pengalihan_hak_cipta' => 'required|file|mimes:pdf',
             'usulan' => 'required',
-            'file_salinan_pks' => 'required|file|mimes:pdf',
+            'file_salinan_pks' => 'file|mimes:pdf',
         ], [
             'nik.required' => 'nik harus diisi',
-            'nik.unique' => 'nik sudah digunakan',
             'judul_usulan.required' => 'judul usulan harus diisi',
             'file_formulir_permohonan.required' => 'file formulir permohonan harus diunggah',
             'file_formulir_permohonan.mimes' => 'file formulir permohonan harus berformat PDF',
@@ -61,7 +66,6 @@ class CiptaController extends Controller
             'file_surat_pengalihan_hak_cipta.required' => 'file surat pengalihan hak cipta harus diunggah',
             'file_surat_pengalihan_hak_cipta.mimes' => 'file surat pengalihan hak cipta harus berformat PDF',
             'usulan.required' => 'usulan harus diisi',
-            'file_salinan_pks.required' => 'file salinan PKS harus diunggah',
             'file_salinan_pks.mimes' => 'file salinan PKS harus berformat PDF',
         ]);
 

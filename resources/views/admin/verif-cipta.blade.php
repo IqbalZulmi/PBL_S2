@@ -86,12 +86,9 @@ Verifikasi Hak Cipta
                             </button>
                         </td>
                         <td>
-                            <a class="btn btn-sm btn-outline-success">
-                                <i class="fa-solid fa-check"></i>Terima
-                            </a>
-                            <a class="btn btn-sm btn-outline-danger">
-                                <i class="fa-solid fa-xmark"></i>Tolak
-                            </a>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                verifikasi
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -109,5 +106,37 @@ Verifikasi Hak Cipta
         </nav>
     </div>
 </div>
-
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Verfikasi</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+        <form action="">
+            <div class="modal-body">
+                @csrf @method('put')
+                <label class="form-label">Status</label>
+                <select name="status" class="form-select @error('status') is-invalid @enderror">
+                    <option value="diterima">diterima</option>
+                    <option value="perlu direvisi">perlu direvisi</option>
+                </select>
+                @error('status')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+                <label class="form-label">Alasan</label>
+                <textarea name="alasan" class="form-control @error('alasan') is-invalid @enderror" cols="30" rows="5" placeholder="File Ktp Buram"></textarea>
+                @error('alasan')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success">Save changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
 @endsection
