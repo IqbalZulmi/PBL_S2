@@ -34,8 +34,8 @@ class Registercontroller extends Controller
             'username' => 'required|unique:users,username',
             'password' => 'required|min:8|max:255',
             'nama' => 'required',
-            'email' => 'required|email:dns',
-            'no_wa' => 'required',
+            'email' => 'required|unique:users,email|email:dns',
+            'no_wa' => 'required|numeric|min:10',
             'jurusan' => 'required',
         ], [
             'username.required' => 'username harus diisi.',
@@ -44,8 +44,10 @@ class Registercontroller extends Controller
             'password.min' => 'Password minimal 8 Karakter.',
             'nama.required' => 'nama harus diisi.',
             'email.required' => 'email harus diisi.',
+            'email.unique' => 'Email sudah digunakan',
             'email.email' => 'Format email Harus benar',
             'no_wa.required' => 'no whatsapp harus diisi.',
+            'no_wa.min' => 'no whatsapp minimal terdiri dari 10 angka.',
             'jurusan.required' => 'jurusan harus diisi.',
         ]);
 

@@ -37,8 +37,8 @@ class Superadmincontroller extends Controller
             'username' => 'required|unique:users,username',
             'password' => 'required|min:8|max:255',
             'nama' => 'required',
-            'email' => 'required|email:dns',
-            'no_wa' => 'required',
+            'email' => 'required|unique:users,email|email:dns',
+            'no_wa' => 'required|numeric|min:10',
             'jurusan' => 'required',
             'role' => 'required',
         ], [
@@ -49,7 +49,9 @@ class Superadmincontroller extends Controller
             'nama.required' => 'nama harus diisi.',
             'email.required' => 'email harus diisi.',
             'email.email' => 'Format email Harus benar',
+            'email.unique' => 'Email sudah digunakan',
             'no_wa.required' => 'no whatsapp harus diisi.',
+            'no_wa.min' => 'no whatsapp minimal terdiri dari 10 angka.',
             'jurusan.required' => 'jurusan harus diisi.',
             'role.required' => 'Role harus diisi.',
         ]);
@@ -105,8 +107,8 @@ class Superadmincontroller extends Controller
             ],
             'nama' => 'required',
             'nik' => 'required',
-            'email' => 'required',
-            'no_wa' => 'required',
+            'email' => 'required|unique:users,email|email:dns',
+            'no_wa' => 'required|numeric|min:10',
             'jurusan' => 'required',
             'role' => 'required',
             ], [
@@ -115,8 +117,10 @@ class Superadmincontroller extends Controller
             'nama.required' => 'nama harus diisi.',
             'nik.required' => 'nik harus diisi.',
             'email.required' => 'email harus diisi.',
-            'email.email' => 'Format email harus benar',
+            'email.email' => 'Format email Harus benar',
+            'email.unique' => 'Email sudah digunakan',
             'no_wa.required' => 'no_wa harus diisi.',
+            'no_wa.min' => 'no whatsapp minimal terdiri dari 10 angka.',
             'jurusan.required' => 'jurusan harus diisi.',
             'role.required' => 'role harus diisi.',
             ]);

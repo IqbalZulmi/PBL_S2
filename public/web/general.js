@@ -305,3 +305,20 @@ function validasi(input){
 
     return true;
 }
+//select-filter-alasan
+function filterAlasan(selectElement) {
+    var alasanLabel = document.getElementById("alasanLabel");
+    var alasanTextarea = document.getElementById("alasanTextarea");
+
+    if (selectElement.value === "perlu direvisi") {
+        alasanLabel.classList.remove("d-none");
+        alasanLabel.classList.add("d-block");
+        alasanTextarea.classList.remove("d-none");
+        alasanTextarea.classList.add("d-block");
+    } else {
+        alasanLabel.classList.remove("d-block");
+        alasanLabel.classList.add("d-none");
+        alasanTextarea.classList.remove("d-block");
+        alasanTextarea.classList.add("d-none");
+    }
+}

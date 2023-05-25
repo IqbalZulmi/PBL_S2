@@ -79,17 +79,18 @@ Route::middleware('auth')->group(function(){
         Route::get('/dashboard', [adminController::class, 'index'])
         ->name('dashboard.tampil');
 
-        Route::get('/verif-cipta', function () {
-            return view('admin.verif-cipta');
-        });
+        Route::get('/verif-cipta', [adminController::class, 'create'])
+        ->name('cipta.tampil');
+
+        Route::put('/verif-cipta/{id}', [adminController::class, 'update'])
+        ->name('cipta.update');
 
         Route::get('/verif-paten', function () {
             return view('admin.verif-paten');
         });
 
-        Route::get('/riwayat-pengajuan/hak-cipta', function () {
-            return view('admin.riwayat-pengajuan-cipta');
-        });
+        Route::get('/riwayat-pengajuan/hak-cipta', [adminController::class, 'riwayat'])
+        ->name('riwayat-cipta.tampil');
 
         Route::get('/riwayat-pengajuan/paten', function () {
             return view('admin.riwayat-pengajuan-paten');

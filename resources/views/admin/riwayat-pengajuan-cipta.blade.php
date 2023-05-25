@@ -22,7 +22,7 @@ Riwayat pengajuan hak cipta
         </div>
         <div class="table-responsive">
             <table class="table border table-striped table-hover align-middle text-center caption-top">
-                <caption>Judul yang telah diterima:</caption>
+                <caption>Judul yang telah diterima:{{ $join->count() }}</caption>
                 <thead>
                     <tr>
                         <th scope="col">No</th>
@@ -34,34 +34,31 @@ Riwayat pengajuan hak cipta
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
+                 @forelse ($join as $index => $data )
                 <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Iqbal</td>
-                        <td>Iqbal@gmail.com</td>
-                        <td>boboiboy</td>
-                        <td>13 Maret 2023</td>
-                        <td>Diterima</td>
+                        <th scope="row">{{ $index+1 }}</th>
+                        <td>{{ $data->nama }}</td>
+                        <td>{{ $data->email }}</td>
+                        <td>{{ $data->judul_usulan }}</td>
+                        <td>{{ $data->tanggal_pengajuan }}</td>
                         <td>
-                            <button type="button" class="btn btn-outline-warning">
+                            <div class="badge fs-6 fw-normal @if ($data->status == 'diterima') text-bg-success @else text-bg-danger @endif">
+                                {{ $data->status }}
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#hapusModal{{ $index+1 }}">
                                 <i class="fa-solid fa-trash"></i> Hapus
                             </button>
                         </td>
                     </tr>
+                    @empty
                     <tr>
-                        <th scope="row">2</th>
-                        <td>Rayyan</td>
-                        <td>Rayyan@gmail.com</td>
-                        <td>Pendeteksi Bencana</td>
-                        <td>15 Maret 2023</td>
-                        <td>Ditolak</td>
-                        <td>
-                            <button type="button" class="btn btn-outline-warning">
-                                <i class="fa-solid fa-trash"></i> Hapus
-                            </button>
-                        </td>
+                        <td colspan="100%">Tidak ada data untuk ditampilkan !</td>
                     </tr>
                 </tbody>
+                @endforelse
             </table>
         </div>
         <nav aria-label="Page navigation example">
@@ -74,7 +71,29 @@ Riwayat pengajuan hak cipta
                 </li>
             </ul>
         </nav>
+        @foreach ($join as $index => $data )
+        <div class="modal fade" id="hapusModal{{ $index+1 }}" tabindex="-1" aria-labelledby="hapusModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Akun</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h5 class="fw-bold">Apakah Anda Yakin Menghapus Akun Dengan Username {{$data->username}}?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <form action="" method="post">
+                            @csrf @method('DELETE')
+                            <button type="submit" class="btn btn-danger">hapus</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
     </div>
 </div>
-
 @endsection
