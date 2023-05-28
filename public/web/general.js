@@ -298,13 +298,20 @@ function validasi(input){
     var fileExntension = filename.slice(extIndex).toLowerCase();
 
     if (fileExntension !== ".pdf"){
-        alert("Tipe File harus PDF!");
+        Swal.fire({
+            text: 'Tipe File harus PDF !',
+            icon: 'warning',
+            confirmButtonText:'OK',
+            showCloseButton: true,
+            timer: 2000,
+        })
         input.value = "";
         return false;
     }
 
     return true;
 }
+
 //select-filter-alasan
 function filterAlasan(selectElement) {
     var alasanLabel = document.getElementById("alasanLabel");

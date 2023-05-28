@@ -31,16 +31,13 @@ Pengajuan Hak Cipta
             <div class="mb-2 row" data-aos="fade-up" data-aos-duration="500">
                 <label for="NIP" class="col-lg-4 col-form-label">NIP/NIK</label>
                 <div class="col-lg-6">
-                    <input type="text" name="nik"  id="nik" placeholder="Masukkan NIP/NIK" class="form-control @error('nik') is-invalid @enderror" value="{{ old('nik',$user->nik) }}" readonly required>
-                    @error('nik')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <input type="text" name="nik"  id="nik" placeholder="Masukkan NIP/NIK" class="form-control" value="{{ $user->nik }}" readonly required>
                 </div>
             </div>
             <div class="mb-2 row" data-aos="fade-up" data-aos-duration="500">
                 <label for="KKT" class="col-lg-4 col-form-label">KKT/PK</label>
                 <div class="col-lg-6">
-                    <input type="text" name="kkt"  id="kkt" placeholder="KKT/PK" class="form-control @error('kkt') is-invalid @enderror" value="{{ old('kkt') }}"required>
+                    <input type="text" name="kkt"  id="kkt" placeholder="KKT/PK" class="form-control @error('kkt') is-invalid @enderror" value="{{ old('kkt') }}" required autofocus>
                     @error('kkt')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

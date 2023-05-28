@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
     </head>
 
     <body>
@@ -24,8 +25,8 @@
                         <img src="{{ asset('web/logo.jpeg') }}" class="rounded-5" alt="" width="auto" height="38">
                     </span>
                     <div class="dropdown">
-                        <img src="https://learning-if.polibatam.ac.id/theme/image.php/moove/core/1675225508/u/f2" alt="" class="rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->nama }}</span>
+                        <span class="text-light">{{ Auth::user()->nama }} </span><img src="https://learning-if.polibatam.ac.id/theme/image.php/moove/core/1675225508/u/f2" alt="" class="rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false"></span>
                         <ul class="dropdown-menu dropdown-menu-end animate slideIn">
                             <li class="nav-item">
                                 <a class="dropdown-item">
@@ -87,14 +88,6 @@
                 </div>
             </div>
         </div>
-        @if(session('notifikasi'))
-        <div class="form-group">
-            <div class="alert alert-{{ session('type') }} alert-dismissible fade show" role="alert">
-                {{ session('notifikasi') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-            </div>
-        </div>
-        @endif
         <main class="content py-5 px-lg-4">
             <div class="container-fluid">
                 @yield('content')
@@ -109,6 +102,19 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
         <script src="{{ asset('web/general.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+
+        @if (session('notifikasi'))
+        <script>
+            Swal.fire({
+                text: '{{ session('notifikasi') }}',
+                icon: '{{ session('type') }}',
+                confirmButtonText:'OK',
+                showCloseButton: true,
+                timer: 2000,
+            })
+        </script>
+        @endif
 
     </body>
 

@@ -13,7 +13,7 @@ Pengajuan Hak Cipta
     </div>
     <div class="col-sm-7">
         <div class="mt-2 d-flex justify-content-end">
-            <button class="btn btn-warning" onclick="enableinput()" id="editButton">
+            <button class="btn btn-outline-warning" onclick="enableinput()" id="editButton">
                 <i class="fa-solid fa-gear"></i> Edit
             </button>
         </div>

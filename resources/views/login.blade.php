@@ -25,6 +25,7 @@
 	<link rel="stylesheet" type="text/css" href="{{  asset('assets_login/css/util.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{  asset('assets_login/css/main.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
 <!--===============================================================================================-->
 </head>
 <body>
@@ -38,14 +39,6 @@
                 <span class="login100-form-title p-b-20">
                     SENTRA HKI
                 </span>
-                @if(session('notifikasi'))
-                <div class="form-group">
-                    <div class="alert alert-{{ session('type') }} alert-dismissible fade show" role="alert">
-                        {{ session('notifikasi') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-                    </div>
-                </div>
-                @endif
                 <form action="/login" method="post" class="login100-form validate-form">
                     @csrf
 					<div class="wrap-input100 validate-input">
@@ -115,6 +108,19 @@
 
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+
+    @if (session('notifikasi'))
+    <script>
+        Swal.fire({
+            text: '{{ session('notifikasi') }}',
+            icon: '{{ session('type') }}',
+            confirmButtonText:'OK',
+            showCloseButton: true,
+            timer: 2000,
+        })
+    </script>
+    @endif
 
 </body>
 </html>

@@ -1,7 +1,7 @@
 @extends('layout.user')
 
 @section('title')
-Riwayat Judul hak cipta
+Daftar Judul hak cipta
 @endsection
 
 @section('content')

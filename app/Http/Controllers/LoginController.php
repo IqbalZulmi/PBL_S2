@@ -32,15 +32,15 @@ class LoginController extends Controller
         $request->session()->regenerate();
         if ($user->role === 'pemohon'){
             return redirect()->route('home');
-        }elseif($user->role === 'administrator'){
+        }elseif($user->role === 'pic'){
             return redirect()->route('dashboard.tampil');
-        }elseif($user->role === 'superadmin'){
+        }elseif($user->role === 'manajer'){
             return redirect()->route('superadmin.kelola');
         }
        }
        return redirect()->back()->withInput()->with([
         'notifikasi' => 'Login Failed !',
-        'type' => 'danger'
+        'type' => 'error'
        ]);
     }
 

@@ -1,7 +1,7 @@
 @extends('layout.user')
 
 @section('title')
-Riwayat Judul Paten
+Daftar Judul Paten
 @endsection
 
 @section('content')

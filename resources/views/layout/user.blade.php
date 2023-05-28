@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
     </head>
 
     <body>
@@ -25,9 +26,9 @@
                     </span>
                     @auth
                     <div class="dropdown">
-                        <img src="https://learning-if.polibatam.ac.id/theme/image.php/moove/core/1675225508/u/f2" alt=""
+                        <span class="text-light">{{ Auth::user()->nama }} </span><img src="https://learning-if.polibatam.ac.id/theme/image.php/moove/core/1675225508/u/f2" alt=""
                             class="rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->nama }}</span>
+                        <span class="dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false"></span>
                         <ul class="dropdown-menu dropdown-menu-end animate slideIn">
                             <li class="nav-item">
                                 <a class="dropdown-item">
@@ -35,15 +36,15 @@
                                 </a>
                             </li>
                             <hr>
-                            @if (auth()->user()->role == 'pemohon' || auth()->user()->role == 'administrator')
+                            @if (auth()->user()->role == 'pemohon')
                             <li class="nav-item">
-                                <a class="dropdown-item" href="@if (auth()->user()->role == 'administrator') /admin/profile @elseif (auth()->user()->role == 'superadmin') /superadmin/profile @else /user/profile @endif">
+                                <a class="dropdown-item" href="/user/profile">
                                     <i class="fa-regular fa-address-card"></i> Profil
                                 </a>
                             </li>
                             @endif
                             <li class="nav-item">
-                                <a class="dropdown-item" href="@if (auth()->user()->role == 'administrator') /admin/change-password @elseif (auth()->user()->role == 'superadmin') /superadmin/change-password @else /user/change-password @endif">
+                                <a class="dropdown-item" href="@if (auth()->user()->role == 'pic') /admin/change-password @elseif (auth()->user()->role == 'manajer') /superadmin/change-password @else /user/change-password @endif">
                                     <i class="fa-solid fa-key"></i> ubah kata sandi
                                 </a>
                             </li>
@@ -63,7 +64,7 @@
             <div class="img-fluid container-fluid text-white">
                 <div class="row">
                     <div class="col-md-5 col-lg-4 text-center text-md-start">
-                        <a href="/home" class="h1 text-decoration-none text-white">Sentra HKI</a>
+                        <a href="/kelola-akun" class="h1 text-decoration-none text-white">Sentra HKI</a>
                         <p class="fs-6">merupakan unit kerja yang bertujuan untuk mengelola dan mendaya gunakan kekayaan intelektual, sekaligus sebagai pusat informasi dan pelayanan HKI yang dimana merujuk kepada hak - hak hukum, seperti hak cipta, hak paten, merek dagang, rahasia dagang, dan sebagainya</p>
                     </div>
                 </div>
@@ -106,11 +107,11 @@
                                 </li>
                                 <li class="nav-item dropdown me-lg-3 mb-2 mb-sm-0">
                                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-clock-rotate-left"></i> Riwayat Judul
+                                        <i class="fa-solid fa-clock-rotate-left"></i> Daftar Judul
                                     </a>
                                     <ul class="dropdown-menu animate slideIn">
-                                        <li><a class="dropdown-item" href="/riwayat/hak-cipta">Hak Cipta</a></li>
-                                        <li><a class="dropdown-item" href="/riwayat/hak-paten">Paten</a></li>
+                                        <li><a class="dropdown-item" href="/judul/hak-cipta">Hak Cipta</a></li>
+                                        <li><a class="dropdown-item" href="/judul/hak-paten">Paten</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item me-lg-3 mb-2 mb-sm-0">
@@ -129,14 +130,6 @@
                 </div>
             </div>
         </div>
-        @if(session('notifikasi'))
-        <div class="form-group">
-            <div class="alert alert-{{ session('type') }} alert-dismissible fade show" role="alert">
-                {{ session('notifikasi') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-            </div>
-        </div>
-        @endif
         <main class="content py-5 px-lg-4">
             <div class="container-fluid">
                 @yield('content')
@@ -151,6 +144,20 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
         <script src="{{ asset('web/general.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+
+        @if (session('notifikasi'))
+        <script>
+            Swal.fire({
+                text: '{{ session('notifikasi') }}',
+                icon: '{{ session('type') }}',
+                confirmButtonText:'OK',
+                showCloseButton: true,
+                timer: 2000,
+            })
+        </script>
+        @endif
+
 
     </body>
 

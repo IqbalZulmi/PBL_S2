@@ -9,18 +9,17 @@ Tambah Akun
     <div class="col-12 px-4 pt-2">
         <form action="/tambah-akun" method="post">
             @csrf
-            @if(session('notifikasi'))
-            <div class="form-group">
-                <div class="alert alert-{{ session('type') }} alert-dismissible fade show" role="alert">
-                    {{ session('notifikasi') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-                </div>
-            </div>
-            @endif
             <div class="row gy-2" data-aos="zoom-in" data-aos-duration="400">
-                <label for="inputPassword" class="col-sm-2 col-form-label mt-3">username</label>
+                <label for="inputPassword" class="col-sm-2 col-form-label mt-3">NIK</label>
                 <div class="col-sm-10">
-                    <input type="text" name="username" placeholder="username" class="form-control mt-sm-2 @error('username') is-invalid @enderror" value="{{ old('username') }}" required autofocus>
+                    <input type="text" name="nik" placeholder="nik" class="form-control mt-sm-2 @error('nik') is-invalid @enderror" value="{{ old('nik') }}" required autofocus>
+                    @error('nik')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <label for="inputPassword" class="col-sm-2 col-form-label">username</label>
+                <div class="col-sm-10">
+                    <input type="text" name="username" placeholder="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required>
                     @error('username')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -68,12 +67,12 @@ Tambah Akun
                 <label for="inputPassword" class="col-sm-2 col-form-label">Roles</label>
                 <div class="col-sm-10">
                     <select class="form-select" name="role" class="form-control @error('role') is-invalid @enderror" required>
-                        <option value="administrator">administrator</option>
-                        <option value="superadmin">superadmin</option>
-                        @error('role')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <option value="pic">pic</option>
+                        <option value="manajer">manajer</option>
                     </select>
+                    @error('role')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="col-sm-12 my-3 text-center">
                     <button type="submit" name="tambah" class="btn btn-outline-success"><i class="fa-sharp fa-solid fa-circle-plus"></i> Tambah Akun</button>

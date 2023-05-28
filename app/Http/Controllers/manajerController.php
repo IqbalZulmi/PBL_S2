@@ -6,16 +6,17 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
-class Superadmincontroller extends Controller
+class manajerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $accounts = User::where('role', 'administrator')->orWhere('role', 'superadmin')->get();
+        $accounts = User::where('role', 'pic')->orWhere('role', 'manajer')->get();
 
         return view('superadmin.kelola', ['accounts' => $accounts]);
     }
@@ -34,6 +35,7 @@ class Superadmincontroller extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'nik' => 'required|numeric|unique:users,nik',
             'username' => 'required|unique:users,username',
             'password' => 'required|min:8|max:255',
             'nama' => 'required',
@@ -42,6 +44,8 @@ class Superadmincontroller extends Controller
             'jurusan' => 'required',
             'role' => 'required',
         ], [
+            'nik.required' => 'NIK harus diisi.',
+            'nik.unique' => 'NIK sudah digunakan.',
             'username.required' => 'username harus diisi.',
             'username.unique' => 'username sudah digunakan.',
             'password.required' => 'password harus diisi.',
@@ -58,6 +62,7 @@ class Superadmincontroller extends Controller
 
 
         $accounts = User::create([
+        'nik' => $validatedData['nik'],
         'username' => $validatedData['username'],
         'password' => Hash::make($validatedData['password']),
         'nama' => $validatedData['nama'],
@@ -105,9 +110,11 @@ class Superadmincontroller extends Controller
         $validatedData = $request->validate([
             'username' => ['required','unique:users,username,' . $request->old_username . ',username',
             ],
+            'email' => ['required',Rule::unique('users', 'email')->ignore($id, 'username'),'email:dns',
+            ],
             'nama' => 'required',
-            'nik' => 'required',
-            'email' => 'required|unique:users,email|email:dns',
+            'nik' => ['required','unique:users,nik,' . $request->old_nik . ',nik',
+            ],
             'no_wa' => 'required|numeric|min:10',
             'jurusan' => 'required',
             'role' => 'required',
@@ -116,6 +123,7 @@ class Superadmincontroller extends Controller
             'username.unique' => 'username sudah digunakan.',
             'nama.required' => 'nama harus diisi.',
             'nik.required' => 'nik harus diisi.',
+            'nik.unique' => 'NIK sudah digunakan.',
             'email.required' => 'email harus diisi.',
             'email.email' => 'Format email Harus benar',
             'email.unique' => 'Email sudah digunakan',

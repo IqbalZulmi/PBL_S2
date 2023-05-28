@@ -31,6 +31,7 @@ class Registercontroller extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'nik' => 'required|numeric|unique:users,nik',
             'username' => 'required|unique:users,username',
             'password' => 'required|min:8|max:255',
             'nama' => 'required',
@@ -38,6 +39,8 @@ class Registercontroller extends Controller
             'no_wa' => 'required|numeric|min:10',
             'jurusan' => 'required',
         ], [
+            'nik.required' => 'nik harus diisi.',
+            'nik.unique' => 'NIK sudah digunakan.',
             'username.required' => 'username harus diisi.',
             'username.unique' => 'username sudah digunakan.',
             'password.required' => 'password harus diisi.',
@@ -53,6 +56,7 @@ class Registercontroller extends Controller
 
 
         $accounts = User::create([
+        'nik' => $validatedData['nik'],
         'username' => $validatedData['username'],
         'password' => Hash::make($validatedData['password']),
         'nama' => $validatedData['nama'],
@@ -69,7 +73,7 @@ class Registercontroller extends Controller
         } else {
             return redirect()->back()->with([
             'notifikasi' => 'Gagal Membuat Akun !',
-            'type' => 'danger'
+            'type' => 'error'
             ]);
         }
 

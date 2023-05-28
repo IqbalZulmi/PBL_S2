@@ -30,6 +30,7 @@ Status Pengajuan
                         <th scope="col">Tanggal Pengajuan</th>
                         <th scope="col">Status</th>
                         <th scope="col">Alasan</th>
+                        <th scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,12 +46,16 @@ Status Pengajuan
                             </div>
                         </td>
                         <td>{{ $data->alasan }}</td>
+                        <td>
+                            <button class="btn btn-outline-warning" @if ($data->status !== 'perlu direvisi') disabled @endif data-bs-toggle="modal" data-bs-target="#editModal{{ $index+1 }}">
+                                <i class="fa-solid fa-gear"></i> Edit
+                            </button>
+                        </td>
                     </tr>
                     @empty
                     <tr>
                         <td colspan="100%">Tidak ada data untuk ditampilkan !</td>
                     </tr>
-
                     @endforelse
                 </tbody>
             </table>
@@ -65,7 +70,145 @@ Status Pengajuan
                 </li>
             </ul>
         </nav>
+        @foreach ($pengajuan_hakciptas as $index => $data )
+        <div class="modal fade" id="editModal{{ $index+1 }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Pengajuan</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="/status/{{ $data->id }}" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <h5>Silakan update file yang perlu direvisi saja !</h5>
+                            @csrf @method('PUT')
+                            <div class="mb-2 row">
+                                <label for="NIP" class="col-12 col-form-label">NIP/NIK</label>
+                                <div class="col-9">
+                                    <input type="text" name="nik"  id="nik" placeholder="Masukkan NIP/NIK" class="form-control" value="{{ Auth::user()->nik }}" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="KKT" class="col-12 col-form-label">KKT/PK</label>
+                                <div class="col-9">
+                                    <input type="text" name="kkt"  id="kkt" placeholder="KKT/PK" class="form-control @error('kkt') is-invalid @enderror" value="{{ old('kkt',$data->kkt) }}" required>
+                                    @error('kkt')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="Judul" class="col-12 col-form-label">Judul Usulan</label>
+                                <div class="col-9">
+                                    <input type="text" name="judul_usulan" id="judul_usulan" placeholder="Judul Usulan" class="form-control @error('judul_usulan') is-invalid @enderror" value="{{ old('judul_usulan',$data->judul_usulan) }}" required>
+                                    @error('judul_usulan')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="formFile" class="col-12 col-form-label">Formulir permohonan pendaftaran online</label>
+                                <div class="col-9">
+                                    <input type="file" name="file_formulir_permohonan"  id="formFile" onchange="showButton(this); validasi(this);" class="form-control @error('file_formulir_permohonan') is-invalid @enderror" value="{{ old('file_formulir_permohonan',$data->file_formulir_permohonan) }}">
+                                    @error('file_formulir_permohonan')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <p class="format">*format .pdf</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="#" class="btn btn-outline-info btn-view d-none">Review</a>
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="KTP" class="col-12 col-form-label">Scan KTP semua pencipta</label>
+                                <div class="col-9">
+                                    <input type="file" name="file_scan_ktp" id="KTP" onchange="showButton(this); validasi(this);" class="form-control @error('file_scan_ktp') is-invalid @enderror" value="{{ old('file_scan_ktp',$data->file_scan_ktp) }}">
+                                    @error('file_scan_ktp')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <p class="format">*format .pdf</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="#" class="btn btn-outline-info btn-view d-none">Review</a>
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="NPWP" class="col-12 col-form-label">Scan NPWP pencipta</label>
+                                <div class="col-9">
+                                    <input type="file" name="file_scan_npwp"  id="NPWP" onchange="showButton(this); validasi(this);" class="form-control @error('file_scan_npwp') is-invalid @enderror" value="{{ old('file_scan_npwp',$data->file_scan_npwp) }}">
+                                    @error('file_scan_npwp')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <p class="format">*format .pdf</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="#" class="btn btn-outline-info btn-view d-none">Review</a>
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="Ciptaan" class="col-12 col-form-label">Contoh Ciptaan</label>
+                                <div class="col-9">
+                                    <input type="file" name="file_contoh_ciptaan" id="Ciptaan" onchange="showButton(this); validasi(this);" class="form-control @error('file_contoh_ciptaan') is-invalid @enderror" value="{{ old('file_contoh_ciptaan',$data->file_contoh_ciptaan) }}">
+                                    @error('file_contoh_ciptaan')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <p class="format">*lampiran disesuaikan dengan halaman terakhir form pendaftaran</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="#" class="btn btn-outline-info btn-view d-none">Review</a>
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="pernyataan" class="col-12 col-form-label">Surat pernyataan Hak Cipta</label>
+                                <div class="col-9">
+                                    <input type="file" name="file_surat_pernyataan_hak_cipta" id="pernyataan" onchange="showButton(this); validasi(this);" class="form-control @error('file_surat_penyataan_hak_cipta') is-invalid @enderror" value="{{ old('file_surat_pernyataan_hak_cipta',$data->file_surat_pernyataan_hak_cipta) }}">
+                                    @error('file_surat_pernyataan_hak_cipta')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <p class="format">*Sudah ditandatangani Direktur,format .pdf</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="#" class="btn btn-outline-info btn-view d-none">Review</a>
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="Pengalihan" class="col-12 col-form-label">Surat Pengalihan Hak Cipta</label>
+                                <div class="col-9">
+                                    <input type="file" name="file_surat_pengalihan_hak_cipta" id="Pengalihan" onchange="showButton(this); validasi(this);" class="form-control @error('file_surat_pengalihan_hak_cipta') is-invalid @enderror" value="{{ old('file_surat_pengalihan_hak_cipta',$data->file_surat_pengalihan_hak_cipta) }}">
+                                    @error('file_surat_pengalihan_hak_cipta')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <p class="format">*Sudah ditandatangani Direktur,format .pdf</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="#" class="btn btn-outline-info btn-view d-none">Review</a>
+                                </div>
+                            </div>
+                            @if ($data->file_salinan_pks !== null )
+                            <div class="mb-2 row">
+                                <label for="mitra" class="col-12 col-form-label select-filter">File salinan PKS</label>
+                                <div class="col-9 select-filter">
+                                    <input type="file" name="file_salinan_pks" id="mitra" onchange="showButton(this); validasi(this);" class="form-control @error('file_salinan_pks') is-invalid @enderror" value="{{ old('file_salinan_pks',$data->file_salinan_pks) }}"/>
+                                    @error('file_salinan_pks')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <p class="format">*format .pdf</p>
+                                </div>
+                                <div class="col-3">
+                                    <a href="#" class="btn btn-outline-info btn-view d-none">Review</a>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-success">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @endforeach
     </div>
 </div>
-
 @endsection

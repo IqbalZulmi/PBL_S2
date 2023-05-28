@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pengajuan_hak_ciptas', function (Blueprint $table) {
             $table->id();
-            $table->integer('nik');
+            $table->bigInteger('nik');
             $table->String('kkt');
             $table->String('judul_usulan');
             $table->String('file_formulir_permohonan');

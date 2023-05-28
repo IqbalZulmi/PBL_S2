@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class pengajuan_paten extends Model
 {
@@ -12,9 +13,24 @@ class pengajuan_paten extends Model
     protected $table = 'pengajuan_patens';
     public $timestamps = false;
 
-    protected $fillable = array (
-        'nik', 'kkt', 'judul_usulan', 'file_borang_tindak_lanjut_penelitian', 'file_abstrak_paten', 'file_daftar_isian_pendaftaran', 'file_gambar', 'file_surat_pengalihan_hak_atas_invensi', 'file_scan_surat_kepemilikan', 'file_dokumen_spesifikasi_paten', 'file_klaim_paten', 'usulan', 'file_salinan_pks', 'status', 'alasan', 'tanggal_pengajuan'
-    );
+    protected $fillable = [
+        'nik',
+        'kkt',
+        'judul_usulan',
+        'file_borang_tindak_lanjut_penelitian',
+        'file_abstrak_paten',
+        'file_daftar_isian_pendaftaran',
+        'file_gambar',
+        'file_surat_pengalihan_hak_atas_invensi',
+        'file_scan_surat_kepemilikan',
+        'file_dokumen_spesifikasi_paten',
+        'file_klaim_paten',
+        'usulan',
+        'file_salinan_pks',
+        'status',
+        'alasan',
+        'tanggal_pengajuan'
+    ];
 
     protected static function boot()
     {
@@ -23,7 +39,7 @@ class pengajuan_paten extends Model
         // Event 'creating' akan dipanggil sebelum model disimpan ke database
         static::creating(function ($model) {
             // Set nilai tanggal_pengajuan menjadi tanggal saat ini
-            $model->tanggal_pengajuan = now();
+            $model->tanggal_pengajuan = Carbon::now('Asia/Jakarta');
         });
     }
 }

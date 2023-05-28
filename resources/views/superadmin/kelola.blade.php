@@ -22,7 +22,7 @@ Kelola Akun
         </div>
         <div class="table-responsive">
             <table class="table border table-striped table-hover align-middle text-center caption-top">
-                <caption>Jumlah Akun:</caption>
+                <caption>Jumlah Akun: {{ $accounts->count() }}</caption>
                 <thead>
                     <tr>
                         <th scope="col">No</th>
@@ -60,7 +60,6 @@ Kelola Akun
                     <tr>
                         <td colspan="100%">Tidak ada data untuk ditampilkan !</td>
                     </tr>
-
                     @endforelse
                 </tbody>
             </table>
@@ -88,7 +87,15 @@ Kelola Akun
                             @csrf
                             @method('PUT')
                             <input name="old_username" hidden value="{{ $data->username }}">
+                            <input name="old_nik" hidden value="{{ $data->nik }}">
                             <div>
+                                <label for="">NIK</label>
+                                <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" placeholder="Nomor Identitas Kepegawaian" value="{{old('nik', $data->nik)}}" required>
+                                @error('nik')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mt-2">
                                 <label for="">Username</label>
                                 <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" placeholder="username" value="{{old('username', $data->username)}}" required>
                                 @error('username')
@@ -99,13 +106,6 @@ Kelola Akun
                                 <label for="">Nama</label>
                                 <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" placeholder="Nama Lengkap" value="{{old('nama', $data->nama)}}" required>
                                 @error('nama')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="mt-2">
-                                <label for="">NIK</label>
-                                <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" placeholder="Nomor Identitas Kepegawaian" value="{{old('nik', $data->nik)}}" required>
-                                @error('nik')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -138,8 +138,8 @@ Kelola Akun
                             <div class="my-2">
                                 <label for="">Roles</label>
                                 <select class="form-select @error('role') is-invalid @enderror" name="role">
-                                    <option value="administrator">administrator</option>
-                                    <option value="superadmin">superadmin</option>
+                                    <option value="pic">pic</option>
+                                    <option value="manajer">manajer</option>
                                 </select>
                                 @error('role')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -162,7 +162,7 @@ Kelola Akun
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <h5 class="fw-bold">Apakah Anda Yakin Menghapus Akun Dengan Username {{$data->username}}?</h5>
+                        <h5>Apakah Anda Yakin Menghapus Akun Dengan Username <span class="fw-bold text-danger"> {{$data->username}}</span>?</h5>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
