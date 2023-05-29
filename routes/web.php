@@ -4,6 +4,7 @@ use App\Http\Controllers\picController;
 use App\Http\Controllers\CiptaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\manajerController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Registercontroller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CekRole;
@@ -59,16 +60,18 @@ Route::middleware(CekRole::class . ':pemohon')->group(function(){
         return view('user.change-password');
     });
 
-    Route::get('/user/profile', function () {
-        return view('user.profile');
-    });
+    Route::get('/user/profile', [ProfileController::class, 'index'])
+    ->name('profile.tampil');
+
+    Route::put('/user/profile/{id}', [ProfileController::class, 'update'])
+    ->name('profile.edit');
 
     Route::get('/hak-cipta', [CiptaController::class, 'create'])
     ->name('cipta.tampil');
 
     Route::post('/hak-cipta', [CiptaController::class, 'store'])
     ->name('cipta.store');
-    
+
     Route::get('/status', [CiptaController::class, 'index'])
     ->name('status.tampil');
 

@@ -64,7 +64,7 @@
             <div class="img-fluid container-fluid text-white">
                 <div class="row">
                     <div class="col-md-5 col-lg-4 text-center text-md-start">
-                        <a href="/kelola-akun" class="h1 text-decoration-none text-white">Sentra HKI</a>
+                        <a href="/home" class="h1 text-decoration-none text-white">Sentra HKI</a>
                         <p class="fs-6">merupakan unit kerja yang bertujuan untuk mengelola dan mendaya gunakan kekayaan intelektual, sekaligus sebagai pusat informasi dan pelayanan HKI yang dimana merujuk kepada hak - hak hukum, seperti hak cipta, hak paten, merek dagang, rahasia dagang, dan sebagainya</p>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                                     <a class="nav-link" href="/home"><i class="fa-solid fa-house"></i> Beranda</a>
                                 </li>
                                 <li class="nav-item dropdown me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle {{ Request::is('sejarah') || Request::is('visi') ? 'active' : '' }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-user"></i> Profil
                                     </a>
                                     <ul class="dropdown-menu animate slideIn">
@@ -94,7 +94,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle {{ Request::is('hak-cipta') || Request::is('hak-paten') ? 'active' : '' }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-file-pen"></i> Pendaftaran
                                     </a>
                                     <ul class="dropdown-menu animate slideIn">
@@ -106,7 +106,7 @@
                                     <a class="nav-link" href="/status"><i class="fa-solid fa-bell"></i> Status Pengajuan</a>
                                 </li>
                                 <li class="nav-item dropdown me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle {{ Request::is('judul/hak-cipta') || Request::is('judul/hak-paten') ? 'active' : '' }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-clock-rotate-left"></i> Daftar Judul
                                     </a>
                                     <ul class="dropdown-menu animate slideIn">

@@ -265,8 +265,8 @@ function enableinput() {
             inputFields[i].readOnly = false;
         }
         editButton.innerHTML = '<i class="fa-solid fa-times"></i> Cancel Edit';
-        editButton.classList.remove("btn-warning");
-        editButton.classList.add("btn-danger");
+        editButton.classList.remove("btn-outline-warning");
+        editButton.classList.add("btn-outline-danger");
     } else {
         // jika input field dalam keadaan aktif
         for (var y = 0; y < x.length; y++) {
@@ -277,8 +277,8 @@ function enableinput() {
             inputFields[i].readOnly = true;
         }
         editButton.innerHTML = '<i class="fa-solid fa-gear"></i> Edit';
-        editButton.classList.remove("btn-danger");
-        editButton.classList.add("btn-warning");
+        editButton.classList.remove("btn-outline-danger");
+        editButton.classList.add("btn-outline-warning");
     }
 }
 
