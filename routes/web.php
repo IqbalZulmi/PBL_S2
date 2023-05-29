@@ -85,10 +85,10 @@ Route::middleware(CekRole::class . ':pic')->group(function(){
     ->name('dashboard.tampil');
 
     Route::get('/verif-cipta', [picController::class, 'create'])
-    ->name('cipta.tampil');
+    ->name('verif-cipta.tampil');
 
     Route::put('/verif-cipta/{id}', [picController::class, 'update'])
-    ->name('cipta.update');
+    ->name('verif-cipta.update');
 
     Route::get('/verif-paten', function () {
         return view('admin.verif-paten');
@@ -105,9 +105,6 @@ Route::middleware(CekRole::class . ':pic')->group(function(){
         return view('admin.change-password');
     });
 
-    Route::get('/admin/profile', function () {
-        return view('admin.profile');
-    });
 });
 
 Route::middleware(CekRole::class . ':manajer')->group(function () {

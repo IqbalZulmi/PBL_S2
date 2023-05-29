@@ -126,10 +126,10 @@ Kelola Akun
                             <div class="mt-2">
                                 <label for="">Jurusan</label>
                                 <select class="form-select @error('jurusan') is-invalid @enderror" name="jurusan" required>
-                                    <option value="Teknik Informatika">Teknik Informatika</option>
-                                    <option value="Teknik Elektro">Teknik Elektro</option>
-                                    <option value="Teknik Informatika">Teknik Mesin</option>
-                                    <option value="Manajemen Bisnis">Manajemen Bisnis</option>
+                                    <option value="Teknik Informatika" @if($data->jurusan == 'Teknik Informatika') selected @endif>Teknik Informatika</option>
+                                    <option value="Teknik Elektro" @if($data->jurusan == 'Teknik Elektro') selected @endif>Teknik Elektro</option>
+                                    <option value="Teknik Mesin" @if($data->jurusan == 'Teknik Mesin') selected @endif>Teknik Mesin</option>
+                                    <option value="Manajemen Bisnis" @if($data->jurusan == 'Manajemen Bisnis') selected @endif>Manajemen Bisnis</option>
                                 </select>
                                 @error('jurusan')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -138,8 +138,8 @@ Kelola Akun
                             <div class="my-2">
                                 <label for="">Roles</label>
                                 <select class="form-select @error('role') is-invalid @enderror" name="role">
-                                    <option value="pic">pic</option>
-                                    <option value="manajer">manajer</option>
+                                    <option value="pic" @if($data->role == 'pic') selected @endif>pic</option>
+                                    <option value="manajer" @if($data->role == 'manajer') selected @endif>manajer</option>
                                 </select>
                                 @error('role')
                                 <div class="invalid-feedback">{{ $message }}</div>

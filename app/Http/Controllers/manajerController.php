@@ -142,15 +142,22 @@ class manajerController extends Controller
         $accounts->jurusan = $request->jurusan;
         $accounts->role = $request->role;
 
-        if ($accounts->save()) {
-            return redirect('/kelola-akun')->with([
-            'notifikasi' => 'Data Berhasil diedit !',
-            'type' => 'success'
-            ]);
+        if ($accounts->isDirty()) {
+            if ($accounts->save()) {
+                return redirect()->route('superadmin.kelola')->with([
+                    'notifikasi' => 'Data berhasil diedit!',
+                    'type' => 'success'
+                ]);
+            } else {
+                return redirect()->back()->with([
+                    'notifikasi' => 'Data gagal diedit!',
+                    'type' => 'error'
+                ]);
+            }
         } else {
-            return redirect()->back()->with([
-            'notifikasi' => 'Data gagal diedit !',
-            'type' => 'error'
+            return redirect()->route('superadmin.kelola')->with([
+                'notifikasi' => 'Tidak ada perubahan data.',
+                'type' => 'info'
             ]);
         }
 

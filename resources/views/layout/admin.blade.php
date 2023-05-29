@@ -35,11 +35,6 @@
                             </li>
                             <hr>
                             <li class="nav-item">
-                                <a class="dropdown-item" href="/admin/profile">
-                                    <i class="fa-regular fa-address-card"></i> Profil
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="dropdown-item" href="/admin/change-password">
                                     <i class="fa-solid fa-key"></i> Ubah Kata Sandi
                                 </a>
@@ -78,7 +73,7 @@
                                     <a class="nav-link" href="/dashboard"><i class="fa-solid fa-house"></i> Dasbor</a>
                                 </li>
                                 <li class="nav-item dropdown me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle {{ Request::is('verif-cipta') || Request::is('verif-paten') ? 'active' : '' }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-file-pen"></i> Verifikasi
                                     </a>
                                     <ul class="dropdown-menu animate slideIn">
@@ -87,7 +82,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle {{ Request::is('riwayat-pengajuan/hak-cipta') || Request::is('riwayat-pengajuan/paten') ? 'active' : '' }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-clock-rotate-left"></i> Riwayat Pengajuan
                                     </a>
                                     <ul class="dropdown-menu animate slideIn">

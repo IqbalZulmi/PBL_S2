@@ -88,15 +88,22 @@ class ProfileController extends Controller
         $accounts->no_wa = $request->no_wa;
         $accounts->jurusan = $request->jurusan;
 
-        if ($accounts->save()) {
-            return redirect('/user/profile')->with([
-            'notifikasi' => 'Data Berhasil diedit !',
-            'type' => 'success'
-            ]);
+        if ($accounts->isDirty()) {
+            if ($accounts->save()) {
+                return redirect()->route('profile.tampil')->with([
+                    'notifikasi' => 'Data berhasil diedit!',
+                    'type' => 'success'
+                ]);
+            } else {
+                return redirect()->back()->with([
+                    'notifikasi' => 'Data gagal diedit!',
+                    'type' => 'error'
+                ]);
+            }
         } else {
-            return redirect()->back()->with([
-            'notifikasi' => 'Data gagal diedit !',
-            'type' => 'error'
+            return redirect()->route('profile.tampil')->with([
+                'notifikasi' => 'Tidak ada perubahan data.',
+                'type' => 'info'
             ]);
         }
     }
