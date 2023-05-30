@@ -97,6 +97,9 @@ Route::middleware(CekRole::class . ':pic')->group(function(){
     Route::get('/riwayat-pengajuan/hak-cipta', [picController::class, 'riwayat'])
     ->name('riwayat-cipta.tampil');
 
+    Route::put('/riwayat-pengajuan/hak-cipta', [picController::class, 'updateriwayat'])
+    ->name('riwayat-cipta.update');
+
     Route::get('/riwayat-pengajuan/paten', function () {
         return view('admin.riwayat-pengajuan-paten');
     });

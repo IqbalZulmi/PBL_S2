@@ -34,7 +34,7 @@ Riwayat pengajuan hak cipta
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
-                 @forelse ($join as $index => $data )
+                @forelse ($join as $index => $data )
                 <tbody>
                     <tr>
                         <th scope="row">{{ $index+1 }}</th>
@@ -49,7 +49,7 @@ Riwayat pengajuan hak cipta
                         </td>
                         <td>
                             <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#hapusModal{{ $index+1 }}">
-                                <i class="fa-solid fa-trash"></i> Hapus
+                                <i class="fa-solid fa-gear"></i> Edit
                             </button>
                         </td>
                     </tr>
@@ -76,20 +76,32 @@ Riwayat pengajuan hak cipta
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Akun</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Verfikasi</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <h5 class="fw-bold">Apakah Anda Yakin Menghapus Akun Dengan Username {{$data->username}}?</h5>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <form action="" method="post">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="btn btn-danger">hapus</button>
-                        </form>
-
-                    </div>
+                    <form action="/riwayat-pengajuan/hak-cipta/{{ $data->id }}" method="post">
+                        <div class="modal-body">
+                            @csrf @method('put')
+                            <input type="text" hidden value="{{ $data->id }}" name="old_id">
+                            <label class="form-label">Status</label>
+                            <select name="status" class="form-select @error('status') is-invalid @enderror" onchange="filterAlasan(this)">
+                                <option value="diterima" @if ($data->status == 'diterima') selected @endif>diterima</option>
+                                <option value="perlu direvisi" @if ($data->status == 'perlu direvisi') selected @endif>perlu direvisi</option>
+                            </select>
+                            @error('status')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <label class="form-label d-none" id="alasanLabel">Alasan</label>
+                            <textarea name="alasan" class="form-control d-none @error('alasan') is-invalid @enderror" id="alasanTextarea" cols="30" rows="5" placeholder="File Ktp Buram"></textarea>
+                            @error('alasan')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Save changes</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

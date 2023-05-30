@@ -98,6 +98,32 @@ class picController extends Controller
         }
     }
 
+    public function updateriwayat(Request $request, string $id)
+    {
+        $validatedData = $request->validate([
+            'status' => 'required',
+            'alasan' => 'nullable'
+        ], [
+            'status' => 'status perlu diverifikasi',
+        ]);
+
+        $cipta = pengajuan_hakCipta::where('id', $id)->first();
+        $cipta->status = $request->status;
+        $cipta->alasan = $request->alasan;
+
+
+        if($cipta->save()){
+            return redirect()->route('riwayat-cipta.tampil')->with([
+                'notifikasi' => 'Berhasil diedit !',
+                'type' => 'success'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'notifikasi' => 'Gagal diedit !',
+                'type' => 'danger'
+            ]);
+        }
+    }
     /**
      * Remove the specified resource from storage.
      */
