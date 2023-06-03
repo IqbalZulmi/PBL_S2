@@ -44,7 +44,7 @@
                             </li>
                             @endif
                             <li class="nav-item">
-                                <a class="dropdown-item" href="@if (auth()->user()->role == 'pic') /admin/change-password @elseif (auth()->user()->role == 'manajer') /superadmin/change-password @else /user/change-password @endif">
+                                <a class="dropdown-item" href="@if (auth()->user()->role == 'pic') /pic/change-password @elseif (auth()->user()->role == 'manajer') /manajer/change-password @else /user/change-password @endif">
                                     <i class="fa-solid fa-key"></i> ubah kata sandi
                                 </a>
                             </li>

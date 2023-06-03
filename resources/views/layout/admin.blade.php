@@ -35,7 +35,7 @@
                             </li>
                             <hr>
                             <li class="nav-item">
-                                <a class="dropdown-item" href="/admin/change-password">
+                                <a class="dropdown-item" href="/pic/change-password">
                                     <i class="fa-solid fa-key"></i> Ubah Kata Sandi
                                 </a>
                             </li>

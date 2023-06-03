@@ -15,10 +15,18 @@ class picController extends Controller
      */
     public function index()
     {
-        $cipta = pengajuan_hakCipta::where('status','sedang diproses')->count();
-        $paten = pengajuan_paten::where('status','sedang diproses')->count();
-        $cipta1 = pengajuan_hakCipta::where('status','diterima')->orWhere('status','perlu direvisi')->count();
-        $paten2 = pengajuan_paten::where('status','diterima')->orWhere('status','perlu direvisi')->count();
+        $admin = Auth::user()->jurusan;
+        $cipta = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')
+        ->where('pengajuan_hak_ciptas.status', 'sedang diproses')->Where('users.jurusan',$admin)->count();
+
+        $paten = User::join('pengajuan_patens', 'users.nik', '=', 'pengajuan_patens.nik')
+        ->where('pengajuan_patens.status', 'sedang diproses')->Where('users.jurusan',$admin)->count();
+
+        $cipta1 = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')->Where('users.jurusan',$admin)
+        ->where('pengajuan_hak_ciptas.status', 'diterima')->orWhere('pengajuan_hak_ciptas.status', 'perlu direvisi')->count();
+
+        $paten2 = User::join('pengajuan_patens', 'users.nik', '=', 'pengajuan_patens.nik')->Where('users.jurusan',$admin)
+        ->where('pengajuan_patens.status', 'diterima')->orWhere('pengajuan_patens.status', 'perlu direvisi')->count();
         $total = $cipta1 + $paten2;
         return view('admin.dashboard',[
             'cipta' => $cipta,
@@ -40,7 +48,8 @@ class picController extends Controller
 
     public function riwayat()
     {
-        $join = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')
+        $admin = Auth::user()->jurusan;
+        $join = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')->Where('users.jurusan',$admin)
         ->where('pengajuan_hak_ciptas.status', 'diterima')->orWhere('pengajuan_hak_ciptas.status', 'perlu direvisi')->get();
         return view('admin.riwayat-pengajuan-cipta',['join' => $join]);
     }
@@ -82,7 +91,11 @@ class picController extends Controller
 
         $cipta = pengajuan_hakCipta::where('id', $id)->first();
         $cipta->status = $request->status;
-        $cipta->alasan = $request->alasan;
+        if ($request->status == 'diterima'){
+            $cipta->alasan = null;
+        }else{
+            $cipta->alasan = $request->alasan;
+        }
 
 
         if($cipta->save()){
@@ -109,7 +122,11 @@ class picController extends Controller
 
         $cipta = pengajuan_hakCipta::where('id', $id)->first();
         $cipta->status = $request->status;
-        $cipta->alasan = $request->alasan;
+        if ($request->status == 'diterima'){
+            $cipta->alasan = null;
+        }else{
+            $cipta->alasan = $request->alasan;
+        }
 
 
         if($cipta->save()){

@@ -22,16 +22,25 @@ Riwayat pengajuan hak cipta
         </div>
         <div class="table-responsive">
             <table class="table border table-striped table-hover align-middle text-center caption-top">
-                <caption>Judul yang telah diterima:{{ $join->count() }}</caption>
+                <caption>Judul yang telah diverifikasi:{{ $join->count() }}</caption>
                 <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">Nama Ketua Pengusul</th>
-                        <th scope="col">Email</th>
+                        <th scope="col">Nama Ketua</th>
                         <th scope="col">Judul</th>
-                        <th scope="col">Tanggal</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Aksi</th>
+                        <th scope="col" style="min-width:110px;">Email</th>
+                        <th scope="col" style="min-width:110px;">No Whatsapp</th>
+                        <th scope="col" style="min-width:110px;">Formulir Pendaftaran</th>
+                        <th scope="col" style="min-width:110px;">Scan KTP</th>
+                        <th scope="col" style="min-width:110px;">Scan NPWP</th>
+                        <th scope="col" style="min-width:110px;">Contoh Ciptaan</th>
+                        <th scope="col" style="min-width:110px;">Surat pernyataan</th>
+                        <th scope="col" style="min-width:110px;">Surat Pengalihan</th>
+                        <th scope="col" style="min-width:110px;">Salinan PKS</th>
+                        <th scope="col" style="min-width:170px;">Tanggal</th>
+                        <th scope="col" style="min-width:170px;">Status</th>
+                        <th scope="col" style="min-width:110px;">Alasan</th>
+                        <th scope="col" style="min-width:110px;">Aksi</th>
                     </tr>
                 </thead>
                 @forelse ($join as $index => $data )
@@ -39,16 +48,65 @@ Riwayat pengajuan hak cipta
                     <tr>
                         <th scope="row">{{ $index+1 }}</th>
                         <td>{{ $data->nama }}</td>
-                        <td>{{ $data->email }}</td>
                         <td>{{ $data->judul_usulan }}</td>
+                        <td>{{ $data->email }}</td>
+                        <td>{{ $data->no_wa }}</td>
+                        <td>
+                            <iframe src="{{ asset('storage/'. $data->file_formulir_permohonan) }}" frameborder="0" class="d-none"></iframe>
+                            <button type="button" class="btn btn-sm btn-outline-info review">
+                                <i class="fa-solid fa-eye"></i> Review
+                            </button>
+                        </td>
+                        <td>
+                            <iframe src="{{ asset('storage/'. $data->file_scan_ktp) }}" frameborder="0" class="d-none"></iframe>
+                            <button type="button" class="btn btn-sm btn-outline-info review">
+                                <i class="fa-solid fa-eye"></i> Review
+                            </button>
+                        </td>
+                        <td>
+                            <iframe src="{{ asset('storage/'. $data->file_scan_npwp) }}" frameborder="0" class="d-none"></iframe>
+                            <button type="button" class="btn btn-sm btn-outline-info review">
+                                <i class="fa-solid fa-eye"></i> Review
+                            </button>
+                        </td>
+                        <td>
+                            <iframe src="{{ asset('storage/'. $data->file_contoh_ciptaan) }}" frameborder="0" class="d-none"></iframe>
+                            <button type="button" class="btn btn-sm btn-outline-info review">
+                                <i class="fa-solid fa-eye"></i> Review
+                            </button>
+                        </td>
+                        <td>
+                            <iframe src="{{ asset('storage/'. $data->file_surat_pernyataan_hak_cipta) }}" frameborder="0" class="d-none"></iframe>
+                            <button type="button" class="btn btn-sm btn-outline-info review">
+                                <i class="fa-solid fa-eye"></i> Review
+                            </button>
+                        </td>
+                        <td>
+                            <iframe src="{{ asset('storage/'. $data->file_surat_pengalihan_hak_cipta) }}" frameborder="0" class="d-none"></iframe>
+                            <button type="button" class="btn btn-sm btn-outline-info review">
+                                <i class="fa-solid fa-eye"></i> Review
+                            </button>
+                        </td>
+                        <td>
+                            @if ($data->file_salinan_pks == null)
+                               <span>Usulan bukan hasil kerjasama dengan mitra eksternal</span>
+                            @else
+                            <iframe src="{{ asset('storage/'. $data->file_salinan_pks )}}" frameborder="0" class="d-none"></iframe>
+                            <button type="button" class="btn btn-sm btn-outline-info review">
+                                <i class="fa-solid fa-eye"></i> Review
+                            </button>
+                            @endif
+                        </td>
+
                         <td>{{ $data->tanggal_pengajuan }}</td>
                         <td>
                             <div class="badge fs-6 fw-normal @if ($data->status == 'diterima') text-bg-success @else text-bg-danger @endif">
                                 {{ $data->status }}
                             </div>
                         </td>
+                        <td>{{ $data->alasan }}</td>
                         <td>
-                            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#hapusModal{{ $index+1 }}">
+                            <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#hapusModal{{ $index+1 }}">
                                 <i class="fa-solid fa-gear"></i> Edit
                             </button>
                         </td>
@@ -91,8 +149,8 @@ Riwayat pengajuan hak cipta
                             @error('status')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                            <label class="form-label d-none" id="alasanLabel">Alasan</label>
-                            <textarea name="alasan" class="form-control d-none @error('alasan') is-invalid @enderror" id="alasanTextarea" cols="30" rows="5" placeholder="File Ktp Buram"></textarea>
+                            <label class="form-label @if ($data->status == 'perlu direvisi') d-block @else d-none @endif" id="alasanLabel">Alasan</label>
+                            <textarea name="alasan" class="form-control @error('alasan') is-invalid @enderror @if ($data->status == 'perlu direvisi') d-block @else d-none @endif" id="alasanTextarea" cols="30" rows="5" placeholder="File Ktp Buram">{{ $data->alasan }}</textarea>
                             @error('alasan')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

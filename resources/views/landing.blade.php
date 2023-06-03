@@ -41,7 +41,7 @@
                         <h1 class="fw-bold sizing">Sentra HKI Polibatam</h1>
                         <p class="sizing1">Sentra HKI merupakan unit kerja yang bertujuan untuk mengelola dan mendaya gunakan kekayaan intelektual, sekaligus sebagai pusat informasi dan pelayanan HKI yang dimana merujuk kepada hak - hak hukum, seperti hak cipta, hak paten, merek dagang, rahasia dagang, dan sebagainya.</p>
                         <span>
-                            <a href="/login" class="btn btn-outline-primary land">Login</a>
+                            <a href="/login" class="btn btn-outline-primary land @auth d-none @endauth">Login</a>
                         </span>
                         <span class="ms-1">
                             <a href="/home" class="btn btn-outline-primary land">Lihat Informasi lebih lanjut</a>

@@ -47,18 +47,25 @@ Route::get('/visi', function () {
     return view('user.visi');
 });
 
+Route::get('/register', [Registercontroller::class, 'create'])
+->name('register.create');
+
+Route::POST('/register', [Registercontroller::class, 'store'])
+->name('register.store');
 
 Route::get('/login', [LoginController::class, 'index'])
 ->name('login');
 
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::get('/logout', [LoginController::class, 'logout']);
+Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 Route::middleware(CekRole::class . ':pemohon')->group(function(){
-    Route::get('/user/change-password', function () {
-        return view('user.change-password');
-    });
+    Route::get('/user/change-password', [ProfileController::class, 'pemohonPass'])
+    ->name('change-pass.tampil');
+
+    Route::put('/user/change-password/{id}', [ProfileController::class, 'updatePass'])
+    ->name('change-pass.edit');
 
     Route::get('/user/profile', [ProfileController::class, 'index'])
     ->name('profile.tampil');
@@ -97,16 +104,18 @@ Route::middleware(CekRole::class . ':pic')->group(function(){
     Route::get('/riwayat-pengajuan/hak-cipta', [picController::class, 'riwayat'])
     ->name('riwayat-cipta.tampil');
 
-    Route::put('/riwayat-pengajuan/hak-cipta', [picController::class, 'updateriwayat'])
+    Route::put('/riwayat-pengajuan/hak-cipta/{id}', [picController::class, 'updateriwayat'])
     ->name('riwayat-cipta.update');
 
     Route::get('/riwayat-pengajuan/paten', function () {
         return view('admin.riwayat-pengajuan-paten');
     });
 
-    Route::get('/admin/change-password', function () {
-        return view('admin.change-password');
-    });
+    Route::get('/pic/change-password', [ProfileController::class, 'picPass'])
+    ->name('pic-change-pass.tampil');
+
+    Route::put('/pic/change-password/{id}', [ProfileController::class, 'updatePass'])
+    ->name('pic-change-pass.edit');
 
 });
 
@@ -117,9 +126,11 @@ Route::middleware(CekRole::class . ':manajer')->group(function () {
     Route::POST('/tambah-akun', [manajerController::class, 'store'])
     ->name('superadmin.store');
 
-    Route::get('/superadmin/change-password', function () {
-        return view('superadmin.change-password');
-    });
+    Route::get('/manajer/change-password', [ProfileController::class, 'manajerPass'])
+    ->name('manajer-change-pass.tampil');
+
+    Route::put('/manajer/change-password/{id}', [ProfileController::class, 'updatePass'])
+    ->name('manajer-change-pass.edit');
 
     Route::get('/kelola-akun', [manajerController::class, 'index'])
     ->name('superadmin.kelola');
@@ -130,9 +141,3 @@ Route::middleware(CekRole::class . ':manajer')->group(function () {
     Route::DELETE('/kelola-akun/delete/{id}', [manajerController::class, 'destroy'])
     ->name('superadmin.destroy');
 });
-
-Route::get('/register', [Registercontroller::class, 'create'])
-->name('register.create');
-
-Route::POST('/register', [Registercontroller::class, 'store'])
-->name('register.store');

@@ -329,3 +329,19 @@ function filterAlasan(selectElement) {
         alasanTextarea.classList.add("d-none");
     }
 }
+
+//logout
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}
+
+if (window.performance && window.performance.navigation.type === 2) {
+    // Tombol "Back" ditekan
+    window.location.href = "/login";
+}
+
+window.onpageshow = function(event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+};

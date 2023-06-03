@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Stmt\ElseIf_;
 
 class LoginController extends Controller
 {
     public function index(){
         if (auth::check()){
-            return redirect()->back();
+            return redirect()->back()->with([
+                'notifikasi' => Auth::user()->nama . ' anda masih terautentikasi sebagai ' . Auth::user()->role . ',silakan logout terlebih dahulu !',
+                'type' => 'info'
+            ]);
         }
         return view('login');
     }
@@ -31,11 +33,20 @@ class LoginController extends Controller
         $user = Auth::user();
         $request->session()->regenerate();
         if ($user->role === 'pemohon'){
-            return redirect()->route('home');
+            return redirect()->route('home')->with([
+                'notifikasi' => 'Selamat Datang ' . Auth::user()->nama . ' anda telah berhasil login sebagai ' . Auth::user()->role,
+                'type' => 'info'
+            ]);
         }elseif($user->role === 'pic'){
-            return redirect()->route('dashboard.tampil');
+            return redirect()->route('dashboard.tampil')->with([
+                'notifikasi' => 'Selamat Datang ' . Auth::user()->nama . ' anda telah berhasil login sebagai ' . Auth::user()->role,
+                'type' => 'info'
+            ]);
         }elseif($user->role === 'manajer'){
-            return redirect()->route('superadmin.kelola');
+            return redirect()->route('superadmin.kelola')->with([
+                'notifikasi' => 'Selamat Datang ' . Auth::user()->nama . ' anda telah berhasil login sebagai ' . Auth::user()->role,
+                'type' => 'info'
+            ]);
         }
        }
        return redirect()->back()->withInput()->with([
@@ -49,6 +60,9 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login');
+        return redirect()->route('login')->with([
+            'notifikasi' => 'Anda berhasil logout !',
+            'type' => 'success'
+        ]);
     }
 }

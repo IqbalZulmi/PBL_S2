@@ -35,7 +35,7 @@
                             </li>
                             <hr>
                             <li class="nav-item">
-                                <a class="dropdown-item" href="/superadmin/change-password">
+                                <a class="dropdown-item" href="/manajer/change-password">
                                     <i class="fa-solid fa-key"></i> ubah kata sandi
                                 </a>
                             </li>

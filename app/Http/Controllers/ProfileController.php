@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -22,11 +23,57 @@ class ProfileController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function pemohonPass()
     {
-        //
+        return view('user.change-password');
     }
 
+    public function picPass()
+    {
+        return view('admin.change-password');
+    }
+
+    public function manajerPass()
+    {
+        return view('superadmin.change-password');
+    }
+
+    public function updatePass(Request $request, string $id)
+    {
+         // Validasi data yang dikirim dari form
+        $validatedData = $request->validate([
+            'password_lama' => 'required',
+            'password_baru' => 'required|min:8|different:password_lama',
+            'konf_password' => 'required|same:password_baru',
+        ], [
+            'password_lama.required' => 'Masukkan password saat ini.',
+            'password_baru.required' => 'Masukkan password baru.',
+            'password_baru.min' => 'Password baru minimal terdiri dari 8 karakter.',
+            'password_baru.different' => 'Password baru harus berbeda dengan password saat ini.',
+            'konf_password.required' => 'Masukkan konfirmasi password baru.',
+            'konf_password.same' => 'Konfirmasi password baru tidak cocok.',
+        ]);
+
+        // Memeriksa kecocokan password saat ini
+        if (!Hash::check($request->password_lama, auth()->user()->password)) {
+            return redirect()->back()->withErrors(['password_lama' => 'Password salah.'])->withInput();
+        }
+
+        // Memperbarui password
+        $user = User::where('nik',$id)->first();
+        $user->password = Hash::make($request->password_baru);
+        if ($user->save()) {
+            return redirect()->back()->with([
+                'notifikasi' => 'Password berhasil diperbarui!',
+                'type' => 'success'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'notifikasi' => 'Password gagal diperbarui!',
+                'type' => 'error'
+            ]);
+        }
+    }
     /**
      * Store a newly created resource in storage.
      */
