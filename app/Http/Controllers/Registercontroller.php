@@ -3,20 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\View\View;
 
 class Registercontroller extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function notifikasiVerify()
     {
-        //
+        return view('verify-email');
     }
 
+    public function verify (EmailVerificationRequest $request)
+    {
+        $request->fulfill();
+
+        return redirect('/home')->with([
+            'notifikasi' => 'Email Berhasil Diverifikasi',
+            'type' => 'success'
+        ]);
+
+    }
+    public function resendMail(Request $request)
+    {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with([
+            'notifikasi' => 'Link verifikasi telah dikirim ke email anda',
+            'type' => 'success'
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -66,6 +86,7 @@ class Registercontroller extends Controller
         ]);
 
         if ( $accounts->save() ) {
+            event(new Registered($accounts));
             return redirect('/login')->with([
             'notifikasi' => 'Berhasil Membuat Akun !',
             'type' => 'success'

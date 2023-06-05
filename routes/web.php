@@ -71,6 +71,15 @@ Route::get('/visi', function () {
 
 Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
+Route::get('/email/verify', [Registercontroller::class, 'notifikasiVerify'])
+->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', [Registercontroller::class, 'verify'])
+->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', [Registercontroller::class, 'resendMail'])
+->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
 Route::middleware(CekRole::class . ':pemohon')->group(function(){
     Route::get('/user/change-password', [ProfileController::class, 'pemohonPass'])
     ->name('change-pass.tampil');
@@ -85,16 +94,16 @@ Route::middleware(CekRole::class . ':pemohon')->group(function(){
     ->name('profile.edit');
 
     Route::get('/hak-cipta', [CiptaController::class, 'create'])
-    ->name('cipta.tampil');
+    ->name('cipta.tampil')->middleware('verified');
 
     Route::post('/hak-cipta', [CiptaController::class, 'store'])
-    ->name('cipta.store');
+    ->name('cipta.store')->middleware('verified');
 
     Route::get('/status', [CiptaController::class, 'index'])
-    ->name('status.tampil');
+    ->name('status.tampil')->middleware('verified');
 
     Route::put('/status/{id}', [CiptaController::class, 'update'])
-    ->name('cipta.update');
+    ->name('cipta.update')->middleware('verified');
 
 });
 
