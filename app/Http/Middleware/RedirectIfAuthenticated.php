@@ -21,7 +21,10 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                return redirect()->back()->with([
+                    'notifikasi' => Auth::user()->nama . ' anda masih terautentikasi sebagai ' . Auth::user()->role . ',silakan logout terlebih dahulu !',
+                    'type' => 'info'
+                ]);
             }
         }
 

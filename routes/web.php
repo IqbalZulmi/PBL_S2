@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\picController;
 use App\Http\Controllers\CiptaController;
 use App\Http\Controllers\LoginController;
@@ -19,9 +20,30 @@ use App\Http\Middleware\CekRole;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::middleware('guest')->group(function(){
+    Route::get('/', function () {
+        return view('landing');
+    });
 
-Route::get('/', function () {
-    return view('landing');
+    Route::get('/register', [Registercontroller::class, 'create'])
+    ->name('register.create')->middleware('guest');
+
+    Route::POST('/register', [Registercontroller::class, 'store'])
+    ->name('register.store');
+
+    Route::get('/login', [LoginController::class, 'index'])
+    ->name('login');
+
+    Route::post('/login', [LoginController::class, 'login']);
+
+    Route::get('/forgot-password', [ForgotPasswordController::class,'showForm'])->name('password.request');
+
+    Route::post('/forgot-password', [ForgotPasswordController::class,'sendEmail'])->name('password.email');
+
+    Route::get('/reset-password/{token}', [ForgotPasswordController::class,'showResetForm'])->name('password.reset');
+
+    Route::post('/reset-password', [ForgotPasswordController::class,'reset'])->name('password.update');
+
 });
 
 Route::get('/home', function () {
@@ -46,17 +68,6 @@ Route::get('/unduhan', function () {
 Route::get('/visi', function () {
     return view('user.visi');
 });
-
-Route::get('/register', [Registercontroller::class, 'create'])
-->name('register.create');
-
-Route::POST('/register', [Registercontroller::class, 'store'])
-->name('register.store');
-
-Route::get('/login', [LoginController::class, 'index'])
-->name('login');
-
-Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth');
 

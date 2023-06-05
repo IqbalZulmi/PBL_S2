@@ -9,12 +9,6 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index(){
-        if (auth::check()){
-            return redirect()->back()->with([
-                'notifikasi' => Auth::user()->nama . ' anda masih terautentikasi sebagai ' . Auth::user()->role . ',silakan logout terlebih dahulu !',
-                'type' => 'info'
-            ]);
-        }
         return view('login');
     }
    public function login(Request $request): RedirectResponse
