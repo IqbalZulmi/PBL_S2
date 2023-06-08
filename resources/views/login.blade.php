@@ -27,12 +27,26 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
 <!--===============================================================================================-->
+    <style>
+        .logo img {
+            max-width: 70px;
+            max-height: 70px;
+        }
+        .container-login100 {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ asset('assets_login/images/bg/poltek1.jpg') }}');
+        }
+    </style>
 </head>
 <body>
 
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
+                <div class="logo text-center">
+                    <img src="{{ asset('web/logo.jpeg') }}" alt="Logo">
+                </div>
                 <span class="login100-form-title p-b-0">
                     WELCOME
                 </span>
@@ -77,7 +91,7 @@
 						<a href="/register" class="txt2">
                             Register |
                         </a>
-                        <a class="txt2" href="#">
+                        <a class="txt2" href="/forgot-password">
 							 Forgot Password
 						</a>
 					</div>

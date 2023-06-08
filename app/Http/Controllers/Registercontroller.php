@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Notifications\VerifyEmail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -86,7 +87,7 @@ class Registercontroller extends Controller
         ]);
 
         if ( $accounts->save() ) {
-            event(new Registered($accounts));
+            $accounts->notify(new VerifyEmail($validatedData['nik']));
             return redirect('/login')->with([
             'notifikasi' => 'Berhasil Membuat Akun !',
             'type' => 'success'

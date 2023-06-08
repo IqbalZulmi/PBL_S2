@@ -55,4 +55,14 @@ class User extends Authenticatable implements CanResetPasswordContract,MustVerif
     {
         return $this->email;
     }
+
+    public function sendEmailVerificationNotification()
+    {
+        return $this->notify(new \App\Notifications\VerifyEmail($this->nik));
+    }
+
+    public function getKey()
+    {
+        return $this->nik;
+    }
 }

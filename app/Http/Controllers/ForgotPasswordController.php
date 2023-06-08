@@ -41,27 +41,27 @@ class ForgotPasswordController extends Controller
 
     public function showResetForm(Request $request, $token)
     {
-        $tokenData = DB::table('password_reset_tokens')->where('token', $token)->first();
+        // $tokenData = DB::table('password_reset_tokens')->where('token', $token)->first();
 
-        if (!$tokenData) {
-            // Jika token tidak ditemukan, arahkan pengguna ke halaman login dengan notifikasi
-            return redirect()->route('login')->with([
-                'notifikasi' =>'Token reset password tidak valid.',
-                'type' => 'warning'
-            ]);
-        }
+        // if (!$tokenData) {
+        //     // Jika token tidak ditemukan, arahkan pengguna ke halaman login dengan notifikasi
+        //     return redirect()->route('login')->with([
+        //         'notifikasi' =>'Token reset password tidak valid.',
+        //         'type' => 'warning'
+        //     ]);
+        // }
 
-        $tokenCreated = Carbon::parse($tokenData->created_at);
-        $tokenExpiration = $tokenCreated->addMinutes(config('auth.passwords.users.expire'));
+        // $tokenCreated = Carbon::parse($tokenData->created_at);
+        // $tokenExpiration = $tokenCreated->addMinutes(config('auth.passwords.users.expire'));
 
-        if (Carbon::now()->gt($tokenExpiration)) {
-            // Jika token sudah kadaluarsa, arahkan pengguna ke halaman login dengan notifikasi
-            return redirect()->route('login')->with([
-                'notifikasi' =>'Token reset password sudah kadaluarsa.',
-                'type' => 'warning'
-            ]);
-        }
-        
+        // if (Carbon::now()->gt($tokenExpiration)) {
+        //     // Jika token sudah kadaluarsa, arahkan pengguna ke halaman login dengan notifikasi
+        //     return redirect()->route('login')->with([
+        //         'notifikasi' =>'Token reset password sudah kadaluarsa.',
+        //         'type' => 'warning'
+        //     ]);
+        // }
+
         return view('reset-password', [
             'token' => $token,
             'email' => $request->email,

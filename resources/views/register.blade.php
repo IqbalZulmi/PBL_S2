@@ -28,6 +28,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
 <!--===============================================================================================-->
+<style>
+    .logo img {
+        max-width: 70px;
+        max-height: 70px;
+    }
+    .container-login100 {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ asset('assets_login/images/bg/poltek1.jpg') }}');
+    }
+</style>
 </head>
 <body>
 
