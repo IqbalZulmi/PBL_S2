@@ -25,7 +25,7 @@ Status Pengajuan
                 <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">Nik</th>
+                        <th scope="col">Tipe pengajuan</th>
                         <th scope="col">Judul Usulan</th>
                         <th scope="col">Tanggal Pengajuan</th>
                         <th scope="col">Status</th>
@@ -37,7 +37,13 @@ Status Pengajuan
                     @forelse ( $pengajuan_hakciptas as $index => $data)
                     <tr>
                         <td>{{ $index+1 }}</td>
-                        <td>{{ $data->nik }}</td>
+                        <td>
+                            @if ($data instanceof \App\Models\pengajuan_hakCipta)
+                                Hak Cipta
+                            @elseif ($data instanceof \App\Models\pengajuan_paten)
+                                Paten
+                            @endif
+                        </td>
                         <td>{{ $data->judul_usulan }}</td>
                         <td>{{ $data->tanggal_pengajuan }}</td>
                         <td>

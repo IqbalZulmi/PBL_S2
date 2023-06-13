@@ -8,7 +8,7 @@ Pengajuan Paten
 <div class="row wht">
     <div class="col-12 px-4">
         <p class="fw-bold mt-2">Form Pengajuan Paten</p>
-        <form action="/hak-paten" method="post" enctype="multipart/form-data">
+        <form action="/paten" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-2 row mt-3" data-aos="fade-up" data-aos-duration="500">
                 <label for="Email" class="col-lg-4 col-form-label">Email</label>
@@ -29,7 +29,7 @@ Pengajuan Paten
                 </div>
             </div>
             <div class="mb-2 row" data-aos="fade-up" data-aos-duration="500">
-                <label for="NIP" class="col-lg-4 col-form-label">NIP/NIK</label>
+                <label for="NIK" class="col-lg-4 col-form-label">NIP/NIK</label>
                 <div class="col-lg-6">
                     <input type="text" name="nik"  id="nik" placeholder="Masukkan NIP/NIK" class="form-control" value="{{ $user->nik }}" readonly required>
                 </div>
@@ -44,18 +44,18 @@ Pengajuan Paten
                 </div>
             </div>
             <div class="mb-2 row" data-aos="fade-up" data-aos-duration="500">
-                <label for="Judul" class="col-lg-4 col-form-label">Judul Usulan</label>
+                <label for="Judul" class="col-lg-4 col-form-label">Judul usulan</label>
                 <div class="col-lg-6">
-                    <input type="text" name="judul_usulan" id="judul_usulan" placeholder="Judul Usulan" class="form-control @error('judul_usulan') is-invalid @enderror" value="{{ old('judul_usulan') }}" required>
+                    <input type="text" name="judul_usulan" id="judul_usulan" placeholder="Judul usulan" class="form-control @error('judul_usulan') is-invalid @enderror" value="{{ old('judul_usulan') }}" required>
                     @error('judul_usulan')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
             <div class="mb-2 row" data-aos="fade-up" data-aos-duration="500">
-                <label for="formFile" class="col-lg-4 col-form-label">Borang tindak lanjut penelitian</label>
+                <label for="file_borang_tindak_lanjut_penelitian" class="col-lg-4 col-form-label">Borang tindak lanjut penelitian</label>
                 <div class="col-9 col-sm-10 col-lg-6">
-                    <input type="file" name="file_borang_tindak_lanjut_penelitian"  id="formFile" onchange="showButton(this); validasi(this);" class="form-control @error('file_borang_tindak_lanjut_penelitian') is-invalid @enderror" value="{{ old('file_borang_tindak_lanjut_penelitian') }}"required>
+                    <input type="file" name="file_borang_tindak_lanjut_penelitian"  id="file_borang_tindak_lanjut_penelitian" onchange="showButton(this); validasi(this);" class="form-control @error('file_borang_tindak_lanjut_penelitian') is-invalid @enderror" value="{{ old('file_borang_tindak_lanjut_penelitian') }}"required>
                     @error('file_borang_tindak_lanjut_penelitian')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -66,9 +66,9 @@ Pengajuan Paten
                 </div>
             </div>
             <div class="mb-2 row" data-aos="fade-up" data-aos-duration="500">
-                <label for="KTP" class="col-lg-4 col-form-label">Abstrak paten</label>
+                <label for="file_abstrak_paten" class="col-lg-4 col-form-label">Abstrak paten</label>
                 <div class="col-9 col-sm-10 col-lg-6">
-                    <input type="file" name="file_abstrak_paten" id="KTP" onchange="showButton(this); validasi(this);" class="form-control @error('file_abstrak_paten') is-invalid @enderror" value="{{ old('file_abstrak_paten') }}"required>
+                    <input type="file" name="file_abstrak_paten" id="file_abstrak_paten" onchange="showButton(this); validasi(this);" class="form-control @error('file_abstrak_paten') is-invalid @enderror" value="{{ old('file_abstrak_paten') }}"required>
                     @error('file_abstrak_paten')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -79,9 +79,9 @@ Pengajuan Paten
                 </div>
             </div>
             <div class="mb-2 row" data-aos="fade-up" data-aos-duration="500">
-                <label for="NPWP" class="col-lg-4 col-form-label">Daftar isian pendaftaran paten online</label>
+                <label for="file_daftar_isian_pendaftaran" class="col-lg-4 col-form-label">Daftar isian pendaftaran paten online</label>
                 <div class="col-9 col-sm-10 col-lg-6">
-                    <input type="file" name="file_daftar_isian_pendaftaran"  id="NPWP" onchange="showButton(this); validasi(this);" class="form-control @error('file_daftar_isian_pendaftaran') is-invalid @enderror" value="{{ old('file_daftar_isian_pendaftaran') }}"required>
+                    <input type="file" name="file_daftar_isian_pendaftaran"  id="file_daftar_isian_pendaftaran" onchange="showButton(this); validasi(this);" class="form-control @error('file_daftar_isian_pendaftaran') is-invalid @enderror" value="{{ old('file_daftar_isian_pendaftaran') }}"required>
                     @error('file_daftar_isian_pendaftaran')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -92,9 +92,9 @@ Pengajuan Paten
                 </div>
             </div>
             <div class="mb-2 row" data-aos="fade-up" data-aos-duration="500">
-                <label for="Ciptaan" class="col-lg-4 col-form-label">Gambar</label>
+                <label for="file_gambar" class="col-lg-4 col-form-label">Gambar</label>
                 <div class="col-9 col-sm-10 col-lg-6">
-                    <input type="file" name="file_gambar" id="Ciptaan" onchange="showButton(this); validasi(this);" class="form-control @error('file_gambar') is-invalid @enderror" value="{{ old('file_gambar') }}"required>
+                    <input type="file" name="file_gambar" id="file_gambar" onchange="showButton(this); validasi(this);" class="form-control @error('file_gambar') is-invalid @enderror" value="{{ old('file_gambar') }}"required>
                     @error('file_gambar')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -105,9 +105,9 @@ Pengajuan Paten
                 </div>
             </div>
             <div class="mb-2 row" data-aos="fade-up" data-aos-duration="500">
-                <label for="pernyataan" class="col-lg-4 col-form-label">Surat pengalihan hak atas invensi</label>
+                <label for="file_surat_pengalihan_hak_atas_invensi" class="col-lg-4 col-form-label">Surat pengalihan hak atas invensi</label>
                 <div class="col-9 col-sm-10 col-lg-6">
-                    <input type="file" name="file_surat_pengalihan_hak_atas_invensi" id="pernyataan" onchange="showButton(this); validasi(this);" class="form-control @error('file_surat_pengalihan_hak_atas_invensi') is-invalid @enderror" value="{{ old('file_surat_pernyataan_hak_cipta') }}"required>
+                    <input type="file" name="file_surat_pengalihan_hak_atas_invensi" id="file_surat_pengalihan_hak_atas_invensi" onchange="showButton(this); validasi(this);" class="form-control @error('file_surat_pengalihan_hak_atas_invensi') is-invalid @enderror" value="{{ old('file_surat_pernyataan_hak_cipta') }}"required>
                     @error('file_surat_pengalihan_hak_atas_invensi')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -118,9 +118,9 @@ Pengajuan Paten
                 </div>
             </div>
             <div class="mb-2 row" data-aos="fade-up" data-aos-duration="500">
-                <label for="Pengalihan" class="col-lg-4 col-form-label">Scan surat pernyataan kepemilikan atas invensi</label>
+                <label for="file_scan_surat_kepemilikan" class="col-lg-4 col-form-label">Scan surat pernyataan kepemilikan atas invensi</label>
                 <div class="col-9 col-sm-10 col-lg-6">
-                    <input type="file" name="file_scan_surat_kepemilikan" id="Pengalihan" onchange="showButton(this); validasi(this);" class="form-control @error('file_scan_surat_kepemilikan') is-invalid @enderror" value="{{ old('file_scan_surat_kepemilikan') }}"required>
+                    <input type="file" name="file_scan_surat_kepemilikan" id="file_scan_surat_kepemilikan" onchange="showButton(this); validasi(this);" class="form-control @error('file_scan_surat_kepemilikan') is-invalid @enderror" value="{{ old('file_scan_surat_kepemilikan') }}"required>
                     @error('file_scan_surat_kepemilikan')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -131,9 +131,9 @@ Pengajuan Paten
                 </div>
             </div>
             <div class="mb-2 row" data-aos="fade-up" data-aos-duration="500">
-                <label for="Pengalihan" class="col-lg-4 col-form-label">Dokumen spesifikasi paten</label>
+                <label for="file_dokumen_spesifikasi_paten" class="col-lg-4 col-form-label">Dokumen spesifikasi paten</label>
                 <div class="col-9 col-sm-10 col-lg-6">
-                    <input type="file" name="file_dokumen_spesifikasi_paten" id="Pengalihan" onchange="showButton(this); validasi(this);" class="form-control @error('file_dokumen_spesifikasi_paten') is-invalid @enderror" value="{{ old('file_dokumen_spesifikasi_paten') }}"required>
+                    <input type="file" name="file_dokumen_spesifikasi_paten" id="file_dokumen_spesifikasi_paten" onchange="showButton(this); validasi(this);" class="form-control @error('file_dokumen_spesifikasi_paten') is-invalid @enderror" value="{{ old('file_dokumen_spesifikasi_paten') }}"required>
                     @error('file_dokumen_spesifikasi_paten')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -144,9 +144,9 @@ Pengajuan Paten
                 </div>
             </div>
             <div class="mb-2 row" data-aos="fade-up" data-aos-duration="500">
-                <label for="Pengalihan" class="col-lg-4 col-form-label">Klaim Paten</label>
+                <label for="file_klaim_paten" class="col-lg-4 col-form-label">Klaim Paten</label>
                 <div class="col-9 col-sm-10 col-lg-6">
-                    <input type="file" name="file_klaim_paten" id="Pengalihan" onchange="showButton(this); validasi(this);" class="form-control @error('file_klaim_paten') is-invalid @enderror" value="{{ old('file_klaim_paten') }}"required>
+                    <input type="file" name="file_klaim_paten" id="file_klaim_paten" onchange="showButton(this); validasi(this);" class="form-control @error('file_klaim_paten') is-invalid @enderror" value="{{ old('file_klaim_paten') }}"required>
                     @error('file_klaim_paten')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

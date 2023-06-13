@@ -3,6 +3,7 @@
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\picController;
 use App\Http\Controllers\CiptaController;
+use App\Http\Controllers\PatenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\manajerController;
 use App\Http\Controllers\ProfileController;
@@ -98,6 +99,12 @@ Route::middleware(CekRole::class . ':pemohon')->group(function(){
 
     Route::post('/hak-cipta', [CiptaController::class, 'store'])
     ->name('cipta.store')->middleware('verified');
+
+    Route::get('/paten', [PatenController::class, 'create'])
+    ->name('paten.tampil')->middleware('verified');
+
+    Route::post('/paten', [PatenController::class, 'store'])
+    ->name('paten.store')->middleware('verified');
 
     Route::get('/status', [CiptaController::class, 'index'])
     ->name('status.tampil')->middleware('verified');

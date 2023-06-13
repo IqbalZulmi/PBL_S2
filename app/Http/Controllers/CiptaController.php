@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\pengajuan_hakCipta;
+use App\Models\pengajuan_paten;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +23,9 @@ class CiptaController extends Controller
     {
         $user = Auth::user()->nik;
         $cipta = pengajuan_hakCipta::where('nik',$user)->get();
-        return view('user.status', ['pengajuan_hakciptas' => $cipta]);
+        $paten = pengajuan_paten::where('nik',$user)->get();
+        $pengajuan = $cipta->concat($paten);
+        return view('user.status', ['pengajuan_hakciptas' => $pengajuan]);
     }
 
     /**
@@ -105,7 +108,11 @@ class CiptaController extends Controller
         $cipta->file_contoh_ciptaan = $fileContohCiptaan ? 'file/' . $fileContohCiptaan : null;
         $cipta->file_surat_pernyataan_hak_cipta = $fileSuratPernyataan ? 'file/' . $fileSuratPernyataan : null;
         $cipta->file_surat_pengalihan_hak_cipta = $fileSuratPengalihan ? 'file/' . $fileSuratPengalihan : null;
-        $cipta->file_salinan_pks = $fileSalinanPKS ? 'file/' . $fileSalinanPKS : null;
+        if($request->usulan == 'Tidak'){
+            $cipta->file_salinan_pks = null;
+        }else{
+            $cipta->file_salinan_pks = $fileSalinanPKS ? 'file/' . $fileSalinanPKS : null;
+        }
 
 
         if($cipta->save()){

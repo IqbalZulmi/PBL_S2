@@ -94,12 +94,12 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown me-lg-3 mb-2 mb-sm-0">
-                                    <a class="nav-link dropdown-toggle {{ Request::is('hak-cipta') || Request::is('hak-paten') ? 'active' : '' }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle {{ Request::is('hak-cipta') || Request::is('paten') ? 'active' : '' }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-file-pen"></i> Pendaftaran
                                     </a>
                                     <ul class="dropdown-menu animate slideIn">
                                         <li><a class="dropdown-item" href="/hak-cipta">Hak Cipta</a></li>
-                                        <li><a class="dropdown-item" href="/hak-paten">Paten</a></li>
+                                        <li><a class="dropdown-item" href="/paten">Paten</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item me-lg-3 mb-2 mb-sm-0">
