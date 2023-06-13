@@ -59,7 +59,7 @@ Pengajuan Paten
                     @error('file_borang_tindak_lanjut_penelitian')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                    <p class="format">*format .pdf</p>
+                    <p class="format">*sudah ditandatangani, format .pdf</p>
                 </div>
                 <div class="col-3 col-sm-2 col-lg-2">
                     <a href="#" class="btn btn-outline-info btn-view d-none">Review</a>

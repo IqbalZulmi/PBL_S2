@@ -8,7 +8,7 @@ Riwayat pengajuan hak cipta
 <div class="row wht">
     <div class="col-12">
         <div class="container-input mt-2">
-            <input type="text" placeholder="Cari Judul" name="text" class="input" oninput="cari(4)">
+            <input type="text" placeholder="Cari Judul" name="text" class="input" oninput="cari(3)">
             <select name="limit" class="form-select form-select-md">
                 <option value="-1">ALL</option>
                 <option value="5">5</option>

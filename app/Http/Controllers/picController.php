@@ -46,12 +46,28 @@ class picController extends Controller
         return view('admin.verif-cipta',['join' => $join]);
     }
 
+    public function paten()
+    {
+        $admin = Auth::user()->jurusan;
+        $join = User::join('pengajuan_patens', 'users.nik', '=', 'pengajuan_patens.nik')
+        ->where('pengajuan_patens.status', 'sedang diproses')->Where('users.jurusan',$admin)->get();
+        return view('admin.verif-paten',['join' => $join]);
+    }
+
     public function riwayat()
     {
         $admin = Auth::user()->jurusan;
         $join = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')->Where('users.jurusan',$admin)
         ->where('pengajuan_hak_ciptas.status', 'diterima')->orWhere('pengajuan_hak_ciptas.status', 'perlu direvisi')->get();
         return view('admin.riwayat-pengajuan-cipta',['join' => $join]);
+    }
+
+    public function riwayatpaten()
+    {
+        $admin = Auth::user()->jurusan;
+        $join = User::join('pengajuan_patens', 'users.nik', '=', 'pengajuan_patens.nik')->Where('users.jurusan',$admin)
+        ->where('pengajuan_patens.status', 'diterima')->orWhere('pengajuan_patens.status', 'perlu direvisi')->get();
+        return view('admin.riwayat-pengajuan-paten',['join' => $join]);
     }
     /**
      * Store a newly created resource in storage.
@@ -110,6 +126,36 @@ class picController extends Controller
             ]);
         }
     }
+    public function patenupdate(Request $request, string $id)
+    {
+        $validatedData = $request->validate([
+            'status' => 'required',
+            'alasan' => 'nullable'
+        ], [
+            'status' => 'status perlu diverifikasi',
+        ]);
+
+        $cipta = pengajuan_paten::where('id', $id)->first();
+        $cipta->status = $request->status;
+        if ($request->status == 'diterima'){
+            $cipta->alasan = null;
+        }else{
+            $cipta->alasan = $request->alasan;
+        }
+
+
+        if($cipta->save()){
+            return redirect('/verif-paten')->with([
+                'notifikasi' => 'Berhasil diverfikasi !',
+                'type' => 'success'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'notifikasi' => 'Gagal memverifikasi',
+                'type' => 'danger'
+            ]);
+        }
+    }
 
     public function updateriwayat(Request $request, string $id)
     {
@@ -131,6 +177,37 @@ class picController extends Controller
 
         if($cipta->save()){
             return redirect()->route('riwayat-cipta.tampil')->with([
+                'notifikasi' => 'Berhasil diedit !',
+                'type' => 'success'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'notifikasi' => 'Gagal diedit !',
+                'type' => 'danger'
+            ]);
+        }
+    }
+
+    public function updateriwayatpaten(Request $request, string $id)
+    {
+        $validatedData = $request->validate([
+            'status' => 'required',
+            'alasan' => 'nullable'
+        ], [
+            'status' => 'status perlu diverifikasi',
+        ]);
+
+        $cipta = pengajuan_paten::where('id', $id)->first();
+        $cipta->status = $request->status;
+        if ($request->status == 'diterima'){
+            $cipta->alasan = null;
+        }else{
+            $cipta->alasan = $request->alasan;
+        }
+
+
+        if($cipta->save()){
+            return redirect()->route('riwayat-paten.tampil')->with([
                 'notifikasi' => 'Berhasil diedit !',
                 'type' => 'success'
             ]);

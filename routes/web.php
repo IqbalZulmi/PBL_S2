@@ -109,8 +109,11 @@ Route::middleware(CekRole::class . ':pemohon')->group(function(){
     Route::get('/status', [CiptaController::class, 'index'])
     ->name('status.tampil')->middleware('verified');
 
-    Route::put('/status/{id}', [CiptaController::class, 'update'])
+    Route::put('/status/cipta/{id}', [CiptaController::class, 'update'])
     ->name('cipta.update')->middleware('verified');
+
+    Route::put('/status/paten/{id}', [PatenController::class, 'update'])
+    ->name('paten.update')->middleware('verified');
 
 });
 
@@ -124,9 +127,11 @@ Route::middleware(CekRole::class . ':pic')->group(function(){
     Route::put('/verif-cipta/{id}', [picController::class, 'update'])
     ->name('verif-cipta.update');
 
-    Route::get('/verif-paten', function () {
-        return view('admin.verif-paten');
-    });
+    Route::get('/verif-paten', [picController::class, 'paten'])
+    ->name('verif-paten.tampil');
+
+    Route::put('/verif-paten/{id}', [picController::class, 'patenupdate'])
+    ->name('verif-paten.update');
 
     Route::get('/riwayat-pengajuan/hak-cipta', [picController::class, 'riwayat'])
     ->name('riwayat-cipta.tampil');
@@ -134,9 +139,11 @@ Route::middleware(CekRole::class . ':pic')->group(function(){
     Route::put('/riwayat-pengajuan/hak-cipta/{id}', [picController::class, 'updateriwayat'])
     ->name('riwayat-cipta.update');
 
-    Route::get('/riwayat-pengajuan/paten', function () {
-        return view('admin.riwayat-pengajuan-paten');
-    });
+    Route::get('/riwayat-pengajuan/paten', [picController::class, 'riwayatpaten'])
+    ->name('riwayat-paten.tampil');
+
+    Route::put('/riwayat-pengajuan/paten/{id}', [picController::class, 'updateriwayatpaten'])
+    ->name('riwayat-paten.update');
 
     Route::get('/pic/change-password', [ProfileController::class, 'picPass'])
     ->name('pic-change-pass.tampil');

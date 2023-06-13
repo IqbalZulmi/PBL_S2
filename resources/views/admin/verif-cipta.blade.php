@@ -92,7 +92,7 @@ Verifikasi Hak Cipta
                         </td>
                         <td>
                             <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $index+1 }}">
-                                verifikasi
+                                <i class="fa-regular fa-pen-to-square"></i> verifikasi
                             </button>
                         </td>
                     </tr>

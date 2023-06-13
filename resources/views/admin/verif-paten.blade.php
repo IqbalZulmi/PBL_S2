@@ -1,14 +1,13 @@
 @extends('layout.admin')
 
 @section('title')
-Riwayat pengajuan paten
+Verifikasi Hak Cipta
 @endsection
 
 @section('content')
 <div class="row wht">
     <div class="col-12">
         <div class="container-input mt-2">
-            <input type="text" placeholder="Cari Judul" name="text" class="input" oninput="cari(3)">
             <select name="limit" class="form-select form-select-md">
                 <option value="-1">ALL</option>
                 <option value="5">5</option>
@@ -16,9 +15,6 @@ Riwayat pengajuan paten
                 <option value="25">25</option>
                 <option value="50">50</option>
             </select>
-            <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-                <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
-            </svg>
         </div>
         <div class="table-responsive">
             <table class="table border table-striped table-hover text-center caption-top">
@@ -38,10 +34,7 @@ Riwayat pengajuan paten
                         <th scope="col" style="min-width:110px;">scan surat kepemilikan</th>
                         <th scope="col" style="min-width:110px;">dokumen spesifikasi paten</th>
                         <th scope="col" style="min-width:110px;">klaim paten</th>
-                        <th scope="col" style="min-width:170px;">Salinan PKS</th>
-                        <th scope="col" style="min-width:170px;">Tanggal</th>
-                        <th scope="col" style="min-width:170px;">Status</th>
-                        <th scope="col" style="min-width:110px;">Alasan</th>
+                        <th scope="col" style="min-width:110px;">Salinan PKS</th>
                         <th scope="col" style="min-width:170px;">Aksi</th>
                     </tr>
                 </thead>
@@ -111,16 +104,9 @@ Riwayat pengajuan paten
                             </button>
                             @endif
                         </td>
-                        <td>{{ $data->tanggal_pengajuan }}</td>
                         <td>
-                            <div class="badge fs-6 fw-normal @if ($data->status == 'diterima') text-bg-success @else text-bg-danger @endif">
-                                {{ $data->status }}
-                            </div>
-                        </td>
-                        <td>{{ $data->alasan }}</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#hapusModal{{ $index+1 }}">
-                                <i class="fa-solid fa-gear"></i> Edit
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $index+1 }}">
+                                <i class="fa-regular fa-pen-to-square"></i> verifikasi
                             </button>
                         </td>
                     </tr>
@@ -142,41 +128,42 @@ Riwayat pengajuan paten
                 </li>
             </ul>
         </nav>
-        @foreach ($join as $index => $data )
-        <div class="modal fade" id="hapusModal{{ $index+1 }}" tabindex="-1" aria-labelledby="hapusModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Verfikasi</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="/riwayat-pengajuan/paten/{{ $data->id }}" method="post">
-                        <div class="modal-body">
-                            @csrf @method('put')
-                            <input type="text" hidden value="{{ $data->id }}" name="old_id">
-                            <label class="form-label">Status</label>
-                            <select name="status" class="form-select @error('status') is-invalid @enderror" onchange="filterAlasan(this)">
-                                <option value="diterima" @if ($data->status == 'diterima') selected @endif>diterima</option>
-                                <option value="perlu direvisi" @if ($data->status == 'perlu direvisi') selected @endif>perlu direvisi</option>
-                            </select>
-                            @error('status')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            <label class="form-label @if ($data->status == 'perlu direvisi') d-block @else d-none @endif" id="alasanLabel">Alasan</label>
-                            <textarea name="alasan" class="form-control @error('alasan') is-invalid @enderror @if ($data->status == 'perlu direvisi') d-block @else d-none @endif" id="alasanTextarea" cols="30" rows="5" placeholder="File Ktp Buram">{{ $data->alasan }}</textarea>
-                            @error('alasan')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Save changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        @endforeach
     </div>
 </div>
+  <!-- Modal -->
+@foreach ($join as $index=>$data)
+<div class="modal fade" id="exampleModal{{ $index+1 }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Verfikasi</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/verif-paten/{{ $data->id }}" method="post">
+                <div class="modal-body">
+                    @csrf @method('put')
+                    <input type="text" hidden value="{{ $data->id }}" name="old_id">
+                    <label class="form-label">Status</label>
+                    <select name="status" class="form-select @error('status') is-invalid @enderror" onchange="filterAlasan(this)">
+                        <option value="diterima">diterima</option>
+                        <option value="perlu direvisi">perlu direvisi</option>
+                    </select>
+                    @error('status')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                    <label class="form-label d-none" id="alasanLabel">Alasan</label>
+                    <textarea name="alasan" class="form-control d-none @error('alasan') is-invalid @enderror" id="alasanTextarea" cols="30" rows="5" placeholder="File Ktp Buram"></textarea>
+                    @error('alasan')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
 @endsection
