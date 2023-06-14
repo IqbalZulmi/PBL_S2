@@ -13,24 +13,100 @@ class picController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function grafik(Request $request)
+    {
+        $validatedData = $request->validate([
+            'bulan' => 'required',
+            'tahun' => 'required',
+            'jenis_pengajuan' => 'required'
+        ]);
+
+        $admin = Auth::user()->jurusan;
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+        $pengajuan = $request->jenis_pengajuan;
+        
+        if ($pengajuan == 'Cipta'){
+            $grafikProses = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')
+            ->where('pengajuan_hak_ciptas.status', 'sedang diproses')->whereMonth('pengajuan_hak_ciptas.tanggal_pengajuan', $bulan)
+            ->whereYear('pengajuan_hak_ciptas.tanggal_pengajuan', $tahun)->Where('users.jurusan',$admin)->count();
+
+            $grafikTerima = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')
+            ->where('pengajuan_hak_ciptas.status', 'diterima')->whereMonth('pengajuan_hak_ciptas.tanggal_pengajuan', $bulan)
+            ->whereYear('pengajuan_hak_ciptas.tanggal_pengajuan', $tahun)->Where('users.jurusan',$admin)->count();
+            
+            $grafikRevisi = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')
+            ->where('pengajuan_hak_ciptas.status', 'perlu direvisi')->whereMonth('pengajuan_hak_ciptas.tanggal_pengajuan', $bulan)
+            ->whereYear('pengajuan_hak_ciptas.tanggal_pengajuan', $tahun)->Where('users.jurusan',$admin)->count();
+            
+            $total = $grafikProses + $grafikTerima + $grafikRevisi;
+            if($total < 1){
+                return redirect()->route('dashboard.tampil')->with([
+                    'notifikasi' => 'Data Tidak Ditemukan !',
+                    'type' => 'warning',
+                ]);
+            }else{
+                return redirect()->route('dashboard.tampil')->with([
+                    'grafikproses' => $grafikProses,
+                    'grafikterima' => $grafikTerima,
+                    'grafikrevisi' => $grafikRevisi,
+                    'jenis_pengajuan' => 'Pengajuan Hak Cipta',
+                ]);
+            }
+        }elseif($pengajuan == 'Paten'){
+            $grafikProses = User::join('pengajuan_patens', 'users.nik', '=', 'pengajuan_patens.nik')
+            ->where('pengajuan_patens.status', 'sedang diproses')->whereMonth('pengajuan_patens.tanggal_pengajuan', $bulan)
+            ->whereYear('pengajuan_patens.tanggal_pengajuan', $tahun)->Where('users.jurusan',$admin)->count();
+
+            $grafikTerima = User::join('pengajuan_patens', 'users.nik', '=', 'pengajuan_patens.nik')
+            ->where('pengajuan_patens.status', 'diterima')->whereMonth('pengajuan_patens.tanggal_pengajuan', $bulan)
+            ->whereYear('pengajuan_patens.tanggal_pengajuan', $tahun)->Where('users.jurusan',$admin)->count();
+            
+            $grafikRevisi = User::join('pengajuan_patens', 'users.nik', '=', 'pengajuan_patens.nik')
+            ->where('pengajuan_patens.status', 'perlu direvisi')->whereMonth('pengajuan_patens.tanggal_pengajuan', $bulan)
+            ->whereYear('pengajuan_patens.tanggal_pengajuan', $tahun)->Where('users.jurusan',$admin)->count();
+
+            $total = $grafikProses + $grafikTerima + $grafikRevisi;
+            if($total < 1){
+                return redirect()->route('dashboard.tampil')->with([
+                    'notifikasi' => 'Data Tidak Ditemukan !',
+                    'type' => 'warning',
+                ]);
+            }else{
+                return redirect()->route('dashboard.tampil')->with([
+                    'grafikproses' => $grafikProses,
+                    'grafikterima' => $grafikTerima,
+                    'grafikrevisi' => $grafikRevisi,
+                    'jenis_pengajuan' => 'Pengajuan Paten',
+                ]);
+            }
+        }else{
+            return redirect()->route('dashboard.tampil')->with([
+                'notifikasi' => 'Terjadi Kesalahan !',
+                'type' => 'error',
+            ]);
+        }
+    }
+
     public function index()
     {
         $admin = Auth::user()->jurusan;
-        $cipta = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')
+        $ciptaProses = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')
         ->where('pengajuan_hak_ciptas.status', 'sedang diproses')->Where('users.jurusan',$admin)->count();
 
-        $paten = User::join('pengajuan_patens', 'users.nik', '=', 'pengajuan_patens.nik')
+        $patenProses = User::join('pengajuan_patens', 'users.nik', '=', 'pengajuan_patens.nik')
         ->where('pengajuan_patens.status', 'sedang diproses')->Where('users.jurusan',$admin)->count();
 
-        $cipta1 = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')->Where('users.jurusan',$admin)
+        $ciptaTerimaRevisi = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')->Where('users.jurusan',$admin)
         ->where('pengajuan_hak_ciptas.status', 'diterima')->orWhere('pengajuan_hak_ciptas.status', 'perlu direvisi')->count();
 
-        $paten2 = User::join('pengajuan_patens', 'users.nik', '=', 'pengajuan_patens.nik')->Where('users.jurusan',$admin)
+        $patenTerimaRevisi = User::join('pengajuan_patens', 'users.nik', '=', 'pengajuan_patens.nik')->Where('users.jurusan',$admin)
         ->where('pengajuan_patens.status', 'diterima')->orWhere('pengajuan_patens.status', 'perlu direvisi')->count();
-        $total = $cipta1 + $paten2;
+        $total = $ciptaTerimaRevisi + $patenTerimaRevisi;
+
         return view('admin.dashboard',[
-            'cipta' => $cipta,
-            'paten' => $paten,
+            'cipta' => $ciptaProses,
+            'paten' => $patenProses,
             'total' => $total
         ]);
     }

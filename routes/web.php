@@ -120,7 +120,10 @@ Route::middleware(CekRole::class . ':pemohon')->group(function(){
 Route::middleware(CekRole::class . ':pic')->group(function(){
     Route::get('/dashboard', [picController::class, 'index'])
     ->name('dashboard.tampil');
-
+    
+    Route::post('/dashboard', [picController::class, 'grafik'])
+    ->name('dashboard.grafik');
+    
     Route::get('/verif-cipta', [picController::class, 'create'])
     ->name('verif-cipta.tampil');
 
