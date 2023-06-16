@@ -313,9 +313,9 @@ function validasi(input){
 }
 
 //select-filter-alasan
-function filterAlasan(selectElement) {
-    var alasanLabel = document.getElementById("alasanLabel");
-    var alasanTextarea = document.getElementById("alasanTextarea");
+function filterAlasan(selectElement, index) {
+    var alasanLabel = document.getElementById("alasanLabel" + index);
+    var alasanTextarea = document.getElementById("alasanTextarea" + index);
 
     if (selectElement.value === "perlu direvisi") {
         alasanLabel.classList.remove("d-none");
@@ -329,7 +329,6 @@ function filterAlasan(selectElement) {
         alasanTextarea.classList.add("d-none");
     }
 }
-
 //logout
 if (window.history.replaceState) {
     window.history.replaceState(null, null, window.location.href);

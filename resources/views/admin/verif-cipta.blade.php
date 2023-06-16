@@ -130,15 +130,15 @@ Verifikasi Hak Cipta
                     @csrf @method('put')
                     <input type="text" hidden value="{{ $data->id }}" name="old_id">
                     <label class="form-label">Status</label>
-                    <select name="status" class="form-select @error('status') is-invalid @enderror" onchange="filterAlasan(this)">
+                    <select name="status" class="form-select @error('status') is-invalid @enderror" onchange="filterAlasan(this, {{ $index+1 }})">
                         <option value="diterima">diterima</option>
                         <option value="perlu direvisi">perlu direvisi</option>
                     </select>
                     @error('status')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                    <label class="form-label d-none" id="alasanLabel">Alasan</label>
-                    <textarea name="alasan" class="form-control d-none @error('alasan') is-invalid @enderror" id="alasanTextarea" cols="30" rows="5" placeholder="File Ktp Buram"></textarea>
+                    <label class="form-label d-none" id="alasanLabel{{ $index+1 }}">Alasan</label>
+                    <textarea name="alasan" class="form-control d-none @error('alasan') is-invalid @enderror" id="alasanTextarea{{ $index+1 }}" cols="30" rows="5" placeholder="File Ktp Buram"></textarea>
                     @error('alasan')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

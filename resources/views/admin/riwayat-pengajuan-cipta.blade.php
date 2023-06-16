@@ -142,15 +142,15 @@ Riwayat pengajuan hak cipta
                             @csrf @method('put')
                             <input type="text" hidden value="{{ $data->id }}" name="old_id">
                             <label class="form-label">Status</label>
-                            <select name="status" class="form-select @error('status') is-invalid @enderror" onchange="filterAlasan(this)">
+                            <select name="status" class="form-select @error('status') is-invalid @enderror"  onchange="filterAlasan(this, {{ $index+1 }})">
                                 <option value="diterima" @if ($data->status == 'diterima') selected @endif>diterima</option>
                                 <option value="perlu direvisi" @if ($data->status == 'perlu direvisi') selected @endif>perlu direvisi</option>
                             </select>
                             @error('status')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                            <label class="form-label @if ($data->status == 'perlu direvisi') d-block @else d-none @endif" id="alasanLabel">Alasan</label>
-                            <textarea name="alasan" class="form-control @error('alasan') is-invalid @enderror @if ($data->status == 'perlu direvisi') d-block @else d-none @endif" id="alasanTextarea" cols="30" rows="5" placeholder="File Ktp Buram">{{ $data->alasan }}</textarea>
+                            <label class="form-label @if ($data->status == 'perlu direvisi') d-block @else d-none @endif" id="alasanLabel{{ $index+1 }}">Alasan</label>
+                            <textarea name="alasan" class="form-control @error('alasan') is-invalid @enderror @if ($data->status == 'perlu direvisi') d-block @else d-none @endif" id="alasanTextarea{{ $index+1 }}" cols="30" rows="5" placeholder="File Ktp Buram">{{ $data->alasan }}</textarea>
                             @error('alasan')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

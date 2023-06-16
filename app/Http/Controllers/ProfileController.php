@@ -137,6 +137,17 @@ class ProfileController extends Controller
 
         if ($accounts->isDirty()) {
             if ($accounts->save()) {
+                if ($accounts->wasChanged('email')) {
+                    $accounts->email_verified_at = null;
+                    $accounts->save();
+
+                    $accounts->sendEmailVerificationNotification();
+
+                    return redirect()->route('profile.tampil')->with([
+                        'notifikasi' => 'Email telah diubah. Silakan verifikasi alamat email baru Anda.',
+                        'type' => 'info'
+                    ]);
+                }
                 return redirect()->route('profile.tampil')->with([
                     'notifikasi' => 'Data berhasil diedit!',
                     'type' => 'success'
