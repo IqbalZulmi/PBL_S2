@@ -7,6 +7,7 @@ use App\Models\pengajuan_paten;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class picController extends Controller
 {
@@ -25,21 +26,28 @@ class picController extends Controller
         $bulan = $request->bulan;
         $tahun = $request->tahun;
         $pengajuan = $request->jenis_pengajuan;
-        
-        if ($pengajuan == 'Cipta'){
-            $grafikProses = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')
-            ->where('pengajuan_hak_ciptas.status', 'sedang diproses')->whereMonth('pengajuan_hak_ciptas.tanggal_pengajuan', $bulan)
-            ->whereYear('pengajuan_hak_ciptas.tanggal_pengajuan', $tahun)->Where('users.jurusan',$admin)->count();
 
-            $grafikTerima = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')
-            ->where('pengajuan_hak_ciptas.status', 'diterima')->whereMonth('pengajuan_hak_ciptas.tanggal_pengajuan', $bulan)
-            ->whereYear('pengajuan_hak_ciptas.tanggal_pengajuan', $tahun)->Where('users.jurusan',$admin)->count();
-            
-            $grafikRevisi = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')
-            ->where('pengajuan_hak_ciptas.status', 'perlu direvisi')->whereMonth('pengajuan_hak_ciptas.tanggal_pengajuan', $bulan)
-            ->whereYear('pengajuan_hak_ciptas.tanggal_pengajuan', $tahun)->Where('users.jurusan',$admin)->count();
-            
+        if ($pengajuan == 'Cipta'){
+            $data = User::join('pengajuan_hak_ciptas', 'users.nik', '=', 'pengajuan_hak_ciptas.nik')
+                ->whereMonth('pengajuan_hak_ciptas.tanggal_pengajuan', $bulan)
+                ->whereYear('pengajuan_hak_ciptas.tanggal_pengajuan', $tahun)
+                ->where('users.jurusan', $admin)
+                ->whereIn('pengajuan_hak_ciptas.status', ['sedang diproses', 'diterima', 'perlu direvisi'])
+                ->select('pengajuan_hak_ciptas.status', DB::raw('COUNT(*) as jumlah_data'))
+                ->groupBy('pengajuan_hak_ciptas.status')
+                ->get();
+
+            $statusCounts = [];
+            foreach ($data as $row) {
+                $statusCounts[$row->status] = $row->jumlah_data;
+            }
+
+            $grafikProses = $statusCounts['sedang diproses'] ?? 0;
+            $grafikTerima = $statusCounts['diterima'] ?? 0;
+            $grafikRevisi = $statusCounts['perlu direvisi'] ?? 0;
+
             $total = $grafikProses + $grafikTerima + $grafikRevisi;
+
             if($total < 1){
                 return redirect()->route('dashboard.tampil')->with([
                     'notifikasi' => 'Data Tidak Ditemukan !',
@@ -53,20 +61,28 @@ class picController extends Controller
                     'jenis_pengajuan' => 'Pengajuan Hak Cipta',
                 ]);
             }
-        }elseif($pengajuan == 'Paten'){
-            $grafikProses = User::join('pengajuan_patens', 'users.nik', '=', 'pengajuan_patens.nik')
-            ->where('pengajuan_patens.status', 'sedang diproses')->whereMonth('pengajuan_patens.tanggal_pengajuan', $bulan)
-            ->whereYear('pengajuan_patens.tanggal_pengajuan', $tahun)->Where('users.jurusan',$admin)->count();
 
-            $grafikTerima = User::join('pengajuan_patens', 'users.nik', '=', 'pengajuan_patens.nik')
-            ->where('pengajuan_patens.status', 'diterima')->whereMonth('pengajuan_patens.tanggal_pengajuan', $bulan)
-            ->whereYear('pengajuan_patens.tanggal_pengajuan', $tahun)->Where('users.jurusan',$admin)->count();
-            
-            $grafikRevisi = User::join('pengajuan_patens', 'users.nik', '=', 'pengajuan_patens.nik')
-            ->where('pengajuan_patens.status', 'perlu direvisi')->whereMonth('pengajuan_patens.tanggal_pengajuan', $bulan)
-            ->whereYear('pengajuan_patens.tanggal_pengajuan', $tahun)->Where('users.jurusan',$admin)->count();
+        }elseif($pengajuan == 'Paten'){
+            $data = User::join('pengajuan_patens', 'users.nik', '=', 'pengajuan_patens.nik')
+                ->whereMonth('pengajuan_patens.tanggal_pengajuan', $bulan)
+                ->whereYear('pengajuan_patens.tanggal_pengajuan', $tahun)
+                ->where('users.jurusan', $admin)
+                ->whereIn('pengajuan_patens.status', ['sedang diproses', 'diterima', 'perlu direvisi'])
+                ->select('pengajuan_patens.status', DB::raw('COUNT(*) as jumlah_data'))
+                ->groupBy('pengajuan_patens.status')
+                ->get();
+
+            $statusCounts = [];
+            foreach ($data as $row) {
+                $statusCounts[$row->status] = $row->jumlah_data;
+            }
+
+            $grafikProses = $statusCounts['sedang diproses'] ?? 0;
+            $grafikTerima = $statusCounts['diterima'] ?? 0;
+            $grafikRevisi = $statusCounts['perlu direvisi'] ?? 0;
 
             $total = $grafikProses + $grafikTerima + $grafikRevisi;
+
             if($total < 1){
                 return redirect()->route('dashboard.tampil')->with([
                     'notifikasi' => 'Data Tidak Ditemukan !',

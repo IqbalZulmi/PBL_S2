@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pengajuan_patens', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('nik');
+            $table->foreign('nik')->references('nik')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->String('kkt');
             $table->String('judul_usulan');
             $table->String('file_borang_tindak_lanjut_penelitian');
