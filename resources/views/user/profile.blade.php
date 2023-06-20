@@ -1,7 +1,7 @@
 @extends('layout.user')
 
 @section('title')
-Pengajuan Hak Cipta
+Profile
 @endsection
 
 @section('content')

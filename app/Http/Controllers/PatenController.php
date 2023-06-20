@@ -280,4 +280,10 @@ class PatenController extends Controller
         }
     }
 
+    public function daftar_judul()
+    {
+        $paten = pengajuan_paten::where('status','diterima')->get();
+        return view('user.daftar-judul-paten',['paten' => $paten]);
+    }
+
 }

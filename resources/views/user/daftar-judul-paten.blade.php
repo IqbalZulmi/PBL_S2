@@ -22,7 +22,7 @@ Daftar Judul Paten
         </div>
         <div class="table-responsive">
             <table class="table border table-striped table-hover align-middle text-center caption-top">
-                <caption>Judul yang telah diterima:</caption>
+                <caption>Judul yang telah diterima: {{ $paten->count() }}</caption>
                 <thead>
                     <tr>
                         <th scope="col">No</th>
@@ -30,18 +30,19 @@ Daftar Judul Paten
                         <th scope="col">Tanggal diterima</th>
                     </tr>
                 </thead>
+                @forelse ($paten as $index => $data )
                 <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
+                        <th scope="row">{{ $index+1 }}</th>
+                        <td>{{ $data->judul_usulan }}</td>
+                        <td>{{ $data->tanggal_pengajuan }}</td>
                     </tr>
+                    @empty
                     <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
+                        <td colspan="100%">Tidak ada data untuk ditampilkan !</td>
                     </tr>
                 </tbody>
+                @endforelse
             </table>
         </div>
         <nav aria-label="Page navigation example">

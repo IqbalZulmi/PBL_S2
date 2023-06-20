@@ -52,11 +52,10 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::get('/judul/hak-cipta', [CiptaController::class, 'daftar_judul'])
-->name('judul.tampil');
+->name('judul-cipta.tampil');
 
-Route::get('/judul/hak-paten', function () {
-    return view('user.daftar-judul-paten');
-});
+Route::get('/judul/paten', [PatenController::class, 'daftar_judul'])
+->name('judul-paten.tampil');
 
 Route::get('/sejarah', function () {
     return view('user.sejarah');
@@ -120,10 +119,10 @@ Route::middleware(CekRole::class . ':pemohon')->group(function(){
 Route::middleware(CekRole::class . ':pic')->group(function(){
     Route::get('/dashboard', [picController::class, 'index'])
     ->name('dashboard.tampil');
-    
+
     Route::post('/dashboard', [picController::class, 'grafik'])
     ->name('dashboard.grafik');
-    
+
     Route::get('/verif-cipta', [picController::class, 'create'])
     ->name('verif-cipta.tampil');
 
