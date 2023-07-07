@@ -208,7 +208,7 @@ class picController extends Controller
 
         if($cipta->save()){
             return redirect('/verif-cipta')->with([
-                'notifikasi' => 'Berhasil diverfikasi !',
+                'notifikasi' => 'Berhasil diverifikasi !',
                 'type' => 'success'
             ]);
         } else {
@@ -238,7 +238,7 @@ class picController extends Controller
 
         if($cipta->save()){
             return redirect('/verif-paten')->with([
-                'notifikasi' => 'Berhasil diverfikasi !',
+                'notifikasi' => 'Berhasil diverifikasi !',
                 'type' => 'success'
             ]);
         } else {

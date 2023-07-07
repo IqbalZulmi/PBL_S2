@@ -44,7 +44,7 @@ Unduhan
                 <div class="card h-100" data-aos="zoom-in" data-aos-duration="400">
                     <iframe src="SURAT PENGALIHAN HAK CIPTA.pdf" frameborder="0" class="card-img-top"></iframe>
                     <div class="card-header">
-                        <h5 class="card-title">Surat Pengalihan Hak Cipta/h5>
+                        <h5 class="card-title">Surat Pengalihan Hak Cipta</h5>
                     </div>
                     <div class="card-body">
                         <a href="SURAT PENGALIHAN HAK CIPTA.pdf" class="btn btn-outline-primary">
