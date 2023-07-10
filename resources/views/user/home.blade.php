@@ -22,7 +22,7 @@ Beranda
         <p>Untuk proses pendaftarannya bisa mengikuti panduan (poster terlampir):</p>
     </div>
     <div class="col-12 text-center" data-aos="fade-up" data-aos-duration="400">
-        <a href="web/poster_alur.jpeg" class="image-link" title="Alur Hak-Cipta">
+        <a href="web/poster_alur.jpeg" class="image-link" title="Alur Hak-Cipta dan paten">
             <img src="web/poster_alur.jpeg" alt="Gambar" width="200" height="300">
         </a>
     </div>
